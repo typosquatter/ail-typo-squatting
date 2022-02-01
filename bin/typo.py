@@ -66,6 +66,7 @@ glyphs = {
     'z': ['ʐ', 'ż', 'ź', 'ᴢ', 'ƶ', 'ẓ', 'ẕ', 'ⱬ']
     }
 
+
 def globalAppend(loclist):
     r = list()
     rloc = list()
@@ -93,8 +94,19 @@ def globalAppend(loclist):
         i += 1
 
     return r[-1]
+    
 
-def characterOmission(domain):
+def checkResult(resultLoc, resultList):
+    for element in resultLoc:
+        if element not in resultList:
+            resultList.append(element)
+
+    return resultList
+
+
+def characterOmission(domain, resultList):
+    """Leave out a letter of the domain name"""
+
     resultLoc = list()
     loclist = list()
 
@@ -112,11 +124,13 @@ def characterOmission(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
 
+    return checkResult(rLoc, resultList)
 
-def repetition(domain):
+def repetition(domain, resultList):
     """Character Repeat"""
+
     resultLoc = list()
     loclist = list()
 
@@ -130,11 +144,14 @@ def repetition(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
-def transposition(domain):
-    """Adjacent Character Swap"""
+def transposition(domain, resultList):
+    """Swappe the order of adjacent letters in the domain name"""
+
     resultLoc = list()
     loclist = list()
 
@@ -148,11 +165,14 @@ def transposition(domain):
         loclist.append(resultLoc)
         resultLoc = list()
     
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
-def replacement(domain):
-    """Adjacent Character Replacement"""
+def replacement(domain, resultList):
+    """Adjacent character replacement to the immediate left and right on the keyboard"""
+
     resultLoc = list()
     loclist = list()
 
@@ -170,11 +190,14 @@ def replacement(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
-def doubleReplacement(domain):
+def doubleReplacement(domain, resultList):
     """Double Character Replacement"""
+
     resultLoc = list()
     loclist = list()
 
@@ -192,11 +215,13 @@ def doubleReplacement(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
-def insertion(domain):
-    """Adjacent Character Insertion"""
+def insertion(domain, resultList):
+    """Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter"""
 
     resultLoc = list()
     loclist = list()
@@ -215,9 +240,14 @@ def insertion(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
 
-def addition(domain):
+    return checkResult(rLoc, resultList)
+
+
+def addition(domain, resultList):
+    """Add a character in the domain name"""
+
     resultLoc = list()
     loclist = list()
 
@@ -231,10 +261,14 @@ def addition(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
 def utilMissingDot(resultLoc, loc):
+    """Function for missingDot algorithm"""
+
     i = 0
     while "." in loc:
         loc2 = loc[::-1].replace(".", "", 1)[::-1]
@@ -247,9 +281,12 @@ def utilMissingDot(resultLoc, loc):
         if loc2 not in resultLoc:
             resultLoc.append(loc2) 
         i += 1
+        
     return resultLoc
 
-def missingDot(domain):
+def missingDot(domain, resultList):
+    """Omition of a dot from the domain name"""
+
     resultLoc = list()
 
     domainList = domain.split(".")
@@ -263,11 +300,15 @@ def missingDot(domain):
     for i in range(0, len(resultLoc)):
         if domainList[-1] in resultLoc[i].split(".")[0]:
             resultLoc[i] = resultLoc[i] + ".com"
+        
+        if resultLoc[i] not in resultList:
+            resultList.append(resultLoc[i])
     
-    return resultLoc
+    return resultList
 
-def stripDash(domain):
-    resultLoc = list()
+def stripDash(domain, resultList):
+    """Omition of a dash from the domain name"""
+
     loc = domain
 
     i = 0
@@ -275,16 +316,18 @@ def stripDash(domain):
         loc2 = loc[::-1].replace("-", "", 1)[::-1]
         loc = loc.replace("-", "", 1)
 
-        if loc not in resultLoc:
-            resultLoc.append(loc)
+        if loc not in resultList:
+            resultList.append(loc)
 
-        if loc2 not in resultLoc:
-            resultLoc.append(loc2) 
+        if loc2 not in resultList:
+            resultList.append(loc2) 
         i += 1
 
-    return resultLoc
+    return resultList
 
-def vowel_swap(domain):
+def vowel_swap(domain, resultList):
+    """Swap vowels within the domain name"""
+
     resultLoc = list()
     loclist = list()
     # vowels = 'aeiouy'
@@ -309,9 +352,14 @@ def vowel_swap(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
 
-def hyphenation(domain):
+    return checkResult(rLoc, resultList)
+
+
+def hyphenation(domain, resultList):
+    """Addition of a hypen - between the first and last character in a string"""
+
     resultLoc = list()
     loclist = list()
 
@@ -326,10 +374,15 @@ def hyphenation(domain):
         resultLoc = list()
 
     loclist.append([domain.split(".")[-1]])
-    return globalAppend(loclist)
+
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
-def bitsquatting(domain):
+def bitsquatting(domain, resultList):
+    """The character is substituted with the set of valid characters that can be made after a single bit flip"""
+
     resultLoc = list()
     loclist = list()
 
@@ -349,10 +402,14 @@ def bitsquatting(domain):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
-def homoglyph(domain):
+def homoglyph(domain, resultList):
+    """One or more characters that look similar to another character but are different are called homogylphs"""
+
     def mix(domain):
         for w in range(1, len(domain)):
             for i in range(len(domain)-w+1):
@@ -368,11 +425,16 @@ def homoglyph(domain):
 
     for r in result1:
         result2.update(set(mix(r)))
+    
+    for element in list(result1 | result2):
+        if element not in resultList:
+            resultList.append(element)
 
-    return result1 | result2
+    return resultList
 
 
-def commonMisspelling(domain):
+def commonMisspelling(domain, resultList):
+    """Over 8000 common misspellings from Wikipedia."""
     # https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
 
     with open(pathEtc + "/common-misspellings.json", "r") as read_json:
@@ -396,10 +458,13 @@ def commonMisspelling(domain):
             loclist.append(resultLoc)
             resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
-def homophones(domain):
+def homophones(domain, resultList):
+    """Over 450 sets of words that sound the same when spoken"""
     # From http://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones
     # Last updated 04/2020
     # cat /tmp/h | sed 's/^[ ]*//g' | egrep -v "These pairs become homophones in certain dialects only|^Names" | sed -E 's/ (and|or) /,/g' | sed 's/\//,/g' | sed 's/,,/,/g' | tr '[:upper:]' '[:lower:]' | tr -d " '" | grep -v "^$"
@@ -426,10 +491,13 @@ def homophones(domain):
             loclist.append(resultLoc)
             resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
     
 
-def wrongTld(domain):
+def wrongTld(domain, resultList):
+    """For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
     # Version 2022012800
 
@@ -437,27 +505,29 @@ def wrongTld(domain):
         tlds = read_file.readlines()
     
     originalTld = domain.split(".")[-1]
-    resultLoc = list()
     domainLoc = ""
     for element in domain.split(".")[:-1]:
         domainLoc += element + "."
 
     for tld in tlds:
         if tld.lower().rstrip("\n") != originalTld:
-            resultLoc.append(domainLoc + tld.lower().rstrip("\n"))
+            resultList.append(domainLoc + tld.lower().rstrip("\n"))
     
-    return resultLoc
+    return resultList
 
-def subdomain(domain):
-    resultLoc = list()
+
+def subdomain(domain, resultList):
+    """Insert a dot at varying positions to create subdomain"""
+
     for i in range(1, len(domain)-1):
         if domain[i] not in ['-', '.'] and domain[i-1] not in ['-', '.']:
-            resultLoc.append(domain[:i] + '.' + domain[i:])
+            resultList.append(domain[:i] + '.' + domain[i:])
     
-    return resultLoc
+    return resultList
 
 
-def singularPluralize(domain, inflector):
+def singularPluralize(domain, resultList, inflector):
+    """Create by making a singular domain plural and vice versa."""
 
     resultLoc = list()
     loclist = list()
@@ -475,34 +545,34 @@ def singularPluralize(domain, inflector):
         loclist.append(resultLoc)
         resultLoc = list()
 
-    return globalAppend(loclist)
+    rLoc = globalAppend(loclist)
+
+    return checkResult(rLoc, resultList)
 
 
 domain = "google.abuse.it"
 
 inflector = inflect.engine()
+resultList = list()
 
-# result = characterOmission(domain) # 144
-# result = repetition(domain) # 75
-# result = transposition(domain) # 40
-# result = replacement(domain) # 18315
-# result = doubleReplacement(domain) # 18315
-# result = insertion(domain) # 16800
-# result = addition(domain) # 46656
-# result = missingDot(domain) # 6
-# result = stripDash(domain)
-# result = vowel_swap(domain) # 2016
-# result = hyphenation(domain) # 20
-# result = bitsquatting(domain) # 6210
-# result = homoglyph(domain) # 12486
-# result = commonMisspelling(domain)
-# result = homophones(domain)
-result = wrongTld(domain) # 1487
-# result = subdomain(domain)
-# result = singularPluralize(domain, inflector)
+# resultList = characterOmission(domain, resultList) # 144
+# resultList = repetition(domain, resultList) # 75
+# resultList = transposition(domain, resultList) # 40
+# resultList = replacement(domain, resultList) # 18315
+# resultList = doubleReplacement(domain, resultList) # 18315
+# resultList = insertion(domain, resultList) # 16800
+# resultList = addition(domain, resultList) # 46656
+# resultList = missingDot(domain, resultList) # 6
+# resultList = stripDash(domain, resultList)
+# resultList = vowel_swap(domain, resultList) # 2016
+# resultList = hyphenation(domain, resultList) # 20
+# resultList = bitsquatting(domain, resultList) # 6210
+resultList = homoglyph(domain, resultList) # 12486
+# resultList = commonMisspelling(domain, resultList)
+# resultList = homophones(domain, resultList)
+# resultList = wrongTld(domain, resultList) # 1487
+# resultList = subdomain(domain, resultList)
+# resultList = singularPluralize(domain, resultList, inflector)
 
-print(result)
-print(len(result))
-
-# print(set(result))
-# print(len(set(result)))
+print(resultList)
+print(len(resultList))
