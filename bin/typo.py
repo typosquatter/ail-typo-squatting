@@ -1,4 +1,4 @@
-from ast import parse
+import os
 import re
 import sys
 import json
@@ -112,7 +112,7 @@ def characterOmission(domain, resultList, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i in range(0,len(name)):
@@ -126,6 +126,8 @@ def characterOmission(domain, resultList, verbose):
         if resultLoc:
             loclist.append(resultLoc)
             resultLoc = list()
+
+    loclist.append([domain.split(".")[-1]])
 
     rLoc = globalAppend(loclist)
 
@@ -141,7 +143,7 @@ def repetition(domain, resultList, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i, c in enumerate(name):
@@ -152,6 +154,7 @@ def repetition(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -167,7 +170,7 @@ def transposition(domain, resultList, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i in range(len(name)-1):
@@ -178,6 +181,7 @@ def transposition(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
     
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -193,7 +197,7 @@ def replacement(domain, resultList, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i, c in enumerate(name):
@@ -208,6 +212,7 @@ def replacement(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -223,7 +228,7 @@ def doubleReplacement(domain, resultList, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i, c in enumerate(name):
@@ -238,6 +243,7 @@ def doubleReplacement(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -253,7 +259,7 @@ def insertion(domain, resultList, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i in range(1, len(name)-1):
@@ -268,6 +274,7 @@ def insertion(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -283,7 +290,7 @@ def addition(domain, resultList, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i in (*range(48, 58), *range(97, 123)):
@@ -293,6 +300,8 @@ def addition(domain, resultList, verbose):
         if resultLoc:
             loclist.append(resultLoc)
             resultLoc = list()
+
+    loclist.append([domain.split(".")[-1]])
 
     rLoc = globalAppend(loclist)
 
@@ -382,7 +391,7 @@ def vowel_swap(domain, resultList, verbose):
     # vowels = 'aeiouy'
     vowels = ["a", "e", "i", "o", "u", "y"]
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i in range(0, len(name)):
@@ -402,6 +411,7 @@ def vowel_swap(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -429,7 +439,6 @@ def hyphenation(domain, resultList, verbose):
             resultLoc = list()
 
     loclist.append([domain.split(".")[-1]])
-
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -448,7 +457,7 @@ def bitsquatting(domain, resultList, verbose):
     masks = [1, 2, 4, 8, 16, 32, 64, 128]
     chars = set('abcdefghijklmnopqrstuvwxyz0123456789-')
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         for i, c in enumerate(name):
@@ -462,6 +471,7 @@ def bitsquatting(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -484,7 +494,15 @@ def homoglyph(domain, resultList, verbose):
                     for g in glyphs.get(c, []):
                         yield pre + win.replace(c, g) + suf
 
-    result1 = set(mix(domain))
+    domainList = domain.split(".")[:-1]
+    tld = domain.split(".")[-1]
+
+    s = ""
+    for d in domainList:
+        s += d + "."
+    s = s[:-1]
+
+    result1 = set(mix(s))
     result2 = set()
     cp = 0
 
@@ -494,7 +512,7 @@ def homoglyph(domain, resultList, verbose):
     for element in list(result1 | result2):
         if element not in resultList:
             cp += 1
-            resultList.append(element)
+            resultList.append(element + "." + tld)
 
     if verbose:
         print(f"{cp}\n")
@@ -511,7 +529,7 @@ def commonMisspelling(domain, resultList, verbose):
         misspelling = json.load(read_json)
         keys = misspelling.keys()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
     resultLoc = list()
     loclist = list()
 
@@ -528,6 +546,7 @@ def commonMisspelling(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -546,7 +565,7 @@ def homophones(domain, resultList, verbose):
     with open(pathEtc + "/homophones.txt", "r") as read_file:
         homophones = read_file.readlines()
     
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
     resultLoc = list()
     loclist = list()
 
@@ -565,6 +584,7 @@ def homophones(domain, resultList, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -624,7 +644,7 @@ def singularPluralize(domain, resultList, inflector, verbose):
     resultLoc = list()
     loclist = list()
 
-    domainList = domain.split(".")
+    domainList = domain.split(".")[:-1]
 
     for name in domainList:
         
@@ -638,6 +658,7 @@ def singularPluralize(domain, resultList, inflector, verbose):
             loclist.append(resultLoc)
             resultLoc = list()
 
+    loclist.append([domain.split(".")[-1]])
     rLoc = globalAppend(loclist)
 
     if verbose:
@@ -683,6 +704,10 @@ if __name__ == "__main__":
     verbose = args.v
     # domain = "google.abuse.it"
 
+    pathOutput = pathWork + "/output"
+    if not os.path.isdir(pathOutput):
+        os.mkdir(pathOutput)
+
     if args.domainName:
         domainList = args.domainName
     elif args.filedomainName:
@@ -712,6 +737,15 @@ if __name__ == "__main__":
             resultList = wrongTld(domain, resultList, verbose) # 1487
             resultList = subdomain(domain, resultList, verbose)
             resultList = singularPluralize(domain, resultList, inflector, verbose)
+
+            if verbose:
+                print(f"Total: {len(resultList)}")
+
+            with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
+                for element in resultList:
+                    write_file.write(element + "\n")
+
+            resultList = list()
     else:
         for domain in domainList:
             if args.characteromission:
@@ -751,7 +785,11 @@ if __name__ == "__main__":
             if args.singularpluralize:
                 resultList = singularPluralize(domain, resultList, inflector, verbose)
 
-    if verbose:
-        # print(resultList)
+            if verbose:
+                print(f"Total: {len(resultList)}")
+            
+            with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
+                for element in resultList:
+                    write_file.write(element + "\n")
 
-        print(f"Total: {len(resultList)}")
+            resultList = list()
