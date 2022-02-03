@@ -772,6 +772,7 @@ def runAll(domainList, limit, verbose=False):
 
     resultList = list()
     for domain in domainList:
+        print(f"\n\t[*****] {domain} [*****]")
         resultList = characterOmission(domain, resultList, verbose, limit)
 
         resultList = repetition(domain, resultList, verbose, limit)
@@ -884,6 +885,8 @@ if __name__ == "__main__":
     # The user select sepcial algo but not all
     else:
         for domain in domainList:
+            print(f"\n\t[*****] {domain} [*****]")
+
             if args.characteromission:
                 resultList = characterOmission(domain, resultList, verbose, limit)
 
