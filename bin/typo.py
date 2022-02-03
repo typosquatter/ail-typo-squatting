@@ -106,210 +106,252 @@ def checkResult(resultLoc, resultList):
     return resultList
 
 
-def characterOmission(domain, resultList, verbose):
+def characterOmission(domain, resultList, verbose, limit):
     """Leave out a letter of the domain name"""
 
-    print("[+] Character Omission")
-    resultLoc = list()
-    loclist = list()
+    if not len(resultList) >= limit:
+        print("[+] Character Omission")
+        resultLoc = list()
+        loclist = list()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i in range(0,len(name)):
-            resultLoc.append(name)
-            loc = name[0:i]
-            loc += name[i+1:len(name)]
+        for name in domainList:
+            for i in range(0,len(name)):
+                resultLoc.append(name)
+                loc = name[0:i]
+                loc += name[i+1:len(name)]
 
-            if loc not in resultLoc:
-                resultLoc.append(loc)
+                if loc not in resultLoc:
+                    resultLoc.append(loc)
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
+        loclist.append([domain.split(".")[-1]])
 
-    rLoc = globalAppend(loclist)
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
 
-def repetition(domain, resultList, verbose):
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+def repetition(domain, resultList, verbose, limit):
     """Character Repeat"""
 
-    print("[+] Character Repeat")
-    resultLoc = list()
-    loclist = list()
+    if not len(resultList) >= limit:
+        print("[+] Character Repeat")
+        resultLoc = list()
+        loclist = list()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i, c in enumerate(name):
-            if name[:i] + c + name[i:] not in resultLoc:
-                resultLoc.append(name[:i] + c + name[i:])
+        for name in domainList:
+            for i, c in enumerate(name):
+                if name[:i] + c + name[i:] not in resultLoc:
+                    resultLoc.append(name[:i] + c + name[i:])
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
-def transposition(domain, resultList, verbose):
+def transposition(domain, resultList, verbose, limit):
     """Swappe the order of adjacent letters in the domain name"""
 
-    print("[+] Transposition")
-    resultLoc = list()
-    loclist = list()
+    if not len(resultList) >= limit:
+        print("[+] Transposition")
+        resultLoc = list()
+        loclist = list()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i in range(len(name)-1):
-            if name[:i] + name[i+1] + name[i] + name[i+2:] not in resultLoc:
-                resultLoc.append(name[:i] + name[i+1] + name[i] + name[i+2:])
+        for name in domainList:
+            for i in range(len(name)-1):
+                if name[:i] + name[i+1] + name[i] + name[i+2:] not in resultLoc:
+                    resultLoc.append(name[:i] + name[i+1] + name[i] + name[i+2:])
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
-    
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
+        
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
-def replacement(domain, resultList, verbose):
+def replacement(domain, resultList, verbose, limit):
     """Adjacent character replacement to the immediate left and right on the keyboard"""
 
-    print("[+] Replacement")
-    resultLoc = list()
-    loclist = list()
+    if not len(resultList) >= limit:
+        print("[+] Replacement")
+        resultLoc = list()
+        loclist = list()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i, c in enumerate(name):
-            pre = name[:i]
-            suf = name[i+1:]
-            for layout in keyboards:
-                for r in layout.get(c, ''):
-                    if pre + r + suf not in resultLoc:
-                        resultLoc.append(pre + r + suf)
+        for name in domainList:
+            for i, c in enumerate(name):
+                pre = name[:i]
+                suf = name[i+1:]
+                for layout in keyboards:
+                    for r in layout.get(c, ''):
+                        if pre + r + suf not in resultLoc:
+                            resultLoc.append(pre + r + suf)
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
-def doubleReplacement(domain, resultList, verbose):
+def doubleReplacement(domain, resultList, verbose, limit):
     """Double Character Replacement"""
 
-    print("[+] Double Character Replacement")
-    resultLoc = list()
-    loclist = list()
+    if not len(resultList) >= limit:
+        print("[+] Double Character Replacement")
+        resultLoc = list()
+        loclist = list()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i, c in enumerate(name):
-            pre = name[:i]
-            suf = name[i+2:]
-            for layout in keyboards:
-                for r in layout.get(c, ''):
-                    if pre + r + r + suf not in resultLoc:
-                        resultLoc.append(pre + r + r + suf)
+        for name in domainList:
+            for i, c in enumerate(name):
+                pre = name[:i]
+                suf = name[i+2:]
+                for layout in keyboards:
+                    for r in layout.get(c, ''):
+                        if pre + r + r + suf not in resultLoc:
+                            resultLoc.append(pre + r + r + suf)
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
-def insertion(domain, resultList, verbose):
+def insertion(domain, resultList, verbose, limit):
     """Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter"""
 
-    print("[+] Insertion")
-    resultLoc = list()
-    loclist = list()
+    if not len(resultList) >= limit:
+        print("[+] Insertion")
+        resultLoc = list()
+        loclist = list()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i in range(1, len(name)-1):
-            prefix, orig_c, suffix = name[:i], name[i], name[i+1:]
-            for c in (c for keys in keyboards for c in keys.get(orig_c, [])):
-                if prefix + c + orig_c + suffix not in resultLoc:
-                    resultLoc.append(prefix + c + orig_c + suffix)
-                if prefix + orig_c + c + suffix not in resultLoc:
-                    resultLoc.append(prefix + orig_c + c + suffix)
+        for name in domainList:
+            for i in range(1, len(name)-1):
+                prefix, orig_c, suffix = name[:i], name[i], name[i+1:]
+                for c in (c for keys in keyboards for c in keys.get(orig_c, [])):
+                    if prefix + c + orig_c + suffix not in resultLoc:
+                        resultLoc.append(prefix + c + orig_c + suffix)
+                    if prefix + orig_c + c + suffix not in resultLoc:
+                        resultLoc.append(prefix + orig_c + c + suffix)
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
-def addition(domain, resultList, verbose):
+def addition(domain, resultList, verbose, limit):
     """Add a character in the domain name"""
 
-    print("[+] Addition")
-    resultLoc = list()
-    loclist = list()
+    if not len(resultList) >= limit:
+        print("[+] Addition")
+        resultLoc = list()
+        loclist = list()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i in (*range(48, 58), *range(97, 123)):
-            if name + chr(i) not in resultLoc:
-                resultLoc.append(name + chr(i))
+        for name in domainList:
+            for i in (*range(48, 58), *range(97, 123)):
+                if name + chr(i) not in resultLoc:
+                    resultLoc.append(name + chr(i))
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
+        loclist.append([domain.split(".")[-1]])
 
-    rLoc = globalAppend(loclist)
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
 def utilMissingDot(resultLoc, loc):
@@ -330,343 +372,399 @@ def utilMissingDot(resultLoc, loc):
         
     return resultLoc
 
-def missingDot(domain, resultList, verbose):
+def missingDot(domain, resultList, verbose, limit):
     """Omission of a dot from the domain name"""
 
-    print("[+] Missing Dot")
-    resultLoc = list()
-    cp = 0
+    if not len(resultList) >= limit:
+        print("[+] Missing Dot")
+        resultLoc = list()
+        cp = 0
 
-    domainList = domain.split(".")
+        domainList = domain.split(".")
 
-    loc = domain
-    utilMissingDot(resultLoc, loc)
-    
-    loc = f"www{domain}"
-    utilMissingDot(resultLoc, loc)
-
-    for i in range(0, len(resultLoc)):
-        if domainList[-1] in resultLoc[i].split(".")[0]:
-            resultLoc[i] = resultLoc[i] + ".com"
+        loc = domain
+        utilMissingDot(resultLoc, loc)
         
-        if resultLoc[i] not in resultList:
-            cp += 1
-            resultList.append(resultLoc[i])
+        loc = f"www{domain}"
+        utilMissingDot(resultLoc, loc)
 
-    if verbose:
-        print(f"{cp}\n")
-    
+        for i in range(0, len(resultLoc)):
+            if domainList[-1] in resultLoc[i].split(".")[0]:
+                resultLoc[i] = resultLoc[i] + ".com"
+            
+            if resultLoc[i] not in resultList:
+                cp += 1
+                resultList.append(resultLoc[i])
+
+        if verbose:
+            print(f"{cp}\n")
+        
+        while len(resultList) > limit:
+            resultList.pop()
+
     return resultList
 
-def stripDash(domain, resultList, verbose):
+def stripDash(domain, resultList, verbose, limit):
     """Omission of a dash from the domain name"""
 
-    print("[+] Strip Dash")
-    loc = domain
-    cp = 0
-    i = 0
-    while "-" in loc:
-        loc2 = loc[::-1].replace("-", "", 1)[::-1]
-        loc = loc.replace("-", "", 1)
+    if not len(resultList) >= limit:
+        print("[+] Strip Dash")
+        loc = domain
+        cp = 0
+        i = 0
+        while "-" in loc:
+            loc2 = loc[::-1].replace("-", "", 1)[::-1]
+            loc = loc.replace("-", "", 1)
 
-        if loc not in resultList:
-            cp += 1
-            resultList.append(loc)
+            if loc not in resultList:
+                cp += 1
+                resultList.append(loc)
 
-        if loc2 not in resultList:
-            cp += 1
-            resultList.append(loc2) 
-        i += 1
-    
-    if verbose:
-        print(f"{cp}\n")
+            if loc2 not in resultList:
+                cp += 1
+                resultList.append(loc2) 
+            i += 1
+        
+        if verbose:
+            print(f"{cp}\n")
+
+        while len(resultList) > limit:
+            resultList.pop()
 
     return resultList
 
-def vowel_swap(domain, resultList, verbose):
+def vowel_swap(domain, resultList, verbose, limit):
     """Swap vowels within the domain name"""
 
-    print("[+] Vowel Swap")
-    resultLoc = list()
-    loclist = list()
-    # vowels = 'aeiouy'
-    vowels = ["a", "e", "i", "o", "u", "y"]
+    if not len(resultList) >= limit:
+        print("[+] Vowel Swap")
+        resultLoc = list()
+        loclist = list()
+        # vowels = 'aeiouy'
+        vowels = ["a", "e", "i", "o", "u", "y"]
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        for i in range(0, len(name)):
-            for vowel in vowels:
-                if name[i] in vowels:
-                    if name[:i] + vowel + name[i+1:] not in resultLoc:
-                        resultLoc.append(name[:i] + vowel + name[i+1:])
+        for name in domainList:
+            for i in range(0, len(name)):
+                for vowel in vowels:
+                    if name[i] in vowels:
+                        if name[:i] + vowel + name[i+1:] not in resultLoc:
+                            resultLoc.append(name[:i] + vowel + name[i+1:])
 
-        for j in vowels:
-            for k in vowels:
-                if j != k:
-                    loc = name.replace(k, j)
-                    if loc not in resultLoc:
-                        resultLoc.append(loc)
+            for j in vowels:
+                for k in vowels:
+                    if j != k:
+                        loc = name.replace(k, j)
+                        if loc not in resultLoc:
+                            resultLoc.append(loc)
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
 
-
-def hyphenation(domain, resultList, verbose):
-    """Addition of a hypen '-' between the first and last character in a string"""
-
-    print("[+] Hyphenation")
-    resultLoc = list()
-    loclist = list()
-
-    domainList = domain.split(".")[:-1]
-
-    for name in domainList:
-        for i in range(1, len(name)):
-            if name[:i] + '-' + name[i:] not in resultLoc:
-                resultLoc.append(name[:i] + '-' + name[i:])
-
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
-
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
-
-    if verbose:
-        print(f"{len(rLoc)}\n")
-
-    return checkResult(rLoc, resultList)
-
-
-def bitsquatting(domain, resultList, verbose):
-    """The character is substituted with the set of valid characters that can be made after a single bit flip"""
-
-    print("[+] Bitsquatting")
-    resultLoc = list()
-    loclist = list()
-
-    masks = [1, 2, 4, 8, 16, 32, 64, 128]
-    chars = set('abcdefghijklmnopqrstuvwxyz0123456789-')
-
-    domainList = domain.split(".")[:-1]
-
-    for name in domainList:
-        for i, c in enumerate(name):
-            for mask in masks:
-                b = chr(ord(c) ^ mask)
-                if b in chars:
-                    if name[:i] + b +name[i+1:] not in resultLoc:
-                        resultLoc.append(name[:i] + b +name[i+1:])
-
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
-
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
-
-    if verbose:
-        print(f"{len(rLoc)}\n")
-
-    return checkResult(rLoc, resultList)
-
-
-def homoglyph(domain, resultList, verbose):
-    """One or more characters that look similar to another character but are different are called homogylphs"""
-
-    print("[+] Homoglyph")
-    def mix(domain):
-        for w in range(1, len(domain)):
-            for i in range(len(domain)-w+1):
-                pre = domain[:i]
-                win = domain[i:i+w]
-                suf = domain[i+w:]
-                for c in win:
-                    for g in glyphs.get(c, []):
-                        yield pre + win.replace(c, g) + suf
-
-    domainList = domain.split(".")[:-1]
-    tld = domain.split(".")[-1]
-
-    s = ""
-    for d in domainList:
-        s += d + "."
-    s = s[:-1]
-
-    result1 = set(mix(s))
-    result2 = set()
-    cp = 0
-
-    for r in result1:
-        result2.update(set(mix(r)))
-    
-    for element in list(result1 | result2):
-        if element not in resultList:
-            cp += 1
-            resultList.append(element + "." + tld)
-
-    if verbose:
-        print(f"{cp}\n")
+        while len(resultList) > limit:
+            resultList.pop()
 
     return resultList
 
 
-def commonMisspelling(domain, resultList, verbose):
+def hyphenation(domain, resultList, verbose, limit):
+    """Addition of a hypen '-' between the first and last character in a string"""
+
+    if not len(resultList) >= limit:
+        print("[+] Hyphenation")
+        resultLoc = list()
+        loclist = list()
+
+        domainList = domain.split(".")[:-1]
+
+        for name in domainList:
+            for i in range(1, len(name)):
+                if name[:i] + '-' + name[i:] not in resultLoc:
+                    resultLoc.append(name[:i] + '-' + name[i:])
+
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
+
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
+
+        if verbose:
+            print(f"{len(rLoc)}\n")
+
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+
+def bitsquatting(domain, resultList, verbose, limit):
+    """The character is substituted with the set of valid characters that can be made after a single bit flip"""
+
+    if not len(resultList) >= limit:
+        print("[+] Bitsquatting")
+        resultLoc = list()
+        loclist = list()
+
+        masks = [1, 2, 4, 8, 16, 32, 64, 128]
+        chars = set('abcdefghijklmnopqrstuvwxyz0123456789-')
+
+        domainList = domain.split(".")[:-1]
+
+        for name in domainList:
+            for i, c in enumerate(name):
+                for mask in masks:
+                    b = chr(ord(c) ^ mask)
+                    if b in chars:
+                        if name[:i] + b +name[i+1:] not in resultLoc:
+                            resultLoc.append(name[:i] + b +name[i+1:])
+
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
+
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
+
+        if verbose:
+            print(f"{len(rLoc)}\n")
+
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+
+def homoglyph(domain, resultList, verbose, limit):
+    """One or more characters that look similar to another character but are different are called homogylphs"""
+
+    if not len(resultList) >= limit:
+        print("[+] Homoglyph")
+        def mix(domain):
+            for w in range(1, len(domain)):
+                for i in range(len(domain)-w+1):
+                    pre = domain[:i]
+                    win = domain[i:i+w]
+                    suf = domain[i+w:]
+                    for c in win:
+                        for g in glyphs.get(c, []):
+                            yield pre + win.replace(c, g) + suf
+
+        domainList = domain.split(".")[:-1]
+        tld = domain.split(".")[-1]
+
+        s = ""
+        for d in domainList:
+            s += d + "."
+        s = s[:-1]
+
+        result1 = set(mix(s))
+        result2 = set()
+        cp = 0
+
+        for r in result1:
+            result2.update(set(mix(r)))
+        
+        for element in list(result1 | result2):
+            if element not in resultList:
+                cp += 1
+                resultList.append(element + "." + tld)
+
+        if verbose:
+            print(f"{cp}\n")
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+
+def commonMisspelling(domain, resultList, verbose, limit):
     """Change a word by is misspellings"""
     # https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
 
-    print("[+] Common Misspelling")
-    with open(pathEtc + "/common-misspellings.json", "r") as read_json:
-        misspelling = json.load(read_json)
-        keys = misspelling.keys()
+    if not len(resultList) >= limit:
+        print("[+] Common Misspelling")
+        with open(pathEtc + "/common-misspellings.json", "r") as read_json:
+            misspelling = json.load(read_json)
+            keys = misspelling.keys()
 
-    domainList = domain.split(".")[:-1]
-    resultLoc = list()
-    loclist = list()
+        domainList = domain.split(".")[:-1]
+        resultLoc = list()
+        loclist = list()
 
-    for name in domainList:
-        if name in keys:
-            misspell = misspelling[name].split(",")
-            for mis in misspell:
-                if mis.replace(" ","") not in resultLoc:
-                    resultLoc.append(mis.replace(" ",""))
-        elif name not in resultLoc:
-            resultLoc.append(name)
+        for name in domainList:
+            if name in keys:
+                misspell = misspelling[name].split(",")
+                for mis in misspell:
+                    if mis.replace(" ","") not in resultLoc:
+                        resultLoc.append(mis.replace(" ",""))
+            elif name not in resultLoc:
+                resultLoc.append(name)
 
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
-def homophones(domain, resultList, verbose):
+def homophones(domain, resultList, verbose, limit):
     """Change word by an other who sound the same when spoken"""
     # From http://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones
     # Last updated 04/2020
     # cat /tmp/h | sed 's/^[ ]*//g' | egrep -v "These pairs become homophones in certain dialects only|^Names" | sed -E 's/ (and|or) /,/g' | sed 's/\//,/g' | sed 's/,,/,/g' | tr '[:upper:]' '[:lower:]' | tr -d " '" | grep -v "^$"
 
-    print("[+] Homophones")
-    with open(pathEtc + "/homophones.txt", "r") as read_file:
-        homophones = read_file.readlines()
+    if not len(resultList) >= limit:
+        print("[+] Homophones")
+        with open(pathEtc + "/homophones.txt", "r") as read_file:
+            homophones = read_file.readlines()
+        
+        domainList = domain.split(".")[:-1]
+        resultLoc = list()
+        loclist = list()
+
+        for name in domainList:
+            for lines in homophones:
+                line = lines.split(",")
+                for word in line:
+                    if name == word.rstrip("\n"):
+                        for otherword in line:
+                            if otherword.rstrip("\n") not in resultLoc and otherword.rstrip("\n") != name:
+                                resultLoc.append(otherword.rstrip("\n"))
+                    elif name not in resultLoc:
+                        resultLoc.append(name)
+
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
+
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
+
+        if verbose:
+            print(f"{len(rLoc)}\n")
+
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
     
-    domainList = domain.split(".")[:-1]
-    resultLoc = list()
-    loclist = list()
 
-    for name in domainList:
-        for lines in homophones:
-            line = lines.split(",")
-            for word in line:
-                if name == word.rstrip("\n"):
-                    for otherword in line:
-                        if otherword.rstrip("\n") not in resultLoc and otherword.rstrip("\n") != name:
-                            resultLoc.append(otherword.rstrip("\n"))
-                elif name not in resultLoc:
-                    resultLoc.append(name)
-
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
-
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
-
-    if verbose:
-        print(f"{len(rLoc)}\n")
-
-    return checkResult(rLoc, resultList)
-    
-
-def wrongTld(domain, resultList, verbose):
+def wrongTld(domain, resultList, verbose, limit):
     """Change the original top level domain to another"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
     # Version 2022012800
 
-    print("[+] Wrong Tld")
-    with open(pathEtc + "/tlds-alpha-by-domain.txt", "r") as read_file:
-        tlds = read_file.readlines()
-    
-    originalTld = domain.split(".")[-1]
-    domainLoc = ""
-    cp = 0 
+    if not len(resultList) >= limit:
+        print("[+] Wrong Tld")
+        with open(pathEtc + "/tlds-alpha-by-domain.txt", "r") as read_file:
+            tlds = read_file.readlines()
+        
+        originalTld = domain.split(".")[-1]
+        domainLoc = ""
+        cp = 0 
 
-    for element in domain.split(".")[:-1]:
-        domainLoc += element + "."
+        for element in domain.split(".")[:-1]:
+            domainLoc += element + "."
 
-    for tld in tlds:
-        if tld.lower().rstrip("\n") != originalTld:
-            cp += 1
-            resultList.append(domainLoc + tld.lower().rstrip("\n"))
-    
-    if verbose:
-        print(f"{cp}\n")
+        for tld in tlds:
+            if tld.lower().rstrip("\n") != originalTld:
+                cp += 1
+                resultList.append(domainLoc + tld.lower().rstrip("\n"))
+        
+        if verbose:
+            print(f"{cp}\n")
+
+        while len(resultList) > limit:
+            resultList.pop()
 
     return resultList
 
 
-def subdomain(domain, resultList, verbose):
+def subdomain(domain, resultList, verbose, limit):
     """Insert a dot at varying positions to create subdomain"""
 
-    print("[+] Subdomain")
-    cp = 0
+    if not len(resultList) >= limit:
+        print("[+] Subdomain")
+        cp = 0
 
-    for i in range(1, len(domain)-1):
-        if domain[i] not in ['-', '.'] and domain[i-1] not in ['-', '.']:
-            cp += 1
-            resultList.append(domain[:i] + '.' + domain[i:])
+        for i in range(1, len(domain)-1):
+            if domain[i] not in ['-', '.'] and domain[i-1] not in ['-', '.']:
+                cp += 1
+                resultList.append(domain[:i] + '.' + domain[i:])
 
-    if verbose:
-        print(f"{cp}\n")
+        if verbose:
+            print(f"{cp}\n")
+
+        while len(resultList) > limit:
+            resultList.pop()
 
     return resultList
 
 
-def singularPluralize(domain, resultList, verbose):
+def singularPluralize(domain, resultList, verbose, limit):
     """Create by making a singular domain plural and vice versa"""
 
-    print("[+] Singular Pluralize")
-    resultLoc = list()
-    loclist = list()
-    inflector = inflect.engine()
+    if not len(resultList) >= limit:
+        print("[+] Singular Pluralize")
+        resultLoc = list()
+        loclist = list()
+        inflector = inflect.engine()
 
-    domainList = domain.split(".")[:-1]
+        domainList = domain.split(".")[:-1]
 
-    for name in domainList:
-        
-        loc = inflector.plural(name)
-        resultLoc.append(name)
+        for name in domainList:
+            
+            loc = inflector.plural(name)
+            resultLoc.append(name)
 
-        if loc and loc not in resultLoc:
-            resultLoc.append(loc)
-        
-        if resultLoc:
-            loclist.append(resultLoc)
-            resultLoc = list()
+            if loc and loc not in resultLoc:
+                resultLoc.append(loc)
+            
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
 
-    loclist.append([domain.split(".")[-1]])
-    rLoc = globalAppend(loclist)
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
 
-    if verbose:
-        print(f"{len(rLoc)}\n")
+        if verbose:
+            print(f"{len(rLoc)}\n")
 
-    return checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 
 def runAll(domainList, limit, verbose=False):
@@ -674,127 +772,41 @@ def runAll(domainList, limit, verbose=False):
 
     resultList = list()
     for domain in domainList:
-        resultList = characterOmission(domain, resultList, verbose)
+        resultList = characterOmission(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = repetition(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = repetition(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = transposition(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
-        
-        if not reachLimit and len(resultList) <= limit:
-            resultList = replacement(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
-        
-        if not reachLimit and len(resultList) <= limit:
-            resultList = doubleReplacement(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
-        
-        if not reachLimit and len(resultList) <= limit:
-            resultList = insertion(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
-        
-        if not reachLimit and len(resultList) <= limit:
-            resultList = addition(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = transposition(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = missingDot(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop() 
-        
-        if not reachLimit and len(resultList) <= limit:
-            resultList = stripDash(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop() 
-        
-        if not reachLimit and len(resultList) <= limit:
-            resultList = vowel_swap(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = replacement(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = hyphenation(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = doubleReplacement(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = bitsquatting(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = insertion(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = homoglyph(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = addition(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = commonMisspelling(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
-        
-        if not reachLimit and len(resultList) <= limit:
-            resultList = homophones(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = missingDot(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = wrongTld(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = stripDash(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = subdomain(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
+        resultList = vowel_swap(domain, resultList, verbose, limit)
 
-        if not reachLimit and len(resultList) <= limit:
-            resultList = singularPluralize(domain, resultList, verbose)
-        else:
-            reachLimit = True
-            while len(resultList) > limit:
-                resultList.pop()
-        
+        resultList = hyphenation(domain, resultList, verbose, limit)
+
+        resultList = bitsquatting(domain, resultList, verbose, limit)
+
+        resultList = homoglyph(domain, resultList, verbose, limit)
+
+        resultList = commonMisspelling(domain, resultList, verbose, limit)
+
+        resultList = homophones(domain, resultList, verbose, limit)
+
+        resultList = wrongTld(domain, resultList, verbose, limit)
+
+        resultList = subdomain(domain, resultList, verbose, limit)
+
+        resultList = singularPluralize(domain, resultList, verbose, limit)
 
         if verbose:
             print(f"Total: {len(resultList)}")
@@ -873,146 +885,58 @@ if __name__ == "__main__":
     else:
         for domain in domainList:
             if args.characteromission:
-                resultList = characterOmission(domain, resultList, verbose)
+                resultList = characterOmission(domain, resultList, verbose, limit)
 
             if args.repetition:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = repetition(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = repetition(domain, resultList, verbose, limit)
 
             if args.transposition:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = transposition(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = transposition(domain, resultList, verbose, limit)
 
             if args.replacement:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = replacement(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = replacement(domain, resultList, verbose, limit)
 
             if args.doublereplacement:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = doubleReplacement(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = doubleReplacement(domain, resultList, verbose, limit)
 
             if args.insertion:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = insertion(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = insertion(domain, resultList, verbose, limit)
 
             if args.addition:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = addition(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = addition(domain, resultList, verbose, limit)
 
             if args.missingdot:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = missingDot(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop() 
+                resultList = missingDot(domain, resultList, verbose, limit)
 
             if args.stripdash:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = stripDash(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop() 
+                resultList = stripDash(domain, resultList, verbose, limit)
 
             if args.vowelswap:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = vowel_swap(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = vowel_swap(domain, resultList, verbose, limit)
 
             if args.hyphenation:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = hyphenation(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = hyphenation(domain, resultList, verbose, limit)
 
             if args.bitsquatting:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = bitsquatting(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = bitsquatting(domain, resultList, verbose, limit)
 
             if args.homoglyph:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = homoglyph(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = homoglyph(domain, resultList, verbose, limit)
 
             if args.commonmisspelling:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = commonMisspelling(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = commonMisspelling(domain, resultList, verbose, limit)
 
             if args.homophones:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = homophones(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = homophones(domain, resultList, verbose, limit)
 
             if args.wrongtld:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = wrongTld(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = wrongTld(domain, resultList, verbose, limit)
 
             if args.subdomain:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = subdomain(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()
+                resultList = subdomain(domain, resultList, verbose, limit)
 
             if args.singularpluralize:
-                if not reachLimit and len(resultList) <= limit:
-                    resultList = singularPluralize(domain, resultList, verbose)
-                else:
-                    reachLimit = True
-                    while len(resultList) > limit:
-                        resultList.pop()  
-
-            while len(resultList) > limit:
-                resultList.pop()
+                resultList = singularPluralize(domain, resultList, verbose, limit)
 
             if verbose:
                 print(f"Total: {len(resultList)}")
