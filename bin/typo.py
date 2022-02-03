@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import json
+import math
 import inflect
 import argparse
 
@@ -677,6 +678,8 @@ if __name__ == "__main__":
     parser.add_argument("-dn", "--domainName", nargs="+", help="list of domain name")
     parser.add_argument("-fdn", "--filedomainName", help="file containing list of domain name")
 
+    parser.add_argument("-l", "--limit", help="limit of variations for a domain name")
+
     parser.add_argument("-a", "--all", help="Use all algo", action="store_true")
     parser.add_argument("-co", "--characteromission", help="Leave out a letter of the domain name", action="store_true")
     parser.add_argument("-repe", "--repetition", help="Character Repeat", action="store_true")
@@ -702,12 +705,18 @@ if __name__ == "__main__":
     resultList = list()
     inflector = inflect.engine()
     verbose = args.v
+    limit = math.inf
+    if args.limit:
+        limit = int(args.limit)
+    reachLimit = False
     # domain = "google.abuse.it"
 
+    # directory for list of variations for a domain name
     pathOutput = pathWork + "/output"
     if not os.path.isdir(pathOutput):
         os.mkdir(pathOutput)
 
+    # Verify that a domain name is receive
     if args.domainName:
         domainList = args.domainName
     elif args.filedomainName:
@@ -717,26 +726,130 @@ if __name__ == "__main__":
         print("[-] No Entry")
         exit(-1)
 
+    # the option for all algo to run is selected
     if args.all:
         for domain in domainList:
-            resultList = characterOmission(domain, resultList, verbose) # 144
-            resultList = repetition(domain, resultList, verbose) # 75
-            resultList = transposition(domain, resultList, verbose) # 40
-            resultList = replacement(domain, resultList, verbose) # 18315
-            resultList = doubleReplacement(domain, resultList, verbose) # 18315
-            resultList = insertion(domain, resultList, verbose) # 16800
-            resultList = addition(domain, resultList, verbose) # 46656
-            resultList = missingDot(domain, resultList, verbose) # 6
-            resultList = stripDash(domain, resultList, verbose)
-            resultList = vowel_swap(domain, resultList, verbose) # 2016
-            resultList = hyphenation(domain, resultList, verbose) # 20
-            resultList = bitsquatting(domain, resultList, verbose) # 6210
-            resultList = homoglyph(domain, resultList, verbose) # 12486
-            resultList = commonMisspelling(domain, resultList, verbose)
-            resultList = homophones(domain, resultList, verbose)
-            resultList = wrongTld(domain, resultList, verbose) # 1487
-            resultList = subdomain(domain, resultList, verbose)
-            resultList = singularPluralize(domain, resultList, inflector, verbose)
+            resultList = characterOmission(domain, resultList, verbose) # 36
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = repetition(domain, resultList, verbose) # 25
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = transposition(domain, resultList, verbose) # 20
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+            
+            if not reachLimit and len(resultList) <= limit:
+                resultList = replacement(domain, resultList, verbose) # 1221
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+            
+            if not reachLimit and len(resultList) <= limit:
+                resultList = doubleReplacement(domain, resultList, verbose) # 1221
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+            
+            if not reachLimit and len(resultList) <= limit:
+                resultList = insertion(domain, resultList, verbose) # 1400
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+            
+            if not reachLimit and len(resultList) <= limit:
+                resultList = addition(domain, resultList, verbose) # 1296
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = missingDot(domain, resultList, verbose) # 6
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop() 
+            
+            if not reachLimit and len(resultList) <= limit:
+                resultList = stripDash(domain, resultList, verbose) # 0
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop() 
+            
+            if not reachLimit and len(resultList) <= limit:
+                resultList = vowel_swap(domain, resultList, verbose) # 336
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = hyphenation(domain, resultList, verbose) # 20
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = bitsquatting(domain, resultList, verbose) # 621
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = homoglyph(domain, resultList, verbose) # 9292
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = commonMisspelling(domain, resultList, verbose) # 0
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+            
+            if not reachLimit and len(resultList) <= limit:
+                resultList = homophones(domain, resultList, verbose) # 0
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = wrongTld(domain, resultList, verbose) # 1487
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = subdomain(domain, resultList, verbose) # 10
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+
+            if not reachLimit and len(resultList) <= limit:
+                resultList = singularPluralize(domain, resultList, inflector, verbose) # 4
+            else:
+                reachLimit = True
+                while len(resultList) > limit:
+                    resultList.pop()
+            
 
             if verbose:
                 print(f"Total: {len(resultList)}")
@@ -746,44 +859,151 @@ if __name__ == "__main__":
                     write_file.write(element + "\n")
 
             resultList = list()
+            
+    # The user select sepcial algo but not all
     else:
         for domain in domainList:
             if args.characteromission:
                 resultList = characterOmission(domain, resultList, verbose)
+
             if args.repetition:
-                resultList = repetition(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = repetition(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.transposition:
-                resultList = transposition(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = transposition(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.replacement:
-                resultList = replacement(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = replacement(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.doublereplacement:
-                resultList = doubleReplacement(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = doubleReplacement(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.insertion:
-                resultList = insertion(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = insertion(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.addition:
-                resultList = addition(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = addition(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.missingdot:
-                resultList = missingDot(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = missingDot(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop() 
+
             if args.stripdash:
-                resultList = stripDash(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = stripDash(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop() 
+
             if args.vowelswap:
-                resultList = vowel_swap(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = vowel_swap(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.hyphenation:
-                resultList = hyphenation(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = hyphenation(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.bitsquatting:
-                resultList = bitsquatting(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = bitsquatting(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.homoglyph:
-                resultList = homoglyph(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = homoglyph(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.commonmisspelling:
-                resultList = commonMisspelling(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = commonMisspelling(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.homophones:
-                resultList = homophones(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = homophones(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.wrongtld:
-                resultList = wrongTld(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = wrongTld(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.subdomain:
-                resultList = subdomain(domain, resultList, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = subdomain(domain, resultList, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()
+
             if args.singularpluralize:
-                resultList = singularPluralize(domain, resultList, inflector, verbose)
+                if not reachLimit and len(resultList) <= limit:
+                    resultList = singularPluralize(domain, resultList, inflector, verbose)
+                else:
+                    reachLimit = True
+                    while len(resultList) > limit:
+                        resultList.pop()  
+
+            while len(resultList) > limit:
+                resultList.pop()
 
             if verbose:
                 print(f"Total: {len(resultList)}")
