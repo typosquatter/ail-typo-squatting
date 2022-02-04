@@ -709,6 +709,30 @@ def wrongTld(domain, resultList, verbose, limit):
     return resultList
 
 
+def addTld(domain, resultList, verbose, limit):
+    """Adding a tld before the original tld"""
+    # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
+    # Version 2022012800
+
+    if not len(resultList) >= limit:
+        print("[+] Adding Tld")
+        with open(pathEtc + "/tlds-alpha-by-domain.txt", "r") as read_file:
+            tlds = read_file.readlines()
+        
+        cp = 0 
+        for tld in tlds:
+            cp += 1
+            resultList.append(domain + "." + tld.lower().rstrip("\n"))
+        
+        if verbose:
+            print(f"{cp}\n")
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+
 def subdomain(domain, resultList, verbose, limit):
     """Insert a dot at varying positions to create subdomain"""
 
@@ -805,6 +829,8 @@ def runAll(domainList, limit, verbose=False):
 
         resultList = wrongTld(domain, resultList, verbose, limit)
 
+        resultList = addTld(domain, resultList, verbose, limit)
+
         resultList = subdomain(domain, resultList, verbose, limit)
 
         resultList = singularPluralize(domain, resultList, verbose, limit)
@@ -849,6 +875,7 @@ if __name__ == "__main__":
     parser.add_argument("-cm", "--commonmisspelling", help="Change a word by is misspellings", action="store_true")
     parser.add_argument("-hp", "--homophones", help="Change word by an other who sound the same when spoken", action="store_true")
     parser.add_argument("-wt", "--wrongtld", help="Change the original top level domain to another", action="store_true")
+    parser.add_argument("-at", "--addtld", help="Adding a tld before the original tld", action="store_true")
     parser.add_argument("-sub", "--subdomain", help="Insert a dot at varying positions to create subdomain", action="store_true")
     parser.add_argument("-sp", "--singularpluralize", help="Create by making a singular domain plural and vice versa", action="store_true")
     
@@ -934,6 +961,9 @@ if __name__ == "__main__":
 
             if args.wrongtld:
                 resultList = wrongTld(domain, resultList, verbose, limit)
+
+            if args.addtld:
+                resultList = addTld(domain, resultList, verbose, limit)
 
             if args.subdomain:
                 resultList = subdomain(domain, resultList, verbose, limit)
