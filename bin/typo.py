@@ -791,7 +791,7 @@ def singularPluralize(domain, resultList, verbose, limit):
     return resultList
 
 
-def runAll(domainList, limit, verbose=False):
+def runAll(domainList, limit, dnsresolve=False, verbose=False):
     """Run all algo on each domain contain in domainList"""
 
     resultList = list()
@@ -842,6 +842,29 @@ def runAll(domainList, limit, verbose=False):
             for element in resultList:
                 write_file.write(element + "\n")
 
+
+        if dnsresolve:
+            import dns.name
+            import dns.resolver
+
+            domain_resolve = dict()
+
+            for result in resultList:
+                domain_resolve[result] = dict()
+                n = dns.name.from_text(result)
+                try:
+                    answer = dns.resolver.resolve(n, "A")
+                    ip = list()
+                    for rdata in answer:
+                        ip.append(rdata.to_text())
+                        domain_resolve[result]["NotExist"] = False
+                    domain_resolve[result]["ip"] = ip
+                except:
+                    domain_resolve[result]["NotExist"] = True
+
+            with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
+                json.dump(domain_resolve, write_json, indent=4)
+
         resultList = list()
 
 
@@ -855,6 +878,8 @@ if __name__ == "__main__":
 
     parser.add_argument("-dn", "--domainName", nargs="+", help="list of domain name")
     parser.add_argument("-fdn", "--filedomainName", help="file containing list of domain name")
+
+    parser.add_argument("-dnsr", "--dnsresolving", help="resolve all variation of domain name to see if it's up or not", action="store_true")
 
     parser.add_argument("-l", "--limit", help="limit of variations for a domain name")
 
@@ -884,6 +909,7 @@ if __name__ == "__main__":
     resultList = list()
 
     verbose = args.v
+
     limit = math.inf
     if args.limit:
         limit = int(args.limit)
@@ -907,7 +933,7 @@ if __name__ == "__main__":
 
     # the option for all algo to run is selected
     if args.all:
-        runAll(domainList, limit, verbose)
+        runAll(domainList, limit, args.dnsresolving, verbose)
 
     # The user select sepcial algo but not all
     else:
@@ -977,5 +1003,28 @@ if __name__ == "__main__":
             with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
                 for element in resultList:
                     write_file.write(element + "\n")
+
+
+            if args.dnsresolving:
+                import dns.name
+                import dns.resolver
+
+                domain_resolve = dict()
+
+                for result in resultList:
+                    domain_resolve[result] = dict()
+                    n = dns.name.from_text(result)
+                    try:
+                        answer = dns.resolver.resolve(n, "A")
+                        ip = list()
+                        for rdata in answer:
+                            ip.append(rdata.to_text())
+                            domain_resolve[result]["NotExist"] = False
+                        domain_resolve[result]["ip"] = ip
+                    except:
+                        domain_resolve[result]["NotExist"] = True
+
+                with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
+                    json.dump(domain_resolve, write_json, indent=4)
 
             resultList = list()
