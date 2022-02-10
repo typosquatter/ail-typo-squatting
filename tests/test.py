@@ -18,6 +18,7 @@ Error = False
 
 for file in os.listdir(pathTest):
     if file.split(".")[-1] == "txt":
+        print(f"\n\t[*****] {domain} [*****]")
         domain = file.replace(".txt","")
 
         resultList = list()

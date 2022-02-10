@@ -6,9 +6,7 @@ name: Python application
 on:
   push:
    paths:
-      - 'tests/**'
-  pull_request:
-    branches: [ main ]
+      - 'tests/*.txt'
 
 jobs:
   build:
