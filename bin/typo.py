@@ -791,81 +791,53 @@ def singularPluralize(domain, resultList, verbose, limit):
     return resultList
 
 
-def runAll(domainList, limit, dnsresolve=False, verbose=False):
+def runAll(domain, limit, verbose=False):
     """Run all algo on each domain contain in domainList"""
 
     resultList = list()
-    for domain in domainList:
-        print(f"\n\t[*****] {domain} [*****]")
-        resultList = characterOmission(domain, resultList, verbose, limit)
 
-        resultList = repetition(domain, resultList, verbose, limit)
+    resultList = characterOmission(domain, resultList, verbose, limit)
 
-        resultList = transposition(domain, resultList, verbose, limit)
+    resultList = repetition(domain, resultList, verbose, limit)
 
-        resultList = replacement(domain, resultList, verbose, limit)
+    resultList = transposition(domain, resultList, verbose, limit)
 
-        resultList = doubleReplacement(domain, resultList, verbose, limit)
+    resultList = replacement(domain, resultList, verbose, limit)
 
-        resultList = insertion(domain, resultList, verbose, limit)
+    resultList = doubleReplacement(domain, resultList, verbose, limit)
 
-        resultList = addition(domain, resultList, verbose, limit)
+    resultList = insertion(domain, resultList, verbose, limit)
 
-        resultList = missingDot(domain, resultList, verbose, limit)
+    resultList = addition(domain, resultList, verbose, limit)
 
-        resultList = stripDash(domain, resultList, verbose, limit)
+    resultList = missingDot(domain, resultList, verbose, limit)
 
-        resultList = vowel_swap(domain, resultList, verbose, limit)
+    resultList = stripDash(domain, resultList, verbose, limit)
 
-        resultList = hyphenation(domain, resultList, verbose, limit)
+    resultList = vowel_swap(domain, resultList, verbose, limit)
 
-        resultList = bitsquatting(domain, resultList, verbose, limit)
+    resultList = hyphenation(domain, resultList, verbose, limit)
 
-        resultList = homoglyph(domain, resultList, verbose, limit)
+    resultList = bitsquatting(domain, resultList, verbose, limit)
 
-        resultList = commonMisspelling(domain, resultList, verbose, limit)
+    resultList = homoglyph(domain, resultList, verbose, limit)
 
-        resultList = homophones(domain, resultList, verbose, limit)
+    resultList = commonMisspelling(domain, resultList, verbose, limit)
 
-        resultList = wrongTld(domain, resultList, verbose, limit)
+    resultList = homophones(domain, resultList, verbose, limit)
 
-        resultList = addTld(domain, resultList, verbose, limit)
+    resultList = wrongTld(domain, resultList, verbose, limit)
 
-        resultList = subdomain(domain, resultList, verbose, limit)
+    resultList = addTld(domain, resultList, verbose, limit)
 
-        resultList = singularPluralize(domain, resultList, verbose, limit)
+    resultList = subdomain(domain, resultList, verbose, limit)
 
-        if verbose:
-            print(f"Total: {len(resultList)}")
+    resultList = singularPluralize(domain, resultList, verbose, limit)
 
-        with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
-            for element in resultList:
-                write_file.write(element + "\n")
+    if verbose:
+        print(f"Total: {len(resultList)}")
 
-
-        if dnsresolve:
-            import dns.name
-            import dns.resolver
-
-            domain_resolve = dict()
-
-            for result in resultList:
-                domain_resolve[result] = dict()
-                n = dns.name.from_text(result)
-                try:
-                    answer = dns.resolver.resolve(n, "A")
-                    ip = list()
-                    for rdata in answer:
-                        ip.append(rdata.to_text())
-                        domain_resolve[result]["NotExist"] = False
-                    domain_resolve[result]["ip"] = ip
-                except:
-                    domain_resolve[result]["NotExist"] = True
-
-            with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
-                json.dump(domain_resolve, write_json, indent=4)
-
-        resultList = list()
+    return resultList
 
 
 
@@ -933,7 +905,39 @@ if __name__ == "__main__":
 
     # the option for all algo to run is selected
     if args.all:
-        runAll(domainList, limit, args.dnsresolving, verbose)
+        resultList = list()
+        for domain in domainList:
+            print(f"\n\t[*****] {domain} [*****]")
+
+            resultlist = runAll(domain, limit, verbose)
+
+            with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
+                for element in resultList:
+                    write_file.write(element + "\n")
+
+            if args.dnsresolving:
+                import dns.name
+                import dns.resolver
+
+                domain_resolve = dict()
+
+                for result in resultList:
+                    domain_resolve[result] = dict()
+                    n = dns.name.from_text(result)
+                    try:
+                        answer = dns.resolver.resolve(n, "A")
+                        ip = list()
+                        for rdata in answer:
+                            ip.append(rdata.to_text())
+                            domain_resolve[result]["NotExist"] = False
+                        domain_resolve[result]["ip"] = ip
+                    except:
+                        domain_resolve[result]["NotExist"] = True
+
+                with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
+                    json.dump(domain_resolve, write_json, indent=4)
+                
+            resultList = list()
 
     # The user select sepcial algo but not all
     else:
