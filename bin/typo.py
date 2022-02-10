@@ -905,11 +905,10 @@ if __name__ == "__main__":
 
     # the option for all algo to run is selected
     if args.all:
-        resultList = list()
         for domain in domainList:
             print(f"\n\t[*****] {domain} [*****]")
 
-            resultlist = runAll(domain, limit, verbose)
+            resultList = runAll(domain, limit, verbose)
 
             with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
                 for element in resultList:
