@@ -845,7 +845,6 @@ def runAll(domain, limit, verbose=False):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", help="debug", action="store_true")
     parser.add_argument("-v", help="verbose, more display", action="store_true")
 
     parser.add_argument("-dn", "--domainName", nargs="+", help="list of domain name")
