@@ -3,7 +3,7 @@ name = "ail-typo-squatting"
 version = "0.1.0"
 description = "Generate list of domain name using Domain name permutation engine to feed AIL"
 authors = ["David Cruciani <david.cruciani@securitymadein.lu>"]
-license = ""
+license = "BSD-2-Clause"
 repository = "https://github.com/ail-project/ail-typo-squatting"
 
 readme = "README.md"
