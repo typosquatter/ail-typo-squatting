@@ -850,6 +850,8 @@ if __name__ == "__main__":
     parser.add_argument("-dn", "--domainName", nargs="+", help="list of domain name")
     parser.add_argument("-fdn", "--filedomainName", help="file containing list of domain name")
 
+    parser.add_argument("-o", "--output", help="path to ouput location", required=True)
+
     parser.add_argument("-dnsr", "--dnsresolving", help="resolve all variation of domain name to see if it's up or not", action="store_true")
 
     parser.add_argument("-l", "--limit", help="limit of variations for a domain name")
@@ -887,10 +889,7 @@ if __name__ == "__main__":
     reachLimit = False
     # domain = "google.abuse.it"
 
-    # directory for list of variations for a domain name
-    pathOutput = pathWork + "/output"
-    if not os.path.isdir(pathOutput):
-        os.mkdir(pathOutput)
+    pathOutput = args.output
 
     # Verify that a domain name is receive
     if args.domainName:

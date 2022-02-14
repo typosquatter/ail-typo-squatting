@@ -3,11 +3,39 @@ Generate list of domain name using Domain name permutation engine to feed AIL
 
 
 
+# (main) Requirements
+
+- [inflect](https://github.com/jaraco/inflect)
+
+
+
+## Optionnal
+
+- [dnspython](https://github.com/rthalley/dnspython)
+
+
+
+
+
+# Installation
+
+ail-typo-squatting can be install with poetry. If you don't have poetry installed, you can do the following `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`.
+
+~~~
+$ poetry install
+$ poetry shell
+$ ail-typo-squatting -h
+~~~
+
+
+
+
+
 # Usage
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
-usage: typo.py [-h] [-d] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-dnsr] [-l LIMIT] [-a] [-co]
+usage: typo.py [-h] [-d] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] -o OUTPUT [-dnsr] [-l LIMIT] [-a] [-co]
                [-repe] [-tra] [-repl] [-drepl] [-ins] [-add] [-md] [-sd] [-vs] [-hyp] [-bs] [-hg] [-cm] [-hp] [-wt]
                [-at] [-sub] [-sp]
 
@@ -18,6 +46,9 @@ optional arguments:
                         list of domain name
   -fdn FILEDOMAINNAME, --filedomainName FILEDOMAINNAME
                         file containing list of domain name
+  -o OUTPUT, --output OUTPUT
+                        path to ouput location
+                        
   -dnsr, --dnsresolving
                         resolve all variation of domain name to see if it's up or not
   -l LIMIT, --limit LIMIT
@@ -55,26 +86,12 @@ optional arguments:
 
 
 
-
-
-# (main) Requirements
-
-- [inflect](https://github.com/jaraco/inflect)
-
-
-
-## Optionnal
-
-- [dnspython](https://github.com/rthalley/dnspython)
-
-
-
 # Example of use
 
 1. Creation of variations for `ail-project.org` and `circl.lu` domain name, using all algorithm
 
 ```bash
-dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a
+dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -o .
 ```
 
 
@@ -82,7 +99,7 @@ dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org ci
 2. Creation of variations for a file who contains domain name, using character omission - subdomain - hyphenation
 
 ````bash
-dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -sub -hyp
+dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -sub -hyp -o .
 ````
 
 
@@ -90,7 +107,7 @@ dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -s
 3. Creation of variations for `ail-project.org` and `circl.lu` domain name, using all algorithm and using dns resolution
 
 ````bash
-dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -dnsr
+dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -dnsr -o .
 ````
 
 
@@ -106,6 +123,7 @@ from typo import runAll
 import math
 
 resultList = list()
+domainList = ["google.com"]
 for domain in domainList:
     resultList = runAll(domain=domain, limit=math.inf, verbose=False)
     print(resultList)
@@ -121,6 +139,7 @@ from typo import characterOmission, subdomain, hyphenation
 import math
 
 resultList = list()
+domainList = ["google.com"]
 limit = math.inf
 for domain in domainList:
     resultList = characterOmission(domain=domain, resultList=resultList, verbose=False, limit=limit)
