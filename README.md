@@ -224,4 +224,6 @@ each keys are variations and may have a field "ip" if the domain name have been 
 
 # Acknowledgment
 
+![](./img/cef.png)
+
 The project has been co-funded by CEF-TC-2020-2 - 2020-EU-IA-0260 - JTAN - Joint Threat Analysis Network.
