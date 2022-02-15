@@ -1,21 +1,17 @@
 # ail-typo-squatting
-Generate list of domain name using Domain name permutation engine to feed AIL
 
+ail-typo-squatting is a Python library to generate list of potential typo squatting domains with domain name permutation engine to feed AIL and other systems. 
 
+The tool can be used as a stand-alone tool or to feed other systems.
 
-# (main) Requirements
+# Requirements
 
-- [inflect](https://github.com/jaraco/inflect)
+- Python 3.8
+- [inflect](https://github.com/jaraco/inflect) library
 
-
-
-## Optionnal
+## Optional
 
 - [dnspython](https://github.com/rthalley/dnspython)
-
-
-
-
 
 # Installation
 
@@ -26,10 +22,6 @@ $ poetry install
 $ poetry shell
 $ ail-typo-squatting -h
 ~~~
-
-
-
-
 
 # Usage
 
@@ -84,9 +76,7 @@ optional arguments:
                         Create by making a singular domain plural and vice versa
 ```
 
-
-
-# Example of use
+# Usage example
 
 1. Creation of variations for `ail-project.org` and `circl.lu` domain name, using all algorithm
 
@@ -94,15 +84,11 @@ optional arguments:
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -o .
 ```
 
-
-
 2. Creation of variations for a file who contains domain name, using character omission - subdomain - hyphenation
 
 ````bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -sub -hyp -o .
 ````
-
-
 
 3. Creation of variations for `ail-project.org` and `circl.lu` domain name, using all algorithm and using dns resolution
 
@@ -110,13 +96,9 @@ dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -s
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -dnsr -o .
 ````
 
+# Used as a library
 
-
-
-
-# Use as library
-
-1. To run all algorithm
+## To run all algorithms
 
 ~~~~python
 from typo import runAll
@@ -130,9 +112,7 @@ for domain in domainList:
     resultList = list()
 ~~~~
 
-
-
-2. To run specific algorithm
+## To run specific algorithm
 
 ````python
 from typo import characterOmission, subdomain, hyphenation
@@ -155,7 +135,7 @@ for domain in domainList:
 
 
 
-# Output
+# Sample output
 
 The variations will be write into a text file, where each line is a variation.
 
@@ -177,11 +157,9 @@ aiil-project.org
 ...
 ````
 
+## DNS output
 
-
-## Dns output
-
-In case dns resolve is selected, an additional file will be created in JSON format
+In case DNS resolve is selected, an additional file will be created in JSON format
 
 each keys are variations and may have a field "ip" if the domain name have been resolved. The filed "NotExist" will be there each time with a Boolean value to determine if the domain is existing or not.
 
@@ -218,7 +196,7 @@ each keys are variations and may have a field "ip" if the domain name have been 
 }
 ````
 
-# List of algorithm use
+# List of algorithms used
 
 
 | Algo                           | Description                                                  |
