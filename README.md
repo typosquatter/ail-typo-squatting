@@ -218,10 +218,7 @@ each keys are variations and may have a field "ip" if the domain name have been 
 }
 ````
 
-
-
 # List of algorithm use
-
 
 
 | Algo                           | Description                                                  |
@@ -246,3 +243,7 @@ each keys are variations and may have a field "ip" if the domain name have been 
 | Add Top Level Domain           | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
 | Subdomain                      | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
 
+
+# Acknowledgment
+
+The project has been co-funded by CEF-TC-2020-2 - 2020-EU-IA-0260 - JTAN - Joint Threat Analysis Network.
