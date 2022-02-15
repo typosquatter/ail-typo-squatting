@@ -3,6 +3,7 @@ import re
 import sys
 import json
 import math
+import string
 import inflect
 import argparse
 
@@ -839,6 +840,55 @@ def runAll(domain, limit, verbose=False):
 
     return resultList
 
+def formatYara(resultList, domain):
+    domainReplace = domain.replace(".", "_")
+
+    rule = f"rule {domainReplace} {{\n\tmeta:\n\t\t"
+    rule += f'domain = "{domain}"\n\t'
+    rule += "strings: \n"
+
+    cp = 0
+    for result in resultList: 
+        rule += f'\t\t$s{cp} = "{result}"\n'
+        cp += 1
+    
+    rule += "\tcondition:\n\t\t any of ($s*)\n}" 
+
+    return rule
+
+def formatRegex(resultList):
+    regex = ""
+    for result in resultList:
+        reg = ""
+        for car in result:
+            if car in string.ascii_letters or car in string.digits:
+                reg += car
+            elif car in string.punctuation:
+                reg += "\\" + car
+        regex += f"{reg}|"
+    regex = regex[:-1]
+
+    return regex
+
+def formatYaml(resultList, domain):
+    return
+
+def formatOutput(format, resultList, domain, pathOutput):
+    if format == "text":
+        with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
+            for element in resultList:
+                write_file.write(element + "\n")
+    elif format == "yara":
+        yara = formatYara(resultList, domain)
+        with open(f"{pathOutput}/{domain}.yar", "w", encoding='utf-8') as write_file:
+            write_file.write(yara)
+    elif format == "regex":
+        regex = formatRegex(resultList)
+        with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
+            write_file.write(regex)
+    elif format == "yaml":
+        yaml = formatYaml(resultList, domain)
+
 
 
 
@@ -851,6 +901,7 @@ if __name__ == "__main__":
     parser.add_argument("-fdn", "--filedomainName", help="file containing list of domain name")
 
     parser.add_argument("-o", "--output", help="path to ouput location", required=True)
+    parser.add_argument("-fo", "--formatoutput", help="format for the output file, yara - regex - yaml - text. Default: text")
 
     parser.add_argument("-dnsr", "--dnsresolving", help="resolve all variation of domain name to see if it's up or not", action="store_true")
 
@@ -890,6 +941,11 @@ if __name__ == "__main__":
     # domain = "google.abuse.it"
 
     pathOutput = args.output
+
+    if args.formatoutput:
+        formatoutput = args.formatoutput
+    else:
+        formatoutput = "text"
 
     # Verify that a domain name is receive
     if args.domainName:
@@ -1001,9 +1057,11 @@ if __name__ == "__main__":
             if verbose:
                 print(f"Total: {len(resultList)}")
             
-            with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
+            formatOutput(formatoutput, resultList, domain, pathOutput)
+
+            """with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
                 for element in resultList:
-                    write_file.write(element + "\n")
+                    write_file.write(element + "\n")"""
 
 
             if args.dnsresolving:
