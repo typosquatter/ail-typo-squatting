@@ -27,9 +27,8 @@ $ ail-typo-squatting -h
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
-usage: typo.py [-h] [-d] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] -o OUTPUT [-dnsr] [-l LIMIT] [-a] [-co]
-               [-repe] [-tra] [-repl] [-drepl] [-ins] [-add] [-md] [-sd] [-vs] [-hyp] [-bs] [-hg] [-cm] [-hp] [-wt]
-               [-at] [-sub] [-sp]
+usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] -o OUTPUT [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-a] [-co] [-repe] [-tra] [-repl] [-drepl] [-ins] [-add] [-md] [-sd] [-vs] [-hyp] [-bs] [-hg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp]
+
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -40,7 +39,8 @@ optional arguments:
                         file containing list of domain name
   -o OUTPUT, --output OUTPUT
                         path to ouput location
-                        
+  -fo FORMATOUTPUT, --formatoutput FORMATOUTPUT
+                        format for the output file, yara - regex - yaml - text. Default: text
   -dnsr, --dnsresolving
                         resolve all variation of domain name to see if it's up or not
   -l LIMIT, --limit LIMIT
@@ -87,7 +87,7 @@ dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org ci
 2. Creation of variations for a file who contains domain name, using character omission - subdomain - hyphenation
 
 ````bash
-dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -sub -hyp -o .
+dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -sub -hyp -o . -fo yara
 ````
 
 3. Creation of variations for `ail-project.org` and `circl.lu` domain name, using all algorithm and using dns resolution
@@ -106,8 +106,10 @@ import math
 
 resultList = list()
 domainList = ["google.com"]
+formatoutput = "yara"
+pathOutput = "."
 for domain in domainList:
-    resultList = runAll(domain=domain, limit=math.inf, verbose=False)
+    resultList = runAll(domain=domain, limit=math.inf, formatoutput=formatoutput, pathOutput=pathOutput, verbose=False)
     print(resultList)
     resultList = list()
 ~~~~
@@ -115,12 +117,14 @@ for domain in domainList:
 ## To run specific algorithm
 
 ````python
-from typo import characterOmission, subdomain, hyphenation
+from typo import formatOutput, characterOmission, subdomain, hyphenation
 import math
 
 resultList = list()
 domainList = ["google.com"]
 limit = math.inf
+formatoutput = "yara"
+pathOutput = "."
 for domain in domainList:
     resultList = characterOmission(domain=domain, resultList=resultList, verbose=False, limit=limit)
     
@@ -129,6 +133,7 @@ for domain in domainList:
     resultList = hyphenation(domain=domain, resultList=resultList, verbose=False, limit=limit)
     
     print(resultList)
+    formatOutput(format=formatoutput, resultList=resultList, domain=domain, pathOutput=pathOutput)
     
     resultList = list()
 ````
@@ -137,7 +142,16 @@ for domain in domainList:
 
 # Sample output
 
-The variations will be write into a text file, where each line is a variation.
+There's 4 format possible for the output file:
+
+- text
+- yara
+- regex
+- sigma
+
+
+
+For text file, each line is a variation.
 
 ````
 ail-project.org
@@ -156,6 +170,65 @@ aail-project.org
 aiil-project.org
 ...
 ````
+
+
+
+For Yara file, each rule is a variation.
+
+~~~~
+rule ail-project_org {
+	meta:
+		domain = "ail-project.org"
+	strings: 
+		$s0 = "ail-project.org"
+		$s1 = "il-project.org"
+		$s2 = "al-project.org"
+		$s3 = "ai-project.org"
+		$s4 = "ailproject.org"
+		$s5 = "ail-roject.org"
+		$s6 = "ail-poject.org"
+		$s7 = "ail-prject.org"
+		$s8 = "ail-proect.org"
+		$s9 = "ail-projct.org"
+		$s10 = "ail-projet.org"
+		$s11 = "ail-projec.org"
+	condition:
+		 any of ($s*)
+}
+~~~~
+
+
+
+For regex file, each variations is transform into regex and concatenate with other to do only one big regex.
+
+~~~~
+ail\-project\.org|il\-project\.org|al\-project\.org|ai\-project\.org|ailproject\.org|ail\-roject\.org|ail\-poject\.org|ail\-prject\.org|ail\-proect\.org|ail\-projct\.org|ail\-projet\.org|ail\-projec\.org
+~~~~
+
+
+
+For sigma file, each variations are list under `variations` key.
+
+~~~~
+title: ail-project.org
+variations:
+- ail-project.org
+- il-project.org
+- al-project.org
+- ai-project.org
+- ailproject.org
+- ail-roject.org
+- ail-poject.org
+- ail-prject.org
+- ail-proect.org
+- ail-projct.org
+- ail-projet.org
+- ail-projec.org
+~~~~
+
+
+
+
 
 ## DNS output
 

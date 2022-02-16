@@ -3,6 +3,7 @@ import re
 import sys
 import json
 import math
+import yaml
 import string
 import inflect
 import argparse
@@ -792,7 +793,7 @@ def singularPluralize(domain, resultList, verbose, limit):
     return resultList
 
 
-def runAll(domain, limit, verbose=False):
+def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
     """Run all algo on each domain contain in domainList"""
 
     resultList = list()
@@ -837,8 +838,33 @@ def runAll(domain, limit, verbose=False):
 
     if verbose:
         print(f"Total: {len(resultList)}")
+        print(f"Write variations result in {formatoutput} file...")
+
+    formatOutput(formatoutput, resultList, domain, pathOutput)
 
     return resultList
+
+
+def dnsResolving(resultList, domain, pathOutput):
+    print("[+] Dns Resolving...")
+    domain_resolve = dict()
+
+    for result in resultList:
+        domain_resolve[result] = dict()
+        n = dns.name.from_text(result)
+        try:
+            answer = dns.resolver.resolve(n, "A")
+            ip = list()
+            for rdata in answer:
+                ip.append(rdata.to_text())
+                domain_resolve[result]["NotExist"] = False
+            domain_resolve[result]["ip"] = ip
+        except:
+            domain_resolve[result]["NotExist"] = True
+
+    with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
+        json.dump(domain_resolve, write_json, indent=4)
+
 
 def formatYara(resultList, domain):
     domainReplace = domain.replace(".", "_")
@@ -871,7 +897,15 @@ def formatRegex(resultList):
     return regex
 
 def formatYaml(resultList, domain):
-    return
+    yaml_file = {"title": domain}
+    variations = list()
+
+    for result in resultList:
+        variations.append(result)
+
+    yaml_file["variations"] = variations
+
+    return yaml_file
 
 def formatOutput(format, resultList, domain, pathOutput):
     if format == "text":
@@ -887,7 +921,9 @@ def formatOutput(format, resultList, domain, pathOutput):
         with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
             write_file.write(regex)
     elif format == "yaml":
-        yaml = formatYaml(resultList, domain)
+        yaml_file = formatYaml(resultList, domain)
+        with open(f"{pathOutput}/{domain}.yml", "w", encoding='utf-8') as write_file:
+            yaml.dump(yaml_file, write_file)
 
 
 
@@ -962,34 +998,14 @@ if __name__ == "__main__":
         for domain in domainList:
             print(f"\n\t[*****] {domain} [*****]")
 
-            resultList = runAll(domain, limit, verbose)
-
-            with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
-                for element in resultList:
-                    write_file.write(element + "\n")
+            resultList = runAll(domain, limit, formatoutput, pathOutput, verbose)
 
             if args.dnsresolving:
                 import dns.name
                 import dns.resolver
 
-                domain_resolve = dict()
-
-                for result in resultList:
-                    domain_resolve[result] = dict()
-                    n = dns.name.from_text(result)
-                    try:
-                        answer = dns.resolver.resolve(n, "A")
-                        ip = list()
-                        for rdata in answer:
-                            ip.append(rdata.to_text())
-                            domain_resolve[result]["NotExist"] = False
-                        domain_resolve[result]["ip"] = ip
-                    except:
-                        domain_resolve[result]["NotExist"] = True
-
-                with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
-                    json.dump(domain_resolve, write_json, indent=4)
-                
+                dnsResolving(resultList, domain, pathOutput)
+                                
             resultList = list()
 
     # The user select sepcial algo but not all
@@ -1059,10 +1075,6 @@ if __name__ == "__main__":
             
             formatOutput(formatoutput, resultList, domain, pathOutput)
 
-            """with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
-                for element in resultList:
-                    write_file.write(element + "\n")"""
-
 
             if args.dnsresolving:
                 import dns.name
@@ -1070,20 +1082,6 @@ if __name__ == "__main__":
 
                 domain_resolve = dict()
 
-                for result in resultList:
-                    domain_resolve[result] = dict()
-                    n = dns.name.from_text(result)
-                    try:
-                        answer = dns.resolver.resolve(n, "A")
-                        ip = list()
-                        for rdata in answer:
-                            ip.append(rdata.to_text())
-                            domain_resolve[result]["NotExist"] = False
-                        domain_resolve[result]["ip"] = ip
-                    except:
-                        domain_resolve[result]["NotExist"] = True
-
-                with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
-                    json.dump(domain_resolve, write_json, indent=4)
+                dnsResolving(resultList, domain, pathOutput)
 
             resultList = list()
