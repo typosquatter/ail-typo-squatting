@@ -979,7 +979,11 @@ if __name__ == "__main__":
     pathOutput = args.output
 
     if args.formatoutput:
-        formatoutput = args.formatoutput
+        if args.formatoutput == "text" or args.formatoutput == "yara" or args.formatoutput == "yaml" or args.formatoutput == "regex":
+            formatoutput = args.formatoutput
+        else:
+            print("[-] Format type error")
+            exit(-1)
     else:
         formatoutput = "text"
 
