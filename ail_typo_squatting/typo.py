@@ -67,7 +67,8 @@ glyphs = {
     'w': ['vv', 'ŵ', 'ẁ', 'ẃ', 'ẅ', 'ⱳ', 'ẇ', 'ẉ', 'ẘ', 'ᴡ'],
     'x': ['ẋ', 'ẍ'],
     'y': ['ʏ', 'ý', 'ÿ', 'ŷ', 'ƴ', 'ȳ', 'ɏ', 'ỿ', 'ẏ', 'ỵ'],
-    'z': ['ʐ', 'ż', 'ź', 'ᴢ', 'ƶ', 'ẓ', 'ẕ', 'ⱬ']
+    'z': ['ʐ', 'ż', 'ź', 'ᴢ', 'ƶ', 'ẓ', 'ẕ', 'ⱬ'],
+    '-': ['➖', '–', '˗', '‑', '⁃', '−', 'Ⲻ', '‒', 'ⲻ', '‐', '۔', '﹘']
     }
 
 
@@ -112,7 +113,9 @@ def characterOmission(domain, resultList, verbose, limit):
     """Leave out a letter of the domain name"""
 
     if not len(resultList) >= limit:
-        print("[+] Character Omission")
+        if verbose:
+            print("[+] Character Omission")
+
         resultLoc = list()
         loclist = list()
 
@@ -149,7 +152,9 @@ def repetition(domain, resultList, verbose, limit):
     """Character Repeat"""
 
     if not len(resultList) >= limit:
-        print("[+] Character Repeat")
+        if verbose:
+            print("[+] Character Repeat")
+
         resultLoc = list()
         loclist = list()
 
@@ -182,7 +187,9 @@ def transposition(domain, resultList, verbose, limit):
     """Swappe the order of adjacent letters in the domain name"""
 
     if not len(resultList) >= limit:
-        print("[+] Transposition")
+        if verbose:
+            print("[+] Transposition")
+
         resultLoc = list()
         loclist = list()
 
@@ -215,7 +222,9 @@ def replacement(domain, resultList, verbose, limit):
     """Adjacent character replacement to the immediate left and right on the keyboard"""
 
     if not len(resultList) >= limit:
-        print("[+] Replacement")
+        if verbose:
+            print("[+] Replacement")
+
         resultLoc = list()
         loclist = list()
 
@@ -252,7 +261,9 @@ def doubleReplacement(domain, resultList, verbose, limit):
     """Double Character Replacement"""
 
     if not len(resultList) >= limit:
-        print("[+] Double Character Replacement")
+        if verbose:
+            print("[+] Double Character Replacement")
+
         resultLoc = list()
         loclist = list()
 
@@ -289,7 +300,9 @@ def insertion(domain, resultList, verbose, limit):
     """Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter"""
 
     if not len(resultList) >= limit:
-        print("[+] Insertion")
+        if verbose:
+            print("[+] Insertion")
+
         resultLoc = list()
         loclist = list()
 
@@ -326,7 +339,9 @@ def addition(domain, resultList, verbose, limit):
     """Add a character in the domain name"""
 
     if not len(resultList) >= limit:
-        print("[+] Addition")
+        if verbose:
+            print("[+] Addition")
+
         resultLoc = list()
         loclist = list()
 
@@ -378,7 +393,9 @@ def missingDot(domain, resultList, verbose, limit):
     """Omission of a dot from the domain name"""
 
     if not len(resultList) >= limit:
-        print("[+] Missing Dot")
+        if verbose:
+            print("[+] Missing Dot")
+
         resultLoc = list()
         cp = 0
 
@@ -410,10 +427,11 @@ def stripDash(domain, resultList, verbose, limit):
     """Omission of a dash from the domain name"""
 
     if not len(resultList) >= limit:
-        print("[+] Strip Dash")
+        if verbose:
+            print("[+] Strip Dash")
+
         loc = domain
         cp = 0
-        i = 0
         while "-" in loc:
             loc2 = loc[::-1].replace("-", "", 1)[::-1]
             loc = loc.replace("-", "", 1)
@@ -424,8 +442,7 @@ def stripDash(domain, resultList, verbose, limit):
 
             if loc2 not in resultList:
                 cp += 1
-                resultList.append(loc2) 
-            i += 1
+                resultList.append(loc2)
         
         if verbose:
             print(f"{cp}\n")
@@ -439,7 +456,9 @@ def vowel_swap(domain, resultList, verbose, limit):
     """Swap vowels within the domain name"""
 
     if not len(resultList) >= limit:
-        print("[+] Vowel Swap")
+        if verbose:
+            print("[+] Vowel Swap")
+
         resultLoc = list()
         loclist = list()
         # vowels = 'aeiouy'
@@ -483,7 +502,9 @@ def hyphenation(domain, resultList, verbose, limit):
     """Addition of a hypen '-' between the first and last character in a string"""
 
     if not len(resultList) >= limit:
-        print("[+] Hyphenation")
+        if verbose:
+            print("[+] Hyphenation")
+
         resultLoc = list()
         loclist = list()
 
@@ -516,7 +537,9 @@ def bitsquatting(domain, resultList, verbose, limit):
     """The character is substituted with the set of valid characters that can be made after a single bit flip"""
 
     if not len(resultList) >= limit:
-        print("[+] Bitsquatting")
+        if verbose:
+            print("[+] Bitsquatting")
+
         resultLoc = list()
         loclist = list()
 
@@ -555,7 +578,9 @@ def homoglyph(domain, resultList, verbose, limit):
     """One or more characters that look similar to another character but are different are called homogylphs"""
 
     if not len(resultList) >= limit:
-        print("[+] Homoglyph")
+        if verbose:
+            print("[+] Homoglyph")
+
         def mix(domain):
             for w in range(1, len(domain)):
                 for i in range(len(domain)-w+1):
@@ -600,7 +625,9 @@ def commonMisspelling(domain, resultList, verbose, limit):
     # https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
 
     if not len(resultList) >= limit:
-        print("[+] Common Misspelling")
+        if verbose:
+            print("[+] Common Misspelling")
+
         with open(pathEtc + "/common-misspellings.json", "r") as read_json:
             misspelling = json.load(read_json)
             keys = misspelling.keys()
@@ -643,7 +670,9 @@ def homophones(domain, resultList, verbose, limit):
     # cat /tmp/h | sed 's/^[ ]*//g' | egrep -v "These pairs become homophones in certain dialects only|^Names" | sed -E 's/ (and|or) /,/g' | sed 's/\//,/g' | sed 's/,,/,/g' | tr '[:upper:]' '[:lower:]' | tr -d " '" | grep -v "^$"
 
     if not len(resultList) >= limit:
-        print("[+] Homophones")
+        if verbose:
+            print("[+] Homophones")
+
         with open(pathEtc + "/homophones.txt", "r") as read_file:
             homophones = read_file.readlines()
         
@@ -686,7 +715,9 @@ def wrongTld(domain, resultList, verbose, limit):
     # Version 2022012800
 
     if not len(resultList) >= limit:
-        print("[+] Wrong Tld")
+        if verbose:
+            print("[+] Wrong Tld")
+
         with open(pathEtc + "/tlds-alpha-by-domain.txt", "r") as read_file:
             tlds = read_file.readlines()
         
@@ -717,7 +748,8 @@ def addTld(domain, resultList, verbose, limit):
     # Version 2022012800
 
     if not len(resultList) >= limit:
-        print("[+] Adding Tld")
+        if verbose:
+            print("[+] Adding Tld")
         with open(pathEtc + "/tlds-alpha-by-domain.txt", "r") as read_file:
             tlds = read_file.readlines()
         
@@ -739,7 +771,9 @@ def subdomain(domain, resultList, verbose, limit):
     """Insert a dot at varying positions to create subdomain"""
 
     if not len(resultList) >= limit:
-        print("[+] Subdomain")
+        if verbose:
+            print("[+] Subdomain")
+
         cp = 0
 
         for i in range(1, len(domain)-1):
@@ -760,7 +794,9 @@ def singularPluralize(domain, resultList, verbose, limit):
     """Create by making a singular domain plural and vice versa"""
 
     if not len(resultList) >= limit:
-        print("[+] Singular Pluralize")
+        if verbose:
+            print("[+] Singular Pluralize")
+            
         resultLoc = list()
         loclist = list()
         inflector = inflect.engine()
@@ -786,6 +822,35 @@ def singularPluralize(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+def changeDotHyph(domain, resultList, verbose, limit):
+    """Change dot to hyphenation '-' """
+
+    if not len(resultList) >= limit:
+        if verbose:
+            print("[+] Change dot to hyphenation")
+
+        loc = domain
+        while "." in loc:
+            resultLoc = list()
+            resultLoc2 = list()
+            loc2 = loc[::-1].replace(".", "-", 1)[::-1]
+            loc = loc.replace(".", "-", 1)
+
+            if "." not in loc:
+                resultLoc = addTld(loc, resultLoc, verbose, limit)
+                resultList = checkResult(resultLoc, resultList)
+            
+            elif loc not in resultList:
+                resultList.append(loc)
+
+            resultLoc2 = addTld(loc2, resultLoc2, verbose, limit)
+            resultList = checkResult(resultLoc2, resultList)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -835,6 +900,8 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
     resultList = subdomain(domain, resultList, verbose, limit)
 
     resultList = singularPluralize(domain, resultList, verbose, limit)
+
+    resultList = changeDotHyph(domain, resultList, verbose, limit)
 
     if verbose:
         print(f"Total: {len(resultList)}")
@@ -963,6 +1030,7 @@ if __name__ == "__main__":
     parser.add_argument("-at", "--addtld", help="Adding a tld before the original tld", action="store_true")
     parser.add_argument("-sub", "--subdomain", help="Insert a dot at varying positions to create subdomain", action="store_true")
     parser.add_argument("-sp", "--singularpluralize", help="Create by making a singular domain plural and vice versa", action="store_true")
+    parser.add_argument("-cdh", "--changedothyphenation", help="Change dot to hyphenation", action="store_true")
     
     args = parser.parse_args()
 
@@ -1073,6 +1141,9 @@ if __name__ == "__main__":
 
             if args.singularpluralize:
                 resultList = singularPluralize(domain, resultList, verbose, limit)
+            
+            if args.changedothyphenation:
+                resultList = changeDotHyph(domain, resultList, verbose, limit)
 
             if verbose:
                 print(f"Total: {len(resultList)}")
