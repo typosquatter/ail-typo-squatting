@@ -13,6 +13,8 @@ The tool can be used as a stand-alone tool or to feed other systems.
 
 - [dnspython](https://github.com/rthalley/dnspython)
 
+
+
 # Installation
 
 ail-typo-squatting can be install with poetry. If you don't have poetry installed, you can do the following `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`.
@@ -23,11 +25,13 @@ $ poetry shell
 $ ail-typo-squatting -h
 ~~~
 
+
+
 # Usage
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
-usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] -o OUTPUT [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-a] [-co] [-repe] [-tra] [-repl] [-drepl] [-ins] [-add] [-md] [-sd] [-vs] [-hyp] [-bs] [-hg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp]
+usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] -o OUTPUT [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-a] [-co] [-repe] [-tra] [-repl] [-drepl] [-ins] [-add] [-md] [-sd] [-vs] [-hyp] [-bs] [-hg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp] [-cdh]
 
 
 optional arguments:
@@ -74,7 +78,11 @@ optional arguments:
   -sub, --subdomain     Insert a dot at varying positions to create subdomain
   -sp, --singularpluralize
                         Create by making a singular domain plural and vice versa
+  -cdh, --changedothyphenation
+                        Change dot to hyphenation
 ```
+
+
 
 # Usage example
 
@@ -96,6 +104,8 @@ dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -s
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -dnsr -o .
 ````
 
+
+
 # Used as a library
 
 ## To run all algorithms
@@ -113,6 +123,8 @@ for domain in domainList:
     print(resultList)
     resultList = list()
 ~~~~
+
+
 
 ## To run specific algorithm
 
@@ -283,6 +295,7 @@ each keys are variations and may have a field "ip" if the domain name have been 
 | Adjacent Character Insertion   | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter. |
 | Missing Dot                    | These typos are created by omitting a dot from the domain name. |
 | Strip Dashes                   | These typos are created by omitting a dash from the domain name. |
+| Change Dot to Dashes           | These typos are created by changing a dot to a dash          |
 | Singular or Pluralise          | These typos are created by making a singular domain plural and vice versa. |
 | Common Misspellings            | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com |
 | Vowel Swapping                 | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
