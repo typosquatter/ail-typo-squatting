@@ -2,13 +2,14 @@ import os
 import re
 import sys
 import math
+import shutil
 import pathlib
 pathProg = pathlib.Path(__file__).parent.absolute()
 
 pathWork = ""
 for i in re.split(r"/|\\", str(pathProg))[:-1]:
     pathWork += i + "/"
-pathBin = pathWork + "bin"
+pathBin = pathWork + "ail_typo_squatting"
 pathTest = pathWork + "tests"
 sys.path.append(pathBin)
 
@@ -18,12 +19,18 @@ Error = False
 
 for file in os.listdir(pathTest):
     if file.split(".")[-1] == "txt":
-        print(f"\n\t[*****] {domain} [*****]")
         domain = file.replace(".txt","")
+        print(f"\n\t[*****] {domain} [*****]")
+
+        pathTrash = pathWork + "trash"
+        if not os.path.isdir(pathTrash):
+            os.mkdir(pathTrash)
 
         resultList = list()
         resultFile = list()
-        resultList = runAll(domain=domain, limit=math.inf, verbose=False)
+        resultList = runAll(domain=domain, limit=math.inf, formatoutput="text", pathOutput=pathTrash, verbose=False)
+
+        shutil.rmtree(pathTrash)
 
         with open(os.path.join(pathTest, file), "r", encoding="utf-8") as read_file:
             for line in read_file.readlines():
