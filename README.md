@@ -13,19 +13,23 @@ The tool can be used as a stand-alone tool or to feed other systems.
 
 - [dnspython](https://github.com/rthalley/dnspython)
 
-
-
 # Installation
+
+## Source install
 
 ail-typo-squatting can be install with poetry. If you don't have poetry installed, you can do the following `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`.
 
-~~~
+~~~bash
 $ poetry install
 $ poetry shell
 $ ail-typo-squatting -h
 ~~~
 
+## pip installation
 
+~~~bash
+$ pip3 ail-typo-squatting
+~~~
 
 # Usage
 
