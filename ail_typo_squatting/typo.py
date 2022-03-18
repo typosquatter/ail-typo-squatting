@@ -73,6 +73,10 @@ glyphs = {
 
 
 def globalAppend(loclist):
+    """
+    Concate each element of each list of loclist to create all variations possible
+    """
+
     r = list()
     rloc = list()
     result = list()
@@ -102,6 +106,10 @@ def globalAppend(loclist):
     
 
 def checkResult(resultLoc, resultList):
+    """
+    Verify if element in resultLoc not exist in resultList before adding them in resultList
+    """
+
     for element in resultLoc:
         if element not in resultList:
             resultList.append(element)
@@ -905,7 +913,6 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
 
     if verbose:
         print(f"Total: {len(resultList)}")
-        print(f"Write variations result in {formatoutput} file...")
 
     formatOutput(formatoutput, resultList, domain, pathOutput)
 
@@ -913,6 +920,7 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
 
 
 def dnsResolving(resultList, domain, pathOutput):
+    """Do a dns resolving on each variations and then create a json"""
     print("[+] Dns Resolving...")
     domain_resolve = dict()
 
@@ -928,12 +936,15 @@ def dnsResolving(resultList, domain, pathOutput):
             domain_resolve[result]["ip"] = ip
         except:
             domain_resolve[result]["NotExist"] = True
-
-    with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
-        json.dump(domain_resolve, write_json, indent=4)
+    if not pathOutput == "-":
+        with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
+            json.dump(domain_resolve, write_json, indent=4)
+    else:
+        sys.stdout.write(json.dumps(domain_resolve))
 
 
 def formatYara(resultList, domain):
+    """Output in yara format"""
     domainReplace = domain.replace(".", "_")
 
     rule = f"rule {domainReplace} {{\n\tmeta:\n\t\t"
@@ -950,6 +961,7 @@ def formatYara(resultList, domain):
     return rule
 
 def formatRegex(resultList):
+    """Output in regex format"""
     regex = ""
     for result in resultList:
         reg = ""
@@ -964,6 +976,7 @@ def formatRegex(resultList):
     return regex
 
 def formatYaml(resultList, domain):
+    """Output in yaml format"""
     yaml_file = {"title": domain}
     variations = list()
 
@@ -975,22 +988,39 @@ def formatYaml(resultList, domain):
     return yaml_file
 
 def formatOutput(format, resultList, domain, pathOutput):
+    """
+    Call different function to create the right format file
+    """
+
     if format == "text":
-        with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
+        if not pathOutput == "-":
+            with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
+                for element in resultList:
+                    write_file.write(element + "\n")
+        else:
             for element in resultList:
-                write_file.write(element + "\n")
+                sys.stdout.write(element + "\n")
     elif format == "yara":
         yara = formatYara(resultList, domain)
-        with open(f"{pathOutput}/{domain}.yar", "w", encoding='utf-8') as write_file:
-            write_file.write(yara)
+        if not pathOutput == "-":
+            with open(f"{pathOutput}/{domain}.yar", "w", encoding='utf-8') as write_file:
+                write_file.write(yara)
+        else:
+            sys.stdout.write(yara)
     elif format == "regex":
         regex = formatRegex(resultList)
-        with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
-            write_file.write(regex)
+        if not pathOutput == "-":
+            with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
+                write_file.write(regex)
+        else:
+            sys.stdout.write(regex)
     elif format == "yaml":
         yaml_file = formatYaml(resultList, domain)
-        with open(f"{pathOutput}/{domain}.yml", "w", encoding='utf-8') as write_file:
-            yaml.dump(yaml_file, write_file)
+        if not pathOutput == "-":
+            with open(f"{pathOutput}/{domain}.yml", "w", encoding='utf-8') as write_file:
+                yaml.dump(yaml_file, write_file)
+        else:
+            sys.stdout.write(yaml)
 
 
 
@@ -1042,9 +1072,14 @@ if __name__ == "__main__":
     if args.limit:
         limit = int(args.limit)
     reachLimit = False
-    # domain = "google.abuse.it"
 
     pathOutput = args.output
+
+    if not pathOutput == "-":
+        try:
+            os.makedirs(pathOutput)
+        except:
+            pass
 
     if args.formatoutput:
         if args.formatoutput == "text" or args.formatoutput == "yara" or args.formatoutput == "yaml" or args.formatoutput == "regex":
