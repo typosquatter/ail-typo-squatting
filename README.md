@@ -8,6 +8,7 @@ The tool can be used as a stand-alone tool or to feed other systems.
 
 - Python 3.8
 - [inflect](https://github.com/jaraco/inflect) library
+- [pyyaml](https://pyyaml.org/wiki/PyYAMLDocumentation)
 
 ## Optional
 
@@ -28,7 +29,7 @@ $ ail-typo-squatting -h
 ## pip installation
 
 ~~~bash
-$ pip3 ail-typo-squatting
+$ pip3 install ail-typo-squatting
 ~~~
 
 # Usage
@@ -115,7 +116,7 @@ dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org ci
 ## To run all algorithms
 
 ~~~~python
-from typo import runAll
+from ail_typo_squatting import runAll
 import math
 
 resultList = list()
@@ -133,7 +134,7 @@ for domain in domainList:
 ## To run specific algorithm
 
 ````python
-from typo import formatOutput, characterOmission, subdomain, hyphenation
+from ail_typo_squatting import formatOutput, characterOmission, subdomain, hyphenation
 import math
 
 resultList = list()
