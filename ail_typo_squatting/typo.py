@@ -911,6 +911,8 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
 
     resultList = changeDotHyph(domain, resultList, verbose, limit)
 
+    resultList.pop(0)
+
     if verbose:
         print(f"Total: {len(resultList)}")
 
@@ -1179,6 +1181,8 @@ if __name__ == "__main__":
             
             if args.changedothyphenation:
                 resultList = changeDotHyph(domain, resultList, verbose, limit)
+
+            resultList.pop(0)
 
             if verbose:
                 print(f"Total: {len(resultList)}")
