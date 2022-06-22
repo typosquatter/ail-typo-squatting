@@ -1,8 +1,14 @@
 [tool.poetry]
 name = "ail-typo-squatting"
-version = "0.4.3"
+version = "0.4.6"
 description = "Generate list of domain name using Domain name permutation engine to feed AIL"
-authors = ["David Cruciani <david.cruciani@securitymadein.lu>"]
+authors = [
+	"David Cruciani <david.cruciani@securitymadein.lu>"
+]
+maintainers = [
+	"Alexandre Dulaunoy <a@foo.be>",
+	"Aurelien Thirion (terrtia) <aurelien.thirion@circl.lu>"
+]
 license = "BSD-2-Clause"
 repository = "https://github.com/ail-project/ail-typo-squatting"
 
@@ -15,8 +21,8 @@ keywords = [
 include = ["etc/*"]
 
 [tool.poetry.dependencies]
-python = "^3.6		"
-inflect = "^5.4.0"
+python = "^3.6"
+inflect = "^5.3.0"
 dnspython = "^2.2.0"
 pyyaml = "^6.0"
 

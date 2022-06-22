@@ -6,7 +6,7 @@ The tool can be used as a stand-alone tool or to feed other systems.
 
 # Requirements
 
-- Python 3.8
+- Python 3.6+
 - [inflect](https://github.com/jaraco/inflect) library
 - [pyyaml](https://pyyaml.org/wiki/PyYAMLDocumentation)
 
