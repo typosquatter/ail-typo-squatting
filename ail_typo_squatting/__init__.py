@@ -1,6 +1,7 @@
 from ail_typo_squatting.typo import runAll
 
 from ail_typo_squatting.typo import formatOutput
+from ail_typo_squatting.typo import dnsResolving
 
 from ail_typo_squatting.typo import characterOmission
 from ail_typo_squatting.typo import repetition

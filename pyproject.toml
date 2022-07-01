@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ail-typo-squatting"
-version = "0.4.6"
+version = "0.4.7"
 description = "Generate list of domain name using Domain name permutation engine to feed AIL"
 authors = [
 	"David Cruciani <david.cruciani@securitymadein.lu>"

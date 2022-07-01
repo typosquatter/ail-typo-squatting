@@ -943,6 +943,7 @@ def dnsResolving(resultList, domain, pathOutput):
             json.dump(domain_resolve, write_json, indent=4)
     else:
         sys.stdout.write(json.dumps(domain_resolve))
+    return domain_resolve
 
 
 def formatYara(resultList, domain):
