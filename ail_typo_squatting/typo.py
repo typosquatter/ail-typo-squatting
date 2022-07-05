@@ -941,10 +941,15 @@ def dnsResolving(resultList, domain, pathOutput):
                 loc = list()
                 for rdata in answer:
                     loc.append(rdata.to_text())
-                    domain_resolve[result]["NotExist"] = False
-                domain_resolve[result][t] = loc
+                if len(loc) > 0:
+                    domain_resolve[result][t] = loc
             except:
-                domain_resolve[result]["NotExist"] = True
+                pass
+        
+        if len(domain_resolve[result]) == 0:
+            domain_resolve[result]['NotExist'] = True
+        else:
+            domain_resolve[result]['NotExist'] = False
 
     if not pathOutput == "-":
         with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
