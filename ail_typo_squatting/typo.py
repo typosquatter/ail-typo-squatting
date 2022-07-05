@@ -152,6 +152,7 @@ def characterOmission(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -186,6 +187,7 @@ def repetition(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -221,6 +223,7 @@ def transposition(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -260,6 +263,7 @@ def replacement(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -299,6 +303,7 @@ def doubleReplacement(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -338,6 +343,7 @@ def insertion(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -374,6 +380,7 @@ def addition(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -427,6 +434,8 @@ def missingDot(domain, resultList, verbose, limit):
 
         if verbose:
             print(f"{cp}\n")
+
+        resultList.remove(domain)
         
         while len(resultList) > limit:
             resultList.pop()
@@ -456,6 +465,8 @@ def stripDash(domain, resultList, verbose, limit):
         
         if verbose:
             print(f"{cp}\n")
+
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -501,6 +512,7 @@ def vowel_swap(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -536,6 +548,7 @@ def hyphenation(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -577,6 +590,7 @@ def bitsquatting(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -624,6 +638,8 @@ def homoglyph(domain, resultList, verbose, limit):
         if verbose:
             print(f"{cp}\n")
 
+        resultList.remove(domain)
+
         while len(resultList) > limit:
             resultList.pop()
 
@@ -666,6 +682,7 @@ def commonMisspelling(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -712,6 +729,7 @@ def homophones(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -746,6 +764,8 @@ def wrongTld(domain, resultList, verbose, limit):
         if verbose:
             print(f"{cp}\n")
 
+        resultList.remove(domain)
+
         while len(resultList) > limit:
             resultList.pop()
 
@@ -771,6 +791,8 @@ def addTld(domain, resultList, verbose, limit):
         if verbose:
             print(f"{cp}\n")
 
+        resultList.remove(domain)
+
         while len(resultList) > limit:
             resultList.pop()
 
@@ -793,6 +815,8 @@ def subdomain(domain, resultList, verbose, limit):
 
         if verbose:
             print(f"{cp}\n")
+
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -832,6 +856,7 @@ def singularPluralize(domain, resultList, verbose, limit):
             print(f"{len(rLoc)}\n")
 
         resultList = checkResult(rLoc, resultList)
+        resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -861,6 +886,8 @@ def changeDotHyph(domain, resultList, verbose, limit):
 
             resultLoc2 = addTld(loc2, resultLoc2, verbose, limit)
             resultList = checkResult(resultLoc2, resultList)
+
+            resultList.remove(domain)
 
         while len(resultList) > limit:
             resultList.pop()
@@ -913,7 +940,6 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
 
     resultList = changeDotHyph(domain, resultList, verbose, limit)
 
-    resultList.remove(domain)
 
     if verbose:
         print(f"Total: {len(resultList)}")
