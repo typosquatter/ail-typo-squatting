@@ -71,6 +71,8 @@ glyphs = {
     '-': ['➖', '–', '˗', '‑', '⁃', '−', 'Ⲻ', '‒', 'ⲻ', '‐', '۔', '﹘']
     }
 
+type_request = ['A', 'AAAA', 'NS', 'MX']
+
 
 def globalAppend(loclist):
     """
@@ -911,7 +913,7 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
 
     resultList = changeDotHyph(domain, resultList, verbose, limit)
 
-    resultList.pop(0)
+    resultList.remove(domain)
 
     if verbose:
         print(f"Total: {len(resultList)}")
@@ -923,26 +925,33 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
 
 def dnsResolving(resultList, domain, pathOutput):
     """Do a dns resolving on each variations and then create a json"""
+
+    import dns.name
+    import dns.resolver
     print("[+] Dns Resolving...")
     domain_resolve = dict()
 
     for result in resultList:
         domain_resolve[result] = dict()
         n = dns.name.from_text(result)
-        try:
-            answer = dns.resolver.resolve(n, "A")
-            ip = list()
-            for rdata in answer:
-                ip.append(rdata.to_text())
-                domain_resolve[result]["NotExist"] = False
-            domain_resolve[result]["ip"] = ip
-        except:
-            domain_resolve[result]["NotExist"] = True
+
+        for t in type_request:
+            try:
+                answer = dns.resolver.resolve(n, t)
+                loc = list()
+                for rdata in answer:
+                    loc.append(rdata.to_text())
+                    domain_resolve[result]["NotExist"] = False
+                domain_resolve[result][t] = loc
+            except:
+                domain_resolve[result]["NotExist"] = True
+
     if not pathOutput == "-":
         with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
             json.dump(domain_resolve, write_json, indent=4)
     else:
         sys.stdout.write(json.dumps(domain_resolve))
+
     return domain_resolve
 
 
@@ -1111,9 +1120,6 @@ if __name__ == "__main__":
             resultList = runAll(domain, limit, formatoutput, pathOutput, verbose)
 
             if args.dnsresolving:
-                import dns.name
-                import dns.resolver
-
                 dnsResolving(resultList, domain, pathOutput)
                                 
             resultList = list()
@@ -1183,7 +1189,7 @@ if __name__ == "__main__":
             if args.changedothyphenation:
                 resultList = changeDotHyph(domain, resultList, verbose, limit)
 
-            resultList.pop(0)
+            resultList.remove(domain)
 
             if verbose:
                 print(f"Total: {len(resultList)}")
@@ -1192,9 +1198,6 @@ if __name__ == "__main__":
 
 
             if args.dnsresolving:
-                import dns.name
-                import dns.resolver
-
                 domain_resolve = dict()
 
                 dnsResolving(resultList, domain, pathOutput)

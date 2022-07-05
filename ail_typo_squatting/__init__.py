@@ -22,3 +22,4 @@ from ail_typo_squatting.typo import wrongTld
 from ail_typo_squatting.typo import addTld
 from ail_typo_squatting.typo import subdomain
 from ail_typo_squatting.typo import singularPluralize
+from ail_typo_squatting.typo import changeDotHyph
