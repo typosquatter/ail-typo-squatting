@@ -64,6 +64,7 @@ optional arguments:
   -repl, --replacement  Adjacent character replacement to the immediate left and right on the keyboard
   -drepl, --doublereplacement
                         Double Character Replacement
+  -cho, --changeorder   Change the order of letters in word
   -ins, --insertion     Adjacent character insertion of letters to the immediate left and right on the keyboard of
                         each letter
   -add, --addition      Add a character in the domain name
@@ -289,28 +290,29 @@ each keys are variations and may have a field "ip" if the domain name have been 
 # List of algorithms used
 
 
-| Algo                           | Description                                                  |
-| :----------------------------- | :----------------------------------------------------------- |
-| Character omission             | These typos are created by leaving out a letter of the domain name, one letter at a time. |
-| Character Repeat               | These typos are created by repeating a letter of the domain name. |
-| Adjacent Character Swap        | These typos are created by swapping the order of adjacent letters in the domain name. |
-| Adjacent Character Replacement | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK) |
-| Add character                  | These typos are created by add a characters in the domain name |
-| Double Character Replacement   | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard. |
-| Adjacent Character Insertion   | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter. |
-| Missing Dot                    | These typos are created by omitting a dot from the domain name. |
-| Strip Dashes                   | These typos are created by omitting a dash from the domain name. |
-| Change Dot to Dashes           | These typos are created by changing a dot to a dash          |
-| Singular or Pluralise          | These typos are created by making a singular domain plural and vice versa. |
-| Common Misspellings            | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com |
-| Vowel Swapping                 | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
-| Bit Flipping                   | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
-| Homophones                     | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com. |
-| Homoglyphs                     | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
-| Hyphenation                    | These typos are created by adding a hypen `-` between the first and last character in a string |
-| Wrong Top Level Domain         | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
-| Add Top Level Domain           | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
-| Subdomain                      | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
+| Algo                                          | Description                                                  |
+| :-------------------------------------------- | :----------------------------------------------------------- |
+| Character omission                            | These typos are created by leaving out a letter of the domain name, one letter at a time. |
+| Character Repeat                              | These typos are created by repeating a letter of the domain name. |
+| Adjacent Character Swap                       | These typos are created by swapping the order of adjacent letters in the domain name. |
+| Adjacent Character Replacement                | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK) |
+| Add character                                 | These typos are created by add a characters in the domain name |
+| Double Character Replacement                  | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard. |
+| Change Order (or Non Adjacent Character Swap) | These typos are created by changing the order of letters in the each part of the domain. |
+| Adjacent Character Insertion                  | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter. |
+| Missing Dot                                   | These typos are created by omitting a dot from the domain name. |
+| Strip Dashes                                  | These typos are created by omitting a dash from the domain name. |
+| Change Dot to Dashes                          | These typos are created by changing a dot to a dash          |
+| Singular or Pluralise                         | These typos are created by making a singular domain plural and vice versa. |
+| Common Misspellings                           | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com |
+| Vowel Swapping                                | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
+| Bit Flipping                                  | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
+| Homophones                                    | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com. |
+| Homoglyphs                                    | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
+| Hyphenation                                   | These typos are created by adding a hypen `-` between the first and last character in a string |
+| Wrong Top Level Domain                        | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
+| Add Top Level Domain                          | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
+| Subdomain                                     | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
 
 
 # Acknowledgment

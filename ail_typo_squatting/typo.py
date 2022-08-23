@@ -200,6 +200,46 @@ def repetition(domain, resultList, verbose, limit):
 
     return resultList
 
+def changeOrder(domain, resultList, verbose, limit):
+    """Change the order of letters in word"""
+
+    if not len(resultList) >= limit:
+        if verbose:
+            print("[+] Change Order")
+
+        resultLoc = list()
+        loclist = list()
+
+        domainList = domain.split(".")[:-1]
+
+        for name in domainList:
+            for i in range(0, len(name)):
+                loc = name[0:i] + name[i+1:]
+                for j in range(0, len(loc)):
+                    inter = loc[:j] + name[i] + loc[j:]
+                    if not inter in resultLoc:
+                        resultLoc.append(loc[:j] + name[i] + loc[j:])
+
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
+
+        loclist.append([domain.split(".")[-1]])
+        rLoc = globalAppend(loclist)
+
+        if verbose:
+            print(f"{len(rLoc)}\n")
+
+        resultList = checkResult(rLoc, resultList)
+        try:
+            resultList.remove(domain)
+        except:
+            pass
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
 
 def transposition(domain, resultList, verbose, limit):
     """Swappe the order of adjacent letters in the domain name"""
@@ -970,6 +1010,8 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
 
     resultList = doubleReplacement(domain, resultList, verbose, limit)
 
+    resultList = changeOrder(domain, resultList, verbose, limit)
+
     resultList = insertion(domain, resultList, verbose, limit)
 
     resultList = addition(domain, resultList, verbose, limit)
@@ -1149,6 +1191,7 @@ if __name__ == "__main__":
     parser.add_argument("-tra", "--transposition", help="Swappe the order of adjacent letters in the domain name", action="store_true")
     parser.add_argument("-repl", "--replacement", help="Adjacent character replacement to the immediate left and right on the keyboard", action="store_true")
     parser.add_argument("-drepl", "--doublereplacement", help="Double Character Replacement", action="store_true")
+    parser.add_argument("-cho", "--changeorder", help="Change the order of letters in word", action="store_true")
     parser.add_argument("-ins", "--insertion", help="Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter", action="store_true")
     parser.add_argument("-add", "--addition", help="Add a character in the domain name", action="store_true")
     parser.add_argument("-md", "--missingdot", help="Omission of a dot from the domain name", action="store_true")
@@ -1234,6 +1277,9 @@ if __name__ == "__main__":
 
             if args.doublereplacement:
                 resultList = doubleReplacement(domain, resultList, verbose, limit)
+            
+            if args.changeorder:
+                resultList = changeOrder(domain, resultList, verbose, limit)
 
             if args.insertion:
                 resultList = insertion(domain, resultList, verbose, limit)
@@ -1280,7 +1326,10 @@ if __name__ == "__main__":
             if args.changedothyphenation:
                 resultList = changeDotHyph(domain, resultList, verbose, limit)
 
-            resultList.remove(domain)
+            try:
+                resultList.remove(domain)
+            except:
+                pass
 
             if verbose:
                 print(f"Total: {len(resultList)}")

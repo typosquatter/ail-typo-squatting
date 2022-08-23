@@ -23,3 +23,4 @@ from ail_typo_squatting.typo import addTld
 from ail_typo_squatting.typo import subdomain
 from ail_typo_squatting.typo import singularPluralize
 from ail_typo_squatting.typo import changeDotHyph
+from ail_typo_squatting.typo import changeOrder
