@@ -23,7 +23,8 @@ ail-typo-squatting can be install with poetry. If you don't have poetry installe
 ~~~bash
 $ poetry install
 $ poetry shell
-$ ail-typo-squatting -h
+$ cd ail-typo-squatting
+$ python typo.py -h
 ~~~
 
 ## pip installation
@@ -160,7 +161,7 @@ for domain in domainList:
 
 # Sample output
 
-There's 4 format possible for the output file:
+There's **4 format** possible for the output file:
 
 - text
 - yara
@@ -169,7 +170,7 @@ There's 4 format possible for the output file:
 
 
 
-For text file, each line is a variation.
+For **Text** file, each line is a variation.
 
 ````
 ail-project.org
@@ -191,7 +192,7 @@ aiil-project.org
 
 
 
-For Yara file, each rule is a variation.
+For **Yara** file, each rule is a variation.
 
 ~~~~
 rule ail-project_org {
@@ -217,7 +218,7 @@ rule ail-project_org {
 
 
 
-For regex file, each variations is transform into regex and concatenate with other to do only one big regex.
+For **Regex** file, each variations is transform into regex and concatenate with other to do only one big regex.
 
 ~~~~
 ail\-project\.org|il\-project\.org|al\-project\.org|ai\-project\.org|ailproject\.org|ail\-roject\.org|ail\-poject\.org|ail\-prject\.org|ail\-proect\.org|ail\-projct\.org|ail\-projet\.org|ail\-projec\.org
@@ -225,7 +226,7 @@ ail\-project\.org|il\-project\.org|al\-project\.org|ai\-project\.org|ailproject\
 
 
 
-For sigma file, each variations are list under `variations` key.
+For **Sigma** file, each variations are list under `variations` key.
 
 ~~~~
 title: ail-project.org
@@ -287,6 +288,8 @@ each keys are variations and may have a field "ip" if the domain name have been 
 }
 ````
 
+
+
 # List of algorithms used
 
 
@@ -313,6 +316,7 @@ each keys are variations and may have a field "ip" if the domain name have been 
 | Wrong Top Level Domain                        | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
 | Add Top Level Domain                          | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
 | Subdomain                                     | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
+
 
 
 # Acknowledgment

@@ -1051,12 +1051,15 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
     return resultList
 
 
-def dnsResolving(resultList, domain, pathOutput):
+def dnsResolving(resultList, domain, pathOutput, verbose=False):
     """Do a dns resolving on each variations and then create a json"""
 
     import dns.name
     import dns.resolver
-    print("[+] Dns Resolving...")
+
+    if verbose:
+        print("[+] Dns Resolving...")
+
     domain_resolve = dict()
 
     for result in resultList:
@@ -1079,11 +1082,11 @@ def dnsResolving(resultList, domain, pathOutput):
         else:
             domain_resolve[result]['NotExist'] = False
 
-    if not pathOutput == "-":
+    if pathOutput and not pathOutput == "-":
         with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
             json.dump(domain_resolve, write_json, indent=4)
-    else:
-        sys.stdout.write(json.dumps(domain_resolve))
+    elif pathOutput == '-':
+        print(json.dumps(domain_resolve), flush=True)
 
     return domain_resolve
 
@@ -1138,34 +1141,37 @@ def formatOutput(format, resultList, domain, pathOutput):
     """
 
     if format == "text":
-        if not pathOutput == "-":
+        if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
                 for element in resultList:
                     write_file.write(element + "\n")
-        else:
+        elif pathOutput == "-":
             for element in resultList:
-                sys.stdout.write(element + "\n")
+                print(element)
+
     elif format == "yara":
         yara = formatYara(resultList, domain)
-        if not pathOutput == "-":
+        if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.yar", "w", encoding='utf-8') as write_file:
                 write_file.write(yara)
-        else:
-            sys.stdout.write(yara)
+        elif pathOutput == "-":
+            print(yara)
+
     elif format == "regex":
         regex = formatRegex(resultList)
-        if not pathOutput == "-":
+        if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
                 write_file.write(regex)
-        else:
-            sys.stdout.write(regex)
+        elif pathOutput == "-":
+            print(regex)
+
     elif format == "yaml":
         yaml_file = formatYaml(resultList, domain)
-        if not pathOutput == "-":
+        if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.yml", "w", encoding='utf-8') as write_file:
                 yaml.dump(yaml_file, write_file)
-        else:
-            sys.stdout.write(yaml)
+        elif pathOutput == "-":
+            print(yaml_file)
 
 
 
@@ -1178,7 +1184,7 @@ if __name__ == "__main__":
     parser.add_argument("-dn", "--domainName", nargs="+", help="list of domain name")
     parser.add_argument("-fdn", "--filedomainName", help="file containing list of domain name")
 
-    parser.add_argument("-o", "--output", help="path to ouput location", required=True)
+    parser.add_argument("-o", "--output", help="path to ouput location")
     parser.add_argument("-fo", "--formatoutput", help="format for the output file, yara - regex - yaml - text. Default: text")
 
     parser.add_argument("-dnsr", "--dnsresolving", help="resolve all variation of domain name to see if it's up or not", action="store_true")
@@ -1221,7 +1227,7 @@ if __name__ == "__main__":
 
     pathOutput = args.output
 
-    if not pathOutput == "-":
+    if pathOutput and not pathOutput == "-":
         try:
             os.makedirs(pathOutput)
         except:
@@ -1249,19 +1255,21 @@ if __name__ == "__main__":
     # the option for all algo to run is selected
     if args.all:
         for domain in domainList:
-            print(f"\n\t[*****] {domain} [*****]")
+            if pathOutput:
+                print(f"\n\t[*****] {domain} [*****]")
 
             resultList = runAll(domain, limit, formatoutput, pathOutput, verbose)
 
             if args.dnsresolving:
-                dnsResolving(resultList, domain, pathOutput)
+                dnsResolving(resultList, domain, pathOutput, verbose)
                                 
             resultList = list()
 
     # The user select sepcial algo but not all
     else:
         for domain in domainList:
-            print(f"\n\t[*****] {domain} [*****]")
+            if pathOutput:
+                print(f"\n\t[*****] {domain} [*****]")
 
             if args.characteromission:
                 resultList = characterOmission(domain, resultList, verbose, limit)
@@ -1340,6 +1348,6 @@ if __name__ == "__main__":
             if args.dnsresolving:
                 domain_resolve = dict()
 
-                dnsResolving(resultList, domain, pathOutput)
+                dnsResolving(resultList, domain, pathOutput, verbose)
 
             resultList = list()
