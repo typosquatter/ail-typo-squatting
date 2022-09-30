@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ail-typo-squatting"
-version = "0.6.0"
+version = "1.1.0"
 description = "Generate list of domain name using Domain name permutation engine to feed AIL"
 authors = [
 	"David Cruciani <david.cruciani@securitymadein.lu>"
@@ -15,7 +15,8 @@ repository = "https://github.com/ail-project/ail-typo-squatting"
 readme = "README.md"
 
 keywords = [
-	"typo-squatting"
+	"typo-squatting",
+	"typosquatting"
 ]
 
 include = ["etc/*"]

@@ -37,10 +37,10 @@ $ pip3 install ail-typo-squatting
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
-usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] -o OUTPUT [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-a] [-co] [-repe] [-tra] [-repl] [-drepl] [-ins] [-add] [-md] [-sd] [-vs] [-hyp] [-bs] [-hg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp] [-cdh]
+usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT] [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-var] [-a] [-om] [-repe] [-tra] [-repl] [-drepl] [-cho] [-ki] [-add] [-md] [-sd]
+               [-vs] [-ada] [-bs] [-hg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp] [-cdd]
 
-
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -v                    verbose, more display
   -dn DOMAINNAME [DOMAINNAME ...], --domainName DOMAINNAME [DOMAINNAME ...]
@@ -55,10 +55,10 @@ optional arguments:
                         resolve all variation of domain name to see if it's up or not
   -l LIMIT, --limit LIMIT
                         limit of variations for a domain name
-                        
+  -var, --givevariations
+                        give the algo that generate variations
   -a, --all             Use all algo
-  -co, --characteromission
-                        Leave out a letter of the domain name
+  -om, --omission       Leave out a letter of the domain name
   -repe, --repetition   Character Repeat
   -tra, --transposition
                         Swappe the order of adjacent letters in the domain name
@@ -66,17 +66,15 @@ optional arguments:
   -drepl, --doublereplacement
                         Double Character Replacement
   -cho, --changeorder   Change the order of letters in word
-  -ins, --insertion     Adjacent character insertion of letters to the immediate left and right on the keyboard of
-                        each letter
+  -ki, --keyboardinsertion
+                        Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter
   -add, --addition      Add a character in the domain name
-  -md, --missingdot     Omission of a dot from the domain name
-  -sd, --stripdash      Omission of a dash from the domain name
+  -md, --missingdot     Delete a dot from the domain name
+  -sd, --stripdash      Delete of a dash from the domain name
   -vs, --vowelswap      Swap vowels within the domain name
-  -hyp, --hyphenation   Addition of a hypen '-' between the first and last character in a string
-  -bs, --bitsquatting   The character is substituted with the set of valid characters that can be made after a single
-                        bit flip
-  -hg, --homoglyph      One or more characters that look similar to another character but are different are called
-                        homogylphs
+  -ada, --adddash       Add a dash between the first and last character in a string
+  -bs, --bitsquatting   The character is substituted with the set of valid characters that can be made after a single bit flip
+  -hg, --homoglyph      One or more characters that look similar to another character but are different are called homogylphs
   -cm, --commonmisspelling
                         Change a word by is misspellings
   -hp, --homophones     Change word by an other who sound the same when spoken
@@ -85,31 +83,37 @@ optional arguments:
   -sub, --subdomain     Insert a dot at varying positions to create subdomain
   -sp, --singularpluralize
                         Create by making a singular domain plural and vice versa
-  -cdh, --changedothyphenation
-                        Change dot to hyphenation
+  -cdd, --changedotdash
+                        Change dot to dash
 ```
 
 
 
 # Usage example
 
-1. Creation of variations for `ail-project.org` and `circl.lu` domain name, using all algorithm
+1. Creation of variations for `ail-project.org` and `circl.lu`, using all algorithm.
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -o .
 ```
 
-2. Creation of variations for a file who contains domain name, using character omission - subdomain - hyphenation
+2. Creation of variations for a file who contains domain name, using character omission - subdomain - hyphenation.
 
 ````bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -sub -hyp -o . -fo yara
 ````
 
-3. Creation of variations for `ail-project.org` and `circl.lu` domain name, using all algorithm and using dns resolution
+3. Creation of variations for `ail-project.org` and `circl.lu`, using all algorithm and using dns resolution.
 
 ````bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -dnsr -o .
 ````
+
+4. Creation of variations for `ail-project.org`  and give the algorithm that generate the variation (**only for text format**).
+
+~~~bash
+dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org -a -o - -var
+~~~
 
 
 
@@ -126,7 +130,14 @@ domainList = ["google.com"]
 formatoutput = "yara"
 pathOutput = "."
 for domain in domainList:
-    resultList = runAll(domain=domain, limit=math.inf, formatoutput=formatoutput, pathOutput=pathOutput, verbose=False)
+    resultList = runAll(
+        domain=domain, 
+        limit=math.inf, 
+        formatoutput=formatoutput, 
+        pathOutput=pathOutput, 
+        verbose=False, 
+        givevariations=False)
+    
     print(resultList)
     resultList = list()
 ~~~~
@@ -136,7 +147,7 @@ for domain in domainList:
 ## To run specific algorithm
 
 ````python
-from ail_typo_squatting import formatOutput, characterOmission, subdomain, hyphenation
+from ail_typo_squatting import formatOutput, omission, subdomain, addDash
 import math
 
 resultList = list()
@@ -145,14 +156,14 @@ limit = math.inf
 formatoutput = "yara"
 pathOutput = "."
 for domain in domainList:
-    resultList = characterOmission(domain=domain, resultList=resultList, verbose=False, limit=limit)
+    resultList = omission(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False)
     
-    resultList = subdomain(domain=domain, resultList=resultList, verbose=False, limit=limit)
+    resultList = subdomain(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False)
     
-    resultList = hyphenation(domain=domain, resultList=resultList, verbose=False, limit=limit)
+    resultList = addDash(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False)
     
     print(resultList)
-    formatOutput(format=formatoutput, resultList=resultList, domain=domain, pathOutput=pathOutput)
+    formatOutput(format=formatoutput, resultList=resultList, domain=domain, pathOutput=pathOutput, givevariations=False)
     
     resultList = list()
 ````
@@ -293,29 +304,29 @@ each keys are variations and may have a field "ip" if the domain name have been 
 # List of algorithms used
 
 
-| Algo                                          | Description                                                  |
-| :-------------------------------------------- | :----------------------------------------------------------- |
-| Character omission                            | These typos are created by leaving out a letter of the domain name, one letter at a time. |
-| Character Repeat                              | These typos are created by repeating a letter of the domain name. |
-| Adjacent Character Swap                       | These typos are created by swapping the order of adjacent letters in the domain name. |
-| Adjacent Character Replacement                | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK) |
-| Add character                                 | These typos are created by add a characters in the domain name |
-| Double Character Replacement                  | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard. |
-| Change Order (or Non Adjacent Character Swap) | These typos are created by changing the order of letters in the each part of the domain. |
-| Adjacent Character Insertion                  | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter. |
-| Missing Dot                                   | These typos are created by omitting a dot from the domain name. |
-| Strip Dashes                                  | These typos are created by omitting a dash from the domain name. |
-| Change Dot to Dashes                          | These typos are created by changing a dot to a dash          |
-| Singular or Pluralise                         | These typos are created by making a singular domain plural and vice versa. |
-| Common Misspellings                           | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com |
-| Vowel Swapping                                | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
-| Bit Flipping                                  | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
-| Homophones                                    | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com. |
-| Homoglyphs                                    | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
-| Hyphenation                                   | These typos are created by adding a hypen `-` between the first and last character in a string |
-| Wrong Top Level Domain                        | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
-| Add Top Level Domain                          | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
-| Subdomain                                     | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
+| Algo               | Description                                                  |
+| :----------------- | :----------------------------------------------------------- |
+| Omission           | These typos are created by leaving out a letter of the domain name, one letter at a time. |
+| Repetition         | These typos are created by repeating a letter of the domain name. |
+| ChangeOrder        | These typos are created by changing the order of letters in the each part of the domain. |
+| Transposition      | These typos are created by swapping the order of adjacent letters in the domain name. |
+| Replacement        | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK) |
+| Double Replacement | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard. |
+| Addition           | These typos are created by add a characters in the domain name. |
+| KeyboardInsertion  | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter. |
+| MissingDot         | These typos are created by deleting a dot from the domain name. |
+| StripDash          | These typos are created by deleting a dash from the domain name. |
+| VowelSwap          | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
+| AddDash            | These typos are created by adding a dash between the first and last character in a string. |
+| Bitsquatting       | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
+| Homoglyph          | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
+| CommonMisspelling  | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com. |
+| Homophones         | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com. |
+| WrongTld           | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
+| AddTld             | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
+| Subdomain          | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
+| SingularPluralize  | These typos are created by making a singular domain plural and vice versa. |
+| ChangeDotDash      | These typos are created by changing a dot to a dash          |
 
 
 

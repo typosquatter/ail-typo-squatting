@@ -71,6 +71,8 @@ glyphs = {
     '-': ['➖', '–', '˗', '‑', '⁃', '−', 'Ⲻ', '‒', 'ⲻ', '‐', '۔', '﹘']
     }
 
+algo_list = ["omission", "repetition", "changeOrder", "transposition", "replacement", "doubleReplacement", "addition", "keyboardInsertion", "missingDot", "stripDash", "vowelSwap", "addDash", "bitsquatting", "homoglyph", "commonMisspelling", "homophones", "wrongTld", "addTld", "subdomain", "singularePluralize", "changeDotDash"]
+
 type_request = ['A', 'AAAA', 'NS', 'MX']
 
 
@@ -94,7 +96,7 @@ def globalAppend(loclist):
             i += 1
             cp = False
             r.append(result)
-        # concat other word with latest concatanation, ex: google.abuse.com -> concat goole.ause and com
+        # concat other word with latest concatanation, ex: google.ause.com -> concat goole.ause and com
         else:
             for element in r[-1]:
                 for add in loclist[i]:
@@ -107,24 +109,46 @@ def globalAppend(loclist):
     return r[-1]
     
 
-def checkResult(resultLoc, resultList):
+def checkResult(resultLoc, resultList, givevariations, algoName=''):
     """
     Verify if element in resultLoc not exist in resultList before adding them in resultList
     """
 
-    for element in resultLoc:
-        if element not in resultList:
-            resultList.append(element)
+    if algoName == "changeDotDash" and givevariations:
+        for element in resultLoc:
+            flag = False
+            for var in [algoName, "addTld"]:
+                loc = element
+                loc[1] = var
+                if loc in resultList:
+                    flag = True
+                    
+            if not flag:
+                element[1] = algoName
+                resultList.append(element)
+
+    else:
+        for element in resultLoc:
+            if givevariations:
+                flag = False
+                for var in algo_list:
+                    if [element, var] in resultList:
+                        flag = True
+                if not flag:
+                    resultList.append([element, algoName])
+            else:
+                if element not in resultList:
+                    resultList.append(element)
 
     return resultList
 
 
-def characterOmission(domain, resultList, verbose, limit):
+def omission(domain, resultList, verbose, limit, givevariations=False):
     """Leave out a letter of the domain name"""
 
     if not len(resultList) >= limit:
         if verbose:
-            print("[+] Character Omission")
+            print("[+] Omission")
 
         resultLoc = list()
         loclist = list()
@@ -151,9 +175,12 @@ def characterOmission(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, "omission")
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, 'omission'])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -162,12 +189,12 @@ def characterOmission(domain, resultList, verbose, limit):
 
     return resultList
 
-def repetition(domain, resultList, verbose, limit):
-    """Character Repeat"""
+def repetition(domain, resultList, verbose, limit, givevariations=False):
+    """Characters Repetition"""
 
     if not len(resultList) >= limit:
         if verbose:
-            print("[+] Character Repeat")
+            print("[+] Characters Repetition")
 
         resultLoc = list()
         loclist = list()
@@ -189,9 +216,12 @@ def repetition(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, 'repetition')
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, 'repetition'])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -200,7 +230,7 @@ def repetition(domain, resultList, verbose, limit):
 
     return resultList
 
-def changeOrder(domain, resultList, verbose, limit):
+def changeOrder(domain, resultList, verbose, limit, givevariations=False):
     """Change the order of letters in word"""
 
     if not len(resultList) >= limit:
@@ -230,9 +260,12 @@ def changeOrder(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, 'changeOrder')
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "changeOrder"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -241,7 +274,7 @@ def changeOrder(domain, resultList, verbose, limit):
 
     return resultList
 
-def transposition(domain, resultList, verbose, limit):
+def transposition(domain, resultList, verbose, limit, givevariations=False):
     """Swappe the order of adjacent letters in the domain name"""
 
     if not len(resultList) >= limit:
@@ -268,9 +301,13 @@ def transposition(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, 'transposition')
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "transposition"])
+            else:
+                resultList.remove(domain)
+            
         except:
             pass
 
@@ -280,7 +317,7 @@ def transposition(domain, resultList, verbose, limit):
     return resultList
 
 
-def replacement(domain, resultList, verbose, limit):
+def replacement(domain, resultList, verbose, limit, givevariations=False):
     """Adjacent character replacement to the immediate left and right on the keyboard"""
 
     if not len(resultList) >= limit:
@@ -311,9 +348,12 @@ def replacement(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, 'replacement')
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, 'replacement'])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -323,7 +363,7 @@ def replacement(domain, resultList, verbose, limit):
     return resultList
 
 
-def doubleReplacement(domain, resultList, verbose, limit):
+def doubleReplacement(domain, resultList, verbose, limit, givevariations=False):
     """Double Character Replacement"""
 
     if not len(resultList) >= limit:
@@ -354,9 +394,12 @@ def doubleReplacement(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, 'doubleReplacement')
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "doubleReplacement"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -366,12 +409,12 @@ def doubleReplacement(domain, resultList, verbose, limit):
     return resultList
 
 
-def insertion(domain, resultList, verbose, limit):
+def keyboardInsertion(domain, resultList, verbose, limit, givevariations=False):
     """Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter"""
 
     if not len(resultList) >= limit:
         if verbose:
-            print("[+] Insertion")
+            print("[+] Keyboard Insertion")
 
         resultLoc = list()
         loclist = list()
@@ -397,9 +440,12 @@ def insertion(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, 'keyboardInsertion')
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "keyboardInsertion"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -409,7 +455,7 @@ def insertion(domain, resultList, verbose, limit):
     return resultList
 
 
-def addition(domain, resultList, verbose, limit):
+def addition(domain, resultList, verbose, limit, givevariations=False):
     """Add a character in the domain name"""
 
     if not len(resultList) >= limit:
@@ -437,9 +483,12 @@ def addition(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, 'addition')
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "addition"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -467,8 +516,8 @@ def utilMissingDot(resultLoc, loc):
         
     return resultLoc
 
-def missingDot(domain, resultList, verbose, limit):
-    """Omission of a dot from the domain name"""
+def missingDot(domain, resultList, verbose, limit, givevariations=False):
+    """Delete a dot from the domain name"""
 
     if not len(resultList) >= limit:
         if verbose:
@@ -488,16 +537,27 @@ def missingDot(domain, resultList, verbose, limit):
         for i in range(0, len(resultLoc)):
             if domainList[-1] in resultLoc[i].split(".")[0]:
                 resultLoc[i] = resultLoc[i] + ".com"
-            
-            if resultLoc[i] not in resultList:
+
+            if givevariations:
+                flag = False
+                for var in algo_list:
+                    if [resultLoc[i], var] in resultList:
+                        flag = True
+                if not flag:
+                    cp += 1
+                    resultList.append([resultLoc[i], "missingDot"])
+            elif resultLoc[i] not in resultList:
                 cp += 1
-                resultList.append(resultLoc[i])
+                resultList.append(resultLoc[i])             
 
         if verbose:
             print(f"{cp}\n")
 
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "missingDot"])
+            else:
+                resultList.remove(domain)
         except:
             pass
         
@@ -506,8 +566,8 @@ def missingDot(domain, resultList, verbose, limit):
 
     return resultList
 
-def stripDash(domain, resultList, verbose, limit):
-    """Omission of a dash from the domain name"""
+def stripDash(domain, resultList, verbose, limit, givevariations=False):
+    """Delete a dash from the domain name"""
 
     if not len(resultList) >= limit:
         if verbose:
@@ -519,19 +579,39 @@ def stripDash(domain, resultList, verbose, limit):
             loc2 = loc[::-1].replace("-", "", 1)[::-1]
             loc = loc.replace("-", "", 1)
 
-            if loc not in resultList:
-                cp += 1
-                resultList.append(loc)
+            if givevariations:
+                flag = False
+                for var in algo_list:
+                    if [loc, var] in resultList:
+                        flag = True
+                if not flag:
+                    cp += 1
+                    resultList.append([loc, "stripDash"])
 
-            if loc2 not in resultList:
-                cp += 1
-                resultList.append(loc2)
+                flag = False
+                for var in algo_list:
+                    if [loc2, var] in resultList:
+                        flag = True
+                if not flag:
+                    cp += 1
+                    resultList.append([loc2, "stripDash"])
+            else:
+                if loc not in resultList:
+                    cp += 1
+                    resultList.append(loc)
+
+                if loc2 not in resultList:
+                    cp += 1
+                    resultList.append(loc2)
         
         if verbose:
             print(f"{cp}\n")
 
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "stripDash"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -540,7 +620,7 @@ def stripDash(domain, resultList, verbose, limit):
 
     return resultList
 
-def vowel_swap(domain, resultList, verbose, limit):
+def vowelSwap(domain, resultList, verbose, limit, givevariations=False):
     """Swap vowels within the domain name"""
 
     if not len(resultList) >= limit:
@@ -578,9 +658,12 @@ def vowel_swap(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, "vowelSwap")
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "vowelSwap"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -590,12 +673,12 @@ def vowel_swap(domain, resultList, verbose, limit):
     return resultList
 
 
-def hyphenation(domain, resultList, verbose, limit):
-    """Addition of a hypen '-' between the first and last character in a string"""
+def addDash(domain, resultList, verbose, limit, givevariations=False):
+    """Add a dash between the first and last character in a string"""
 
     if not len(resultList) >= limit:
         if verbose:
-            print("[+] Hyphenation")
+            print("[+] Add Dash")
 
         resultLoc = list()
         loclist = list()
@@ -617,9 +700,12 @@ def hyphenation(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, "addDash")
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "addDash"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -629,7 +715,7 @@ def hyphenation(domain, resultList, verbose, limit):
     return resultList
 
 
-def bitsquatting(domain, resultList, verbose, limit):
+def bitsquatting(domain, resultList, verbose, limit, givevariations=False):
     """The character is substituted with the set of valid characters that can be made after a single bit flip"""
 
     if not len(resultList) >= limit:
@@ -662,9 +748,12 @@ def bitsquatting(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, "bitsquatting")
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "bitsquatting"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -674,7 +763,7 @@ def bitsquatting(domain, resultList, verbose, limit):
     return resultList
 
 
-def homoglyph(domain, resultList, verbose, limit):
+def homoglyph(domain, resultList, verbose, limit, givevariations=False):
     """One or more characters that look similar to another character but are different are called homogylphs"""
 
     if not len(resultList) >= limit:
@@ -707,7 +796,17 @@ def homoglyph(domain, resultList, verbose, limit):
             result2.update(set(mix(r)))
         
         for element in list(result1 | result2):
-            if element not in resultList:
+            element = element + '.' + tld
+            if givevariations:
+                flag = False
+                for var in algo_list:
+                    if [element, var] in resultList:
+                        flag = True
+                if not flag:
+                    cp += 1
+                    resultList.append([element, "homoglyph"])
+
+            elif element not in resultList:
                 cp += 1
                 resultList.append(element + "." + tld)
 
@@ -715,7 +814,10 @@ def homoglyph(domain, resultList, verbose, limit):
             print(f"{cp}\n")
 
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "homoglyph"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -725,7 +827,7 @@ def homoglyph(domain, resultList, verbose, limit):
     return resultList
 
 
-def commonMisspelling(domain, resultList, verbose, limit):
+def commonMisspelling(domain, resultList, verbose, limit, givevariations=False):
     """Change a word by is misspellings"""
     # https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
 
@@ -760,9 +862,12 @@ def commonMisspelling(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, "commonMisspelling")
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "commonMisspelling"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -772,7 +877,7 @@ def commonMisspelling(domain, resultList, verbose, limit):
     return resultList
 
 
-def homophones(domain, resultList, verbose, limit):
+def homophones(domain, resultList, verbose, limit, givevariations=False):
     """Change word by an other who sound the same when spoken"""
     # From http://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones
     # Last updated 04/2020
@@ -810,9 +915,12 @@ def homophones(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, "homophones")
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "homophones"])
+            else:    
+                resultList.remove(domain)
         except:
             pass
 
@@ -822,7 +930,7 @@ def homophones(domain, resultList, verbose, limit):
     return resultList
     
 
-def wrongTld(domain, resultList, verbose, limit):
+def wrongTld(domain, resultList, verbose, limit, givevariations=False):
     """Change the original top level domain to another"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
     # Version 2022012800
@@ -844,13 +952,19 @@ def wrongTld(domain, resultList, verbose, limit):
         for tld in tlds:
             if tld.lower().rstrip("\n") != originalTld:
                 cp += 1
-                resultList.append(domainLoc + tld.lower().rstrip("\n"))
+                if givevariations:
+                    resultList.append([domainLoc + tld.lower().rstrip("\n"), 'wrongTld'])
+                else:
+                    resultList.append(domainLoc + tld.lower().rstrip("\n"))
         
         if verbose:
             print(f"{cp}\n")
 
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "wrongTld"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -860,7 +974,7 @@ def wrongTld(domain, resultList, verbose, limit):
     return resultList
 
 
-def addTld(domain, resultList, verbose, limit):
+def addTld(domain, resultList, verbose, limit, givevariations=False):
     """Adding a tld before the original tld"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
     # Version 2022012800
@@ -874,13 +988,19 @@ def addTld(domain, resultList, verbose, limit):
         cp = 0 
         for tld in tlds:
             cp += 1
-            resultList.append(domain + "." + tld.lower().rstrip("\n"))
-        
+            if givevariations:
+                resultList.append([domain + "." + tld.lower().rstrip("\n"), 'addTld'])
+            else:
+                resultList.append(domain + "." + tld.lower().rstrip("\n"))
+
         if verbose:
             print(f"{cp}\n")
 
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "addTld"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -890,7 +1010,7 @@ def addTld(domain, resultList, verbose, limit):
     return resultList
 
 
-def subdomain(domain, resultList, verbose, limit):
+def subdomain(domain, resultList, verbose, limit, givevariations=False):
     """Insert a dot at varying positions to create subdomain"""
 
     if not len(resultList) >= limit:
@@ -902,13 +1022,19 @@ def subdomain(domain, resultList, verbose, limit):
         for i in range(1, len(domain)-1):
             if domain[i] not in ['-', '.'] and domain[i-1] not in ['-', '.']:
                 cp += 1
-                resultList.append(domain[:i] + '.' + domain[i:])
+                if givevariations:
+                    resultList.append([domain[:i] + '.' + domain[i:], 'subdomain'])
+                else:
+                    resultList.append(domain[:i] + '.' + domain[i:])
 
         if verbose:
             print(f"{cp}\n")
 
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "subdomain"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -918,7 +1044,7 @@ def subdomain(domain, resultList, verbose, limit):
     return resultList
 
 
-def singularPluralize(domain, resultList, verbose, limit):
+def singularPluralize(domain, resultList, verbose, limit, givevariations=False):
     """Create by making a singular domain plural and vice versa"""
 
     if not len(resultList) >= limit:
@@ -949,9 +1075,12 @@ def singularPluralize(domain, resultList, verbose, limit):
         if verbose:
             print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList)
+        resultList = checkResult(rLoc, resultList, givevariations, "singularPluralize")
         try:
-            resultList.remove(domain)
+            if givevariations:
+                resultList.remove([domain, "singularPluralize"])
+            else:
+                resultList.remove(domain)
         except:
             pass
 
@@ -960,12 +1089,12 @@ def singularPluralize(domain, resultList, verbose, limit):
 
     return resultList
 
-def changeDotHyph(domain, resultList, verbose, limit):
-    """Change dot to hyphenation '-' """
+def changeDotDash(domain, resultList, verbose, limit, givevariations=False):
+    """Change dot to dash"""
 
     if not len(resultList) >= limit:
         if verbose:
-            print("[+] Change dot to hyphenation")
+            print("[+] Change dot to dash")
 
         loc = domain
         while "." in loc:
@@ -975,17 +1104,21 @@ def changeDotHyph(domain, resultList, verbose, limit):
             loc = loc.replace(".", "-", 1)
 
             if "." not in loc:
-                resultLoc = addTld(loc, resultLoc, verbose, limit)
-                resultList = checkResult(resultLoc, resultList)
+                resultLoc = addTld(loc, resultLoc, verbose, limit, givevariations)
+                resultList = checkResult(resultLoc, resultList, givevariations, "changeDotDash")
             
             elif loc not in resultList:
                 resultList.append(loc)
 
-            resultLoc2 = addTld(loc2, resultLoc2, verbose, limit)
-            resultList = checkResult(resultLoc2, resultList)
+            if loc != loc2:
+                resultLoc2 = addTld(loc2, resultLoc2, verbose, limit, givevariations)
+                resultList = checkResult(resultLoc2, resultList, givevariations, "changeDotDash")
 
             try:
-                resultList.remove(domain)
+                if givevariations:
+                    resultList.remove([domain, "chanegDotDash"])
+                else:
+                    resultList.remove(domain)
             except:
                 pass
 
@@ -995,63 +1128,63 @@ def changeDotHyph(domain, resultList, verbose, limit):
     return resultList
 
 
-def runAll(domain, limit, formatoutput, pathOutput, verbose=False):
+def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False):
     """Run all algo on each domain contain in domainList"""
 
     resultList = list()
 
-    resultList = characterOmission(domain, resultList, verbose, limit)
+    resultList = omission(domain, resultList, verbose, limit, givevariations)
 
-    resultList = repetition(domain, resultList, verbose, limit)
+    resultList = repetition(domain, resultList, verbose, limit, givevariations)
 
-    resultList = transposition(domain, resultList, verbose, limit)
+    resultList = transposition(domain, resultList, verbose, limit, givevariations)
 
-    resultList = replacement(domain, resultList, verbose, limit)
+    resultList = replacement(domain, resultList, verbose, limit, givevariations)
 
-    resultList = doubleReplacement(domain, resultList, verbose, limit)
+    resultList = doubleReplacement(domain, resultList, verbose, limit, givevariations)
 
-    resultList = changeOrder(domain, resultList, verbose, limit)
+    resultList = changeOrder(domain, resultList, verbose, limit, givevariations)
 
-    resultList = insertion(domain, resultList, verbose, limit)
+    resultList = keyboardInsertion(domain, resultList, verbose, limit, givevariations)
 
-    resultList = addition(domain, resultList, verbose, limit)
+    resultList = addition(domain, resultList, verbose, limit, givevariations)
 
-    resultList = missingDot(domain, resultList, verbose, limit)
+    resultList = missingDot(domain, resultList, verbose, limit, givevariations)
 
-    resultList = stripDash(domain, resultList, verbose, limit)
+    resultList = stripDash(domain, resultList, verbose, limit, givevariations)
 
-    resultList = vowel_swap(domain, resultList, verbose, limit)
+    resultList = vowelSwap(domain, resultList, verbose, limit, givevariations)
 
-    resultList = hyphenation(domain, resultList, verbose, limit)
+    resultList = addDash(domain, resultList, verbose, limit, givevariations)
 
-    resultList = bitsquatting(domain, resultList, verbose, limit)
+    resultList = bitsquatting(domain, resultList, verbose, limit, givevariations)
 
-    resultList = homoglyph(domain, resultList, verbose, limit)
+    resultList = homoglyph(domain, resultList, verbose, limit, givevariations)
 
-    resultList = commonMisspelling(domain, resultList, verbose, limit)
+    resultList = commonMisspelling(domain, resultList, verbose, limit, givevariations)
 
-    resultList = homophones(domain, resultList, verbose, limit)
+    resultList = homophones(domain, resultList, verbose, limit, givevariations)
 
-    resultList = wrongTld(domain, resultList, verbose, limit)
+    resultList = wrongTld(domain, resultList, verbose, limit, givevariations)
 
-    resultList = addTld(domain, resultList, verbose, limit)
+    resultList = addTld(domain, resultList, verbose, limit, givevariations)
 
-    resultList = subdomain(domain, resultList, verbose, limit)
+    resultList = subdomain(domain, resultList, verbose, limit, givevariations)
 
-    resultList = singularPluralize(domain, resultList, verbose, limit)
+    resultList = singularPluralize(domain, resultList, verbose, limit, givevariations)
 
-    resultList = changeDotHyph(domain, resultList, verbose, limit)
+    resultList = changeDotDash(domain, resultList, verbose, limit, givevariations)
 
 
     if verbose:
         print(f"Total: {len(resultList)}")
 
-    formatOutput(formatoutput, resultList, domain, pathOutput)
+        formatOutput(formatoutput, resultList, domain, pathOutput, givevariations)
 
     return resultList
 
 
-def dnsResolving(resultList, domain, pathOutput, verbose=False):
+def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=False):
     """Do a dns resolving on each variations and then create a json"""
 
     import dns.name
@@ -1063,6 +1196,8 @@ def dnsResolving(resultList, domain, pathOutput, verbose=False):
     domain_resolve = dict()
 
     for result in resultList:
+        if givevariations:
+            result = result[0]
         domain_resolve[result] = dict()
         n = dns.name.from_text(result)
 
@@ -1082,16 +1217,16 @@ def dnsResolving(resultList, domain, pathOutput, verbose=False):
         else:
             domain_resolve[result]['NotExist'] = False
 
-    if pathOutput and not pathOutput == "-":
-        with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
-            json.dump(domain_resolve, write_json, indent=4)
-    elif pathOutput == '-':
+        if pathOutput and not pathOutput == "-":
+            with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
+                json.dump(domain_resolve, write_json, indent=4)
+    if pathOutput == '-':
         print(json.dumps(domain_resolve), flush=True)
 
     return domain_resolve
 
 
-def formatYara(resultList, domain):
+def formatYara(resultList, domain, givevariations=False):
     """Output in yara format"""
     domainReplace = domain.replace(".", "_")
 
@@ -1101,6 +1236,8 @@ def formatYara(resultList, domain):
 
     cp = 0
     for result in resultList: 
+        if givevariations:
+            result = result[0]
         rule += f'\t\t$s{cp} = "{result}"\n'
         cp += 1
     
@@ -1108,10 +1245,12 @@ def formatYara(resultList, domain):
 
     return rule
 
-def formatRegex(resultList):
+def formatRegex(resultList, givevariations=False):
     """Output in regex format"""
     regex = ""
     for result in resultList:
+        if givevariations:
+            result = result[0]
         reg = ""
         for car in result:
             if car in string.ascii_letters or car in string.digits:
@@ -1123,19 +1262,22 @@ def formatRegex(resultList):
 
     return regex
 
-def formatYaml(resultList, domain):
+def formatYaml(resultList, domain, givevariations=False):
     """Output in yaml format"""
     yaml_file = {"title": domain}
     variations = list()
 
     for result in resultList:
-        variations.append(result)
+        if givevariations:
+            variations.append(result[0])
+        else:
+            variations.append(result)
 
     yaml_file["variations"] = variations
 
     return yaml_file
 
-def formatOutput(format, resultList, domain, pathOutput):
+def formatOutput(format, resultList, domain, pathOutput, givevariations=False):
     """
     Call different function to create the right format file
     """
@@ -1144,13 +1286,19 @@ def formatOutput(format, resultList, domain, pathOutput):
         if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
                 for element in resultList:
-                    write_file.write(element + "\n")
+                    if givevariations:
+                        write_file.write(f"{element[0]}, {element[1]}\n")
+                    else:
+                        write_file.write(element + "\n")
         elif pathOutput == "-":
             for element in resultList:
-                print(element)
+                if givevariations:
+                    print(f"{element[0]}, {element[1]}")
+                else:
+                    print(element)
 
     elif format == "yara":
-        yara = formatYara(resultList, domain)
+        yara = formatYara(resultList, domain, givevariations)
         if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.yar", "w", encoding='utf-8') as write_file:
                 write_file.write(yara)
@@ -1158,7 +1306,7 @@ def formatOutput(format, resultList, domain, pathOutput):
             print(yara)
 
     elif format == "regex":
-        regex = formatRegex(resultList)
+        regex = formatRegex(resultList, givevariations)
         if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
                 write_file.write(regex)
@@ -1166,7 +1314,7 @@ def formatOutput(format, resultList, domain, pathOutput):
             print(regex)
 
     elif format == "yaml":
-        yaml_file = formatYaml(resultList, domain)
+        yaml_file = formatYaml(resultList, domain, givevariations)
         if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.yml", "w", encoding='utf-8') as write_file:
                 yaml.dump(yaml_file, write_file)
@@ -1190,20 +1338,21 @@ if __name__ == "__main__":
     parser.add_argument("-dnsr", "--dnsresolving", help="resolve all variation of domain name to see if it's up or not", action="store_true")
 
     parser.add_argument("-l", "--limit", help="limit of variations for a domain name")
+    parser.add_argument("-var", "--givevariations", help="give the algo that generate variations", action="store_true")
 
     parser.add_argument("-a", "--all", help="Use all algo", action="store_true")
-    parser.add_argument("-co", "--characteromission", help="Leave out a letter of the domain name", action="store_true")
+    parser.add_argument("-om", "--omission", help="Leave out a letter of the domain name", action="store_true")
     parser.add_argument("-repe", "--repetition", help="Character Repeat", action="store_true")
     parser.add_argument("-tra", "--transposition", help="Swappe the order of adjacent letters in the domain name", action="store_true")
     parser.add_argument("-repl", "--replacement", help="Adjacent character replacement to the immediate left and right on the keyboard", action="store_true")
     parser.add_argument("-drepl", "--doublereplacement", help="Double Character Replacement", action="store_true")
     parser.add_argument("-cho", "--changeorder", help="Change the order of letters in word", action="store_true")
-    parser.add_argument("-ins", "--insertion", help="Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter", action="store_true")
+    parser.add_argument("-ki", "--keyboardinsertion", help="Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter", action="store_true")
     parser.add_argument("-add", "--addition", help="Add a character in the domain name", action="store_true")
-    parser.add_argument("-md", "--missingdot", help="Omission of a dot from the domain name", action="store_true")
-    parser.add_argument("-sd", "--stripdash", help="Omission of a dash from the domain name", action="store_true")
+    parser.add_argument("-md", "--missingdot", help="Delete a dot from the domain name", action="store_true")
+    parser.add_argument("-sd", "--stripdash", help="Delete of a dash from the domain name", action="store_true")
     parser.add_argument("-vs", "--vowelswap", help="Swap vowels within the domain name", action="store_true")
-    parser.add_argument("-hyp", "--hyphenation", help="Addition of a hypen '-' between the first and last character in a string", action="store_true")
+    parser.add_argument("-ada", "--adddash", help="Add a dash between the first and last character in a string", action="store_true")
     parser.add_argument("-bs", "--bitsquatting", help="The character is substituted with the set of valid characters that can be made after a single bit flip", action="store_true")
     parser.add_argument("-hg", "--homoglyph", help="One or more characters that look similar to another character but are different are called homogylphs", action="store_true")
     parser.add_argument("-cm", "--commonmisspelling", help="Change a word by is misspellings", action="store_true")
@@ -1212,13 +1361,14 @@ if __name__ == "__main__":
     parser.add_argument("-at", "--addtld", help="Adding a tld before the original tld", action="store_true")
     parser.add_argument("-sub", "--subdomain", help="Insert a dot at varying positions to create subdomain", action="store_true")
     parser.add_argument("-sp", "--singularpluralize", help="Create by making a singular domain plural and vice versa", action="store_true")
-    parser.add_argument("-cdh", "--changedothyphenation", help="Change dot to hyphenation", action="store_true")
+    parser.add_argument("-cdd", "--changedotdash", help="Change dot to dash", action="store_true")
     
     args = parser.parse_args()
 
     resultList = list()
 
     verbose = args.v
+    givevariations = args.givevariations
 
     limit = math.inf
     if args.limit:
@@ -1258,11 +1408,11 @@ if __name__ == "__main__":
             if pathOutput:
                 print(f"\n\t[*****] {domain} [*****]")
 
-            resultList = runAll(domain, limit, formatoutput, pathOutput, verbose)
+            resultList = runAll(domain, limit, formatoutput, pathOutput, verbose, givevariations)
 
             if args.dnsresolving:
-                dnsResolving(resultList, domain, pathOutput, verbose)
-                                
+                dnsResolving(resultList, domain, pathOutput, verbose, givevariations)
+           
             resultList = list()
 
     # The user select sepcial algo but not all
@@ -1271,68 +1421,68 @@ if __name__ == "__main__":
             if pathOutput:
                 print(f"\n\t[*****] {domain} [*****]")
 
-            if args.characteromission:
-                resultList = characterOmission(domain, resultList, verbose, limit)
+            if args.omission:
+                resultList = omission(domain, resultList, verbose, limit, givevariations)
 
             if args.repetition:
-                resultList = repetition(domain, resultList, verbose, limit)
+                resultList = repetition(domain, resultList, verbose, limit, givevariations)
 
             if args.transposition:
-                resultList = transposition(domain, resultList, verbose, limit)
+                resultList = transposition(domain, resultList, verbose, limit, givevariations)
 
             if args.replacement:
-                resultList = replacement(domain, resultList, verbose, limit)
+                resultList = replacement(domain, resultList, verbose, limit, givevariations)
 
             if args.doublereplacement:
-                resultList = doubleReplacement(domain, resultList, verbose, limit)
+                resultList = doubleReplacement(domain, resultList, verbose, limit, givevariations)
             
             if args.changeorder:
-                resultList = changeOrder(domain, resultList, verbose, limit)
+                resultList = changeOrder(domain, resultList, verbose, limit, givevariations)
 
-            if args.insertion:
-                resultList = insertion(domain, resultList, verbose, limit)
+            if args.keyboardinsertion:
+                resultList = keyboardInsertion(domain, resultList, verbose, limit, givevariations)
 
             if args.addition:
-                resultList = addition(domain, resultList, verbose, limit)
+                resultList = addition(domain, resultList, verbose, limit, givevariations)
 
             if args.missingdot:
-                resultList = missingDot(domain, resultList, verbose, limit)
+                resultList = missingDot(domain, resultList, verbose, limit, givevariations)
 
             if args.stripdash:
-                resultList = stripDash(domain, resultList, verbose, limit)
+                resultList = stripDash(domain, resultList, verbose, limit, givevariations)
 
             if args.vowelswap:
-                resultList = vowel_swap(domain, resultList, verbose, limit)
+                resultList = vowelSwap(domain, resultList, verbose, limit, givevariations)
 
-            if args.hyphenation:
-                resultList = hyphenation(domain, resultList, verbose, limit)
+            if args.adddash:
+                resultList = addDash(domain, resultList, verbose, limit, givevariations)
 
             if args.bitsquatting:
-                resultList = bitsquatting(domain, resultList, verbose, limit)
+                resultList = bitsquatting(domain, resultList, verbose, limit, givevariations)
 
             if args.homoglyph:
-                resultList = homoglyph(domain, resultList, verbose, limit)
+                resultList = homoglyph(domain, resultList, verbose, limit, givevariations)
 
             if args.commonmisspelling:
-                resultList = commonMisspelling(domain, resultList, verbose, limit)
+                resultList = commonMisspelling(domain, resultList, verbose, limit, givevariations)
 
             if args.homophones:
-                resultList = homophones(domain, resultList, verbose, limit)
+                resultList = homophones(domain, resultList, verbose, limit, givevariations)
 
             if args.wrongtld:
-                resultList = wrongTld(domain, resultList, verbose, limit)
+                resultList = wrongTld(domain, resultList, verbose, limit, givevariations)
 
             if args.addtld:
-                resultList = addTld(domain, resultList, verbose, limit)
+                resultList = addTld(domain, resultList, verbose, limit, givevariations)
 
             if args.subdomain:
-                resultList = subdomain(domain, resultList, verbose, limit)
+                resultList = subdomain(domain, resultList, verbose, limit, givevariations)
 
             if args.singularpluralize:
-                resultList = singularPluralize(domain, resultList, verbose, limit)
+                resultList = singularPluralize(domain, resultList, verbose, limit, givevariations)
             
-            if args.changedothyphenation:
-                resultList = changeDotHyph(domain, resultList, verbose, limit)
+            if args.changedotdash:
+                resultList = changeDotDash(domain, resultList, verbose, limit, givevariations)
 
             try:
                 resultList.remove(domain)
@@ -1341,13 +1491,11 @@ if __name__ == "__main__":
 
             if verbose:
                 print(f"Total: {len(resultList)}")
-            
-            formatOutput(formatoutput, resultList, domain, pathOutput)
+
+            formatOutput(formatoutput, resultList, domain, pathOutput, givevariations)
 
 
             if args.dnsresolving:
-                domain_resolve = dict()
-
-                dnsResolving(resultList, domain, pathOutput, verbose)
+                    dnsResolving(resultList, domain, pathOutput, verbose, givevariations)
 
             resultList = list()
