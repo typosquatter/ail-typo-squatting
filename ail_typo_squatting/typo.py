@@ -1179,12 +1179,12 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
     if verbose:
         print(f"Total: {len(resultList)}")
 
-        formatOutput(formatoutput, resultList, domain, pathOutput, givevariations)
+    formatOutput(formatoutput, resultList, domain, pathOutput, givevariations)
 
     return resultList
 
 
-def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=False):
+def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=False, dns_limited=False):
     """Do a dns resolving on each variations and then create a json"""
 
     import dns.name
@@ -1213,7 +1213,10 @@ def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=F
                 pass
         
         if len(domain_resolve[result]) == 0:
-            domain_resolve[result]['NotExist'] = True
+            if dns_limited:
+                del domain_resolve[result]
+            else:
+                domain_resolve[result]['NotExist'] = True
         else:
             domain_resolve[result]['NotExist'] = False
 
@@ -1336,6 +1339,7 @@ if __name__ == "__main__":
     parser.add_argument("-fo", "--formatoutput", help="format for the output file, yara - regex - yaml - text. Default: text")
 
     parser.add_argument("-dnsr", "--dnsresolving", help="resolve all variation of domain name to see if it's up or not", action="store_true")
+    parser.add_argument("-dnsl", "--dnslimited", help="resolve all variation of domain name but keep only up domain in final result json", action="store_true")
 
     parser.add_argument("-l", "--limit", help="limit of variations for a domain name")
     parser.add_argument("-var", "--givevariations", help="give the algo that generate variations", action="store_true")
@@ -1369,6 +1373,8 @@ if __name__ == "__main__":
 
     verbose = args.v
     givevariations = args.givevariations
+
+    dns_limited = args.dnslimited
 
     limit = math.inf
     if args.limit:
@@ -1405,19 +1411,23 @@ if __name__ == "__main__":
     # the option for all algo to run is selected
     if args.all:
         for domain in domainList:
+            if domain[0] == '.':
+                domain = domain[1:]
             if pathOutput:
                 print(f"\n\t[*****] {domain} [*****]")
 
             resultList = runAll(domain, limit, formatoutput, pathOutput, verbose, givevariations)
 
             if args.dnsresolving:
-                dnsResolving(resultList, domain, pathOutput, verbose, givevariations)
+                dnsResolving(resultList, domain, pathOutput, verbose, givevariations, dns_limited)
            
             resultList = list()
 
     # The user select sepcial algo but not all
     else:
         for domain in domainList:
+            if domain[0] == '.':
+                domain = domain[1:]
             if pathOutput:
                 print(f"\n\t[*****] {domain} [*****]")
 
@@ -1496,6 +1506,6 @@ if __name__ == "__main__":
 
 
             if args.dnsresolving:
-                    dnsResolving(resultList, domain, pathOutput, verbose, givevariations)
+                dnsResolving(resultList, domain, pathOutput, verbose, givevariations, dns_limited)
 
             resultList = list()
