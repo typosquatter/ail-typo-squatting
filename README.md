@@ -37,7 +37,7 @@ $ pip3 install ail-typo-squatting
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
-usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT] [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-var] [-a] [-om] [-repe] [-tra] [-repl] [-drepl] [-cho] [-ki] [-add] [-md] [-sd]
+usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT] [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-var] [-ko] [-a] [-om] [-repe] [-tra] [-repl] [-drepl] [-cho] [-ki] [-add] [-md] [-sd]
                [-vs] [-ada] [-bs] [-hg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp] [-cdd]
 
 options:
@@ -57,6 +57,7 @@ options:
                         limit of variations for a domain name
   -var, --givevariations
                         give the algo that generate variations
+  -ko, --keeporiginal   Keep in the result list the original domain name
   -a, --all             Use all algo
   -om, --omission       Leave out a letter of the domain name
   -repe, --repetition   Character Repeat
@@ -136,7 +137,9 @@ for domain in domainList:
         formatoutput=formatoutput, 
         pathOutput=pathOutput, 
         verbose=False, 
-        givevariations=False)
+        givevariations=False,
+        keeporiginal=False
+    )
     
     print(resultList)
     resultList = list()
@@ -156,11 +159,11 @@ limit = math.inf
 formatoutput = "yara"
 pathOutput = "."
 for domain in domainList:
-    resultList = omission(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False)
+    resultList = omission(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False,  keeporiginal=False)
     
-    resultList = subdomain(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False)
+    resultList = subdomain(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False,  keeporiginal=False)
     
-    resultList = addDash(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False)
+    resultList = addDash(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False,  keeporiginal=False)
     
     print(resultList)
     formatOutput(format=formatoutput, resultList=resultList, domain=domain, pathOutput=pathOutput, givevariations=False)
