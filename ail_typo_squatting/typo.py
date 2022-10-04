@@ -243,12 +243,15 @@ def changeOrder(domain, resultList, verbose, limit, givevariations=False):
         domainList = domain.split(".")[:-1]
 
         for name in domainList:
-            for i in range(0, len(name)):
-                loc = name[0:i] + name[i+1:]
-                for j in range(0, len(loc)):
-                    inter = loc[:j] + name[i] + loc[j:]
-                    if not inter in resultLoc:
-                        resultLoc.append(loc[:j] + name[i] + loc[j:])
+            if len(name) == 1:
+                resultLoc.append(name)
+            else:
+                for i in range(0, len(name)):
+                    loc = name[0:i] + name[i+1:]
+                    for j in range(0, len(loc)):
+                        inter = loc[:j] + name[i] + loc[j:]
+                        if not inter in resultLoc:
+                            resultLoc.append(loc[:j] + name[i] + loc[j:])
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -287,9 +290,12 @@ def transposition(domain, resultList, verbose, limit, givevariations=False):
         domainList = domain.split(".")[:-1]
 
         for name in domainList:
-            for i in range(len(name)-1):
-                if name[:i] + name[i+1] + name[i] + name[i+2:] not in resultLoc:
-                    resultLoc.append(name[:i] + name[i+1] + name[i] + name[i+2:])
+            if len(name) == 1:
+                resultLoc.append(name)
+            else:
+                for i in range(len(name)-1):
+                    if name[:i] + name[i+1] + name[i] + name[i+2:] not in resultLoc:
+                        resultLoc.append(name[:i] + name[i+1] + name[i] + name[i+2:])
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -422,13 +428,16 @@ def keyboardInsertion(domain, resultList, verbose, limit, givevariations=False):
         domainList = domain.split(".")[:-1]
 
         for name in domainList:
-            for i in range(1, len(name)-1):
-                prefix, orig_c, suffix = name[:i], name[i], name[i+1:]
-                for c in (c for keys in keyboards for c in keys.get(orig_c, [])):
-                    if prefix + c + orig_c + suffix not in resultLoc:
-                        resultLoc.append(prefix + c + orig_c + suffix)
-                    if prefix + orig_c + c + suffix not in resultLoc:
-                        resultLoc.append(prefix + orig_c + c + suffix)
+            if len(name) == 1:
+                resultLoc.append(name)
+            else:
+                for i in range(0, len(name)-1):
+                    prefix, orig_c, suffix = name[:i], name[i], name[i+1:]
+                    for c in (c for keys in keyboards for c in keys.get(orig_c, [])):
+                        if prefix + c + orig_c + suffix not in resultLoc:
+                            resultLoc.append(prefix + c + orig_c + suffix)
+                        if prefix + orig_c + c + suffix not in resultLoc:
+                            resultLoc.append(prefix + orig_c + c + suffix)
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -686,9 +695,12 @@ def addDash(domain, resultList, verbose, limit, givevariations=False):
         domainList = domain.split(".")[:-1]
 
         for name in domainList:
-            for i in range(1, len(name)):
-                if name[:i] + '-' + name[i:] not in resultLoc:
-                    resultLoc.append(name[:i] + '-' + name[i:])
+            if len(name) == 1:
+                resultLoc.append(name)
+            else:
+                for i in range(1, len(name)):
+                    if name[:i] + '-' + name[i:] not in resultLoc:
+                        resultLoc.append(name[:i] + '-' + name[i:])
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -1323,6 +1335,9 @@ def formatOutput(format, resultList, domain, pathOutput, givevariations=False):
                 yaml.dump(yaml_file, write_file)
         elif pathOutput == "-":
             print(yaml_file)
+    else:
+        print(f"Unknown format: {format}. Will use text format instead")
+        formatOutput("text", resultList, domain, pathOutput, givevariations)
 
 
 
