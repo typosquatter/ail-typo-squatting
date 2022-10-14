@@ -142,6 +142,13 @@ def checkResult(resultLoc, resultList, givevariations, algoName=''):
     return resultList
 
 
+def split_domain(domain):
+    domain_tmp = '.'.join(domain.split('.')[-2:])
+    prefix = '.'.join(domain.split('.')[0:-2])
+
+    return domain_tmp, prefix
+
+
 def omission(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
     """Leave out a letter of the domain name"""
 
@@ -152,12 +159,19 @@ def omission(domain, resultList, verbose, limit, givevariations=False,  keeporig
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix = split_domain(domain)
+            prefix += '.'
+        else:
+            domain_tmp = domain
+            prefix = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             for i in range(0,len(name)):
-                resultLoc.append(name)
-                loc = name[0:i]
+                resultLoc.append(prefix + name)
+                loc = prefix + name[0:i]
                 loc += name[i+1:len(name)]
 
                 if loc not in resultLoc:
@@ -257,18 +271,25 @@ def changeOrder(domain, resultList, verbose, limit, givevariations=False,  keepo
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix = split_domain(domain)
+            prefix += '.'
+        else:
+            domain_tmp = domain
+            prefix = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             if len(name) == 1:
-                resultLoc.append(name)
+                resultLoc.append(prefix + name)
             else:
                 for i in range(0, len(name)):
                     loc = name[0:i] + name[i+1:]
                     for j in range(0, len(loc)):
-                        inter = loc[:j] + name[i] + loc[j:]
+                        inter = prefix + loc[:j] + name[i] + loc[j:]
                         if not inter in resultLoc:
-                            resultLoc.append(loc[:j] + name[i] + loc[j:])
+                            resultLoc.append(inter)
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -367,7 +388,14 @@ def replacement(domain, resultList, verbose, limit, givevariations=False,  keepo
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix = split_domain(domain)
+            prefix += '.'
+        else:
+            domain_tmp = domain
+            prefix = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             for i, c in enumerate(name):
@@ -375,8 +403,8 @@ def replacement(domain, resultList, verbose, limit, givevariations=False,  keepo
                 suf = name[i+1:]
                 for layout in keyboards:
                     for r in layout.get(c, ''):
-                        if pre + r + suf not in resultLoc:
-                            resultLoc.append(pre + r + suf)
+                        if prefix + pre + r + suf not in resultLoc:
+                            resultLoc.append(prefix + pre + r + suf)
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -422,7 +450,14 @@ def doubleReplacement(domain, resultList, verbose, limit, givevariations=False, 
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix = split_domain(domain)
+            prefix += '.'
+        else:
+            domain_tmp = domain
+            prefix = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             for i, c in enumerate(name):
@@ -430,8 +465,8 @@ def doubleReplacement(domain, resultList, verbose, limit, givevariations=False, 
                 suf = name[i+2:]
                 for layout in keyboards:
                     for r in layout.get(c, ''):
-                        if pre + r + r + suf not in resultLoc:
-                            resultLoc.append(pre + r + r + suf)
+                        if prefix + pre + r + r + suf not in resultLoc:
+                            resultLoc.append(prefix + pre + r + r + suf)
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -477,7 +512,14 @@ def keyboardInsertion(domain, resultList, verbose, limit, givevariations=False, 
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix_domain = split_domain(domain)
+            prefix_domain += '.'
+        else:
+            domain_tmp = domain
+            prefix_domain = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             if len(name) == 1:
@@ -486,10 +528,10 @@ def keyboardInsertion(domain, resultList, verbose, limit, givevariations=False, 
                 for i in range(0, len(name)-1):
                     prefix, orig_c, suffix = name[:i], name[i], name[i+1:]
                     for c in (c for keys in keyboards for c in keys.get(orig_c, [])):
-                        if prefix + c + orig_c + suffix not in resultLoc:
-                            resultLoc.append(prefix + c + orig_c + suffix)
-                        if prefix + orig_c + c + suffix not in resultLoc:
-                            resultLoc.append(prefix + orig_c + c + suffix)
+                        if prefix_domain + prefix + c + orig_c + suffix not in resultLoc:
+                            resultLoc.append(prefix_domain + prefix + c + orig_c + suffix)
+                        if prefix_domain + prefix + orig_c + c + suffix not in resultLoc:
+                            resultLoc.append(prefix_domain + prefix + orig_c + c + suffix)
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -535,12 +577,19 @@ def addition(domain, resultList, verbose, limit, givevariations=False,  keeporig
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix = split_domain(domain)
+            prefix += '.'
+        else:
+            domain_tmp = domain
+            prefix = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             for i in (*range(48, 58), *range(97, 123)):
-                if name + chr(i) not in resultLoc:
-                    resultLoc.append(name + chr(i))
+                if prefix + name + chr(i) not in resultLoc:
+                    resultLoc.append(prefix + name + chr(i))
 
             if resultLoc:
                 loclist.append(resultLoc)
@@ -727,19 +776,26 @@ def vowelSwap(domain, resultList, verbose, limit, givevariations=False,  keepori
         # vowels = 'aeiouy'
         vowels = ["a", "e", "i", "o", "u", "y"]
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix = split_domain(domain)
+            prefix += '.'
+        else:
+            domain_tmp = domain
+            prefix = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             for i in range(0, len(name)):
                 for vowel in vowels:
                     if name[i] in vowels:
-                        if name[:i] + vowel + name[i+1:] not in resultLoc:
-                            resultLoc.append(name[:i] + vowel + name[i+1:])
+                        if prefix + name[:i] + vowel + name[i+1:] not in resultLoc:
+                            resultLoc.append(prefix + name[:i] + vowel + name[i+1:])
 
             for j in vowels:
                 for k in vowels:
                     if j != k:
-                        loc = name.replace(k, j)
+                        loc = prefix + name.replace(k, j)
                         if loc not in resultLoc:
                             resultLoc.append(loc)
 
@@ -844,15 +900,22 @@ def bitsquatting(domain, resultList, verbose, limit, givevariations=False,  keep
         masks = [1, 2, 4, 8, 16, 32, 64, 128]
         chars = set('abcdefghijklmnopqrstuvwxyz0123456789-')
 
-        domainList = domain.split(".")[:-1]
+        if len(domain.split('.')) >= 3:
+            domain_tmp, prefix = split_domain(domain)
+            prefix += '.'
+        else:
+            domain_tmp = domain
+            prefix = ''
+
+        domainList = domain_tmp.split(".")[:-1]
 
         for name in domainList:
             for i, c in enumerate(name):
                 for mask in masks:
                     b = chr(ord(c) ^ mask)
                     if b in chars:
-                        if name[:i] + b +name[i+1:] not in resultLoc:
-                            resultLoc.append(name[:i] + b +name[i+1:])
+                        if prefix + name[:i] + b +name[i+1:] not in resultLoc:
+                            resultLoc.append(prefix + name[:i] + b +name[i+1:])
 
             if resultLoc:
                 loclist.append(resultLoc)
