@@ -888,7 +888,7 @@ def bitsquatting(domain, resultList, verbose, limit, givevariations=False,  keep
     return resultList
 
 
-def homoglyph(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
+def homoglyph(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, all=False):
     """One or more characters that look similar to another character but are different are called homogylphs"""
 
     if not len(resultList) >= limit:
@@ -908,17 +908,15 @@ def homoglyph(domain, resultList, verbose, limit, givevariations=False,  keepori
         domainList = domain.split(".")[:-1]
         tld = domain.split(".")[-1]
 
-        s = ""
-        for d in domainList:
-            s += d + "."
-        s = s[:-1]
+        s = '.'.join(domainList)
 
         result1 = set(mix(s))
         result2 = set()
         cp = 0
 
-        for r in result1:
-            result2.update(set(mix(r)))
+        if all:
+            for r in result1:
+                result2.update(set(mix(r)))
         
         for element in list(result1 | result2):
             element = element + '.' + tld
@@ -933,7 +931,7 @@ def homoglyph(domain, resultList, verbose, limit, givevariations=False,  keepori
 
             elif element not in resultList:
                 cp += 1
-                resultList.append(element + "." + tld)
+                resultList.append(element)
 
         if verbose:
             print(f"{cp}\n")
@@ -1320,7 +1318,7 @@ def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  kee
     return resultList
 
 
-def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False, keeporiginal=False):
+def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False, keeporiginal=False, all_homoglyph=False):
     """Run all algo on each domain contain in domainList"""
 
     resultList = list()
@@ -1351,7 +1349,7 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
 
     resultList = bitsquatting(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
-    resultList = homoglyph(domain, resultList, verbose, limit, givevariations, keeporiginal)
+    resultList = homoglyph(domain, resultList, verbose, limit, givevariations, keeporiginal, all_homoglyph)
 
     resultList = commonMisspelling(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
@@ -1594,7 +1592,10 @@ if __name__ == "__main__":
     parser.add_argument("-vs", "--vowelswap", help="Swap vowels within the domain name", action="store_true")
     parser.add_argument("-ada", "--adddash", help="Add a dash between the first and last character in a string", action="store_true")
     parser.add_argument("-bs", "--bitsquatting", help="The character is substituted with the set of valid characters that can be made after a single bit flip", action="store_true")
+
     parser.add_argument("-hg", "--homoglyph", help="One or more characters that look similar to another character but are different are called homogylphs", action="store_true")
+    parser.add_argument("-ahg", "--all_homoglyph", help="generate all possible homoglyph permutations. Ex: circl.lu, e1rc1.lu", action="store_true")
+
     parser.add_argument("-cm", "--commonmisspelling", help="Change a word by is misspellings", action="store_true")
     parser.add_argument("-hp", "--homophones", help="Change word by an other who sound the same when spoken", action="store_true")
     parser.add_argument("-wt", "--wrongtld", help="Change the original top level domain to another", action="store_true")
@@ -1654,7 +1655,7 @@ if __name__ == "__main__":
             if pathOutput:
                 print(f"\n\t[*****] {domain} [*****]")
 
-            resultList = runAll(domain, limit, formatoutput, pathOutput, verbose, givevariations, keeporiginal)
+            resultList = runAll(domain, limit, formatoutput, pathOutput, verbose, givevariations, keeporiginal, args.all_homoglyph)
 
             if args.dnsresolving:
                 dnsResolving(resultList, domain, pathOutput, verbose, givevariations, dns_limited)
@@ -1709,7 +1710,7 @@ if __name__ == "__main__":
                 resultList = bitsquatting(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
             if args.homoglyph:
-                resultList = homoglyph(domain, resultList, verbose, limit, givevariations, keeporiginal)
+                resultList = homoglyph(domain, resultList, verbose, limit, givevariations, keeporiginal, all=args.all_homoglyph)
 
             if args.commonmisspelling:
                 resultList = commonMisspelling(domain, resultList, verbose, limit, givevariations, keeporiginal)

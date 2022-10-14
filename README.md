@@ -38,7 +38,7 @@ $ pip3 install ail-typo-squatting
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
 usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT] [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-var] [-ko] [-a] [-om] [-repe] [-tra] [-repl] [-drepl] [-cho] [-ki] [-add] [-md] [-sd]
-               [-vs] [-ada] [-bs] [-hg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp] [-cdd]
+               [-vs] [-ada] [-bs] [-hg] [-ahg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp] [-cdd]
 
 options:
   -h, --help            show this help message and exit
@@ -76,6 +76,8 @@ options:
   -ada, --adddash       Add a dash between the first and last character in a string
   -bs, --bitsquatting   The character is substituted with the set of valid characters that can be made after a single bit flip
   -hg, --homoglyph      One or more characters that look similar to another character but are different are called homogylphs
+  -ahg, --all_homoglyph
+                        generate all possible homoglyph permutations. Ex: circl.lu, e1rc1.lu
   -cm, --commonmisspelling
                         Change a word by is misspellings
   -hp, --homophones     Change word by an other who sound the same when spoken
