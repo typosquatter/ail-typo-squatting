@@ -121,6 +121,7 @@ def checkResult(resultLoc, resultList, givevariations, algoName=''):
                 loc[1] = var
                 if loc in resultList:
                     flag = True
+                    continue
                     
             if not flag:
                 element[1] = algoName
@@ -1145,7 +1146,7 @@ def homophones(domain, resultList, verbose, limit, givevariations=False,  keepor
 def wrongTld(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
     """Change the original top level domain to another"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
-    # Version 2022012800
+    # Version 2022102502
 
     if not len(resultList) >= limit:
         if verbose:
@@ -1353,7 +1354,10 @@ def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  kee
                 resultList = checkResult(resultLoc, resultList, givevariations, "changeDotDash")
             
             elif loc not in resultList:
-                resultList.append(loc)
+                if givevariations:
+                    resultList.append([domain, 'changeDotDash'])
+                else:
+                    resultList.append(loc)
 
             if loc != loc2:
                 resultLoc2 = addTld(loc2, resultLoc2, verbose, limit, givevariations)
