@@ -8,6 +8,8 @@ import string
 import inflect
 import argparse
 
+from pyfaup.faup import Faup
+
 import pathlib
 pathProg = pathlib.Path(__file__).parent.absolute()
 pathWork = ""
@@ -143,11 +145,21 @@ def checkResult(resultLoc, resultList, givevariations, algoName=''):
     return resultList
 
 
-def split_domain(domain):
-    domain_tmp = '.'.join(domain.split('.')[-2:])
-    prefix = '.'.join(domain.split('.')[0:-2])
+def parse_domain(domain):
+    f = Faup()
+    f.decode(domain)
 
-    return domain_tmp, prefix
+    if not f.get_tld():
+        print("[-] Domain not valid")
+        exit(-1)
+
+    if f.get_subdomain():
+        prefix = f.get_subdomain()
+        prefix += '.'
+    else:
+        prefix = ''
+
+    return prefix, f.get_domain_without_tld(), f.get_tld()
 
 
 def omission(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
@@ -160,14 +172,8 @@ def omission(domain, resultList, verbose, limit, givevariations=False,  keeporig
         resultLoc = list()
         loclist = list()
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix = split_domain(domain)
-            prefix += '.'
-        else:
-            domain_tmp = domain
-            prefix = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             for i in range(0,len(name)):
@@ -182,7 +188,7 @@ def omission(domain, resultList, verbose, limit, givevariations=False,  keeporig
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
 
         rLoc = globalAppend(loclist)
 
@@ -222,18 +228,20 @@ def repetition(domain, resultList, verbose, limit, givevariations=False,  keepor
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
+            resultLoc.append(prefix + name)
             for i, c in enumerate(name):
-                if name[:i] + c + name[i:] not in resultLoc:
-                    resultLoc.append(name[:i] + c + name[i:])
+                if prefix + name[:i] + c + name[i:] not in resultLoc:
+                    resultLoc.append(prefix + name[:i] + c + name[i:])
 
             if resultLoc:
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -272,14 +280,8 @@ def changeOrder(domain, resultList, verbose, limit, givevariations=False,  keepo
         resultLoc = list()
         loclist = list()
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix = split_domain(domain)
-            prefix += '.'
-        else:
-            domain_tmp = domain
-            prefix = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             if len(name) == 1:
@@ -296,7 +298,7 @@ def changeOrder(domain, resultList, verbose, limit, givevariations=False,  keepo
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -335,21 +337,22 @@ def transposition(domain, resultList, verbose, limit, givevariations=False,  kee
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             if len(name) == 1:
                 resultLoc.append(name)
             else:
                 for i in range(len(name)-1):
-                    if name[:i] + name[i+1] + name[i] + name[i+2:] not in resultLoc:
-                        resultLoc.append(name[:i] + name[i+1] + name[i] + name[i+2:])
+                    if prefix + name[:i] + name[i+1] + name[i] + name[i+2:] not in resultLoc:
+                        resultLoc.append(prefix + name[:i] + name[i+1] + name[i] + name[i+2:])
 
             if resultLoc:
                 loclist.append(resultLoc)
                 resultLoc = list()
         
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -389,14 +392,8 @@ def replacement(domain, resultList, verbose, limit, givevariations=False,  keepo
         resultLoc = list()
         loclist = list()
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix = split_domain(domain)
-            prefix += '.'
-        else:
-            domain_tmp = domain
-            prefix = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             for i, c in enumerate(name):
@@ -411,7 +408,7 @@ def replacement(domain, resultList, verbose, limit, givevariations=False,  keepo
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -451,14 +448,8 @@ def doubleReplacement(domain, resultList, verbose, limit, givevariations=False, 
         resultLoc = list()
         loclist = list()
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix = split_domain(domain)
-            prefix += '.'
-        else:
-            domain_tmp = domain
-            prefix = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             for i, c in enumerate(name):
@@ -473,7 +464,7 @@ def doubleReplacement(domain, resultList, verbose, limit, givevariations=False, 
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -513,14 +504,8 @@ def keyboardInsertion(domain, resultList, verbose, limit, givevariations=False, 
         resultLoc = list()
         loclist = list()
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix_domain = split_domain(domain)
-            prefix_domain += '.'
-        else:
-            domain_tmp = domain
-            prefix_domain = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix_domain, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             if len(name) == 1:
@@ -538,7 +523,7 @@ def keyboardInsertion(domain, resultList, verbose, limit, givevariations=False, 
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -578,14 +563,8 @@ def addition(domain, resultList, verbose, limit, givevariations=False,  keeporig
         resultLoc = list()
         loclist = list()
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix = split_domain(domain)
-            prefix += '.'
-        else:
-            domain_tmp = domain
-            prefix = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             for i in (*range(48, 58), *range(97, 123)):
@@ -596,7 +575,7 @@ def addition(domain, resultList, verbose, limit, givevariations=False,  keeporig
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
 
         rLoc = globalAppend(loclist)
 
@@ -777,14 +756,8 @@ def vowelSwap(domain, resultList, verbose, limit, givevariations=False,  keepori
         # vowels = 'aeiouy'
         vowels = ["a", "e", "i", "o", "u", "y"]
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix = split_domain(domain)
-            prefix += '.'
-        else:
-            domain_tmp = domain
-            prefix = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             for i in range(0, len(name)):
@@ -804,7 +777,7 @@ def vowelSwap(domain, resultList, verbose, limit, givevariations=False,  keepori
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -844,21 +817,23 @@ def addDash(domain, resultList, verbose, limit, givevariations=False,  keeporigi
         resultLoc = list()
         loclist = list()
 
-        domainList = domain.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             if len(name) == 1:
-                resultLoc.append(name)
+                resultLoc.append(prefix + name)
             else:
+                resultLoc.append(prefix + name)
                 for i in range(1, len(name)):
-                    if name[:i] + '-' + name[i:] not in resultLoc:
-                        resultLoc.append(name[:i] + '-' + name[i:])
+                    if prefix + name[:i] + '-' + name[i:] not in resultLoc:
+                        resultLoc.append(prefix + name[:i] + '-' + name[i:])
 
             if resultLoc:
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -901,14 +876,8 @@ def bitsquatting(domain, resultList, verbose, limit, givevariations=False,  keep
         masks = [1, 2, 4, 8, 16, 32, 64, 128]
         chars = set('abcdefghijklmnopqrstuvwxyz0123456789-')
 
-        if len(domain.split('.')) >= 3:
-            domain_tmp, prefix = split_domain(domain)
-            prefix += '.'
-        else:
-            domain_tmp = domain
-            prefix = ''
-
-        domainList = domain_tmp.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             for i, c in enumerate(name):
@@ -922,7 +891,7 @@ def bitsquatting(domain, resultList, verbose, limit, givevariations=False,  keep
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -969,8 +938,8 @@ def homoglyph(domain, resultList, verbose, limit, givevariations=False,  keepori
                         for g in glyphs.get(c, []):
                             yield pre + win.replace(c, g) + suf
 
-        domainList = domain.split(".")[:-1]
-        tld = domain.split(".")[-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         s = '.'.join(domainList)
 
@@ -983,7 +952,7 @@ def homoglyph(domain, resultList, verbose, limit, givevariations=False,  keepori
                 result2.update(set(mix(r)))
         
         for element in list(result1 | result2):
-            element = element + '.' + tld
+            element = prefix + element + '.' + tld
             if givevariations:
                 flag = False
                 for var in algo_list:
@@ -1034,7 +1003,9 @@ def commonMisspelling(domain, resultList, verbose, limit, givevariations=False, 
             misspelling = json.load(read_json)
             keys = misspelling.keys()
 
-        domainList = domain.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
+
         resultLoc = list()
         loclist = list()
 
@@ -1042,16 +1013,16 @@ def commonMisspelling(domain, resultList, verbose, limit, givevariations=False, 
             if name in keys:
                 misspell = misspelling[name].split(",")
                 for mis in misspell:
-                    if mis.replace(" ","") not in resultLoc:
-                        resultLoc.append(mis.replace(" ",""))
+                    if prefix + mis.replace(" ","") not in resultLoc:
+                        resultLoc.append(prefix + mis.replace(" ",""))
             elif name not in resultLoc:
-                resultLoc.append(name)
+                resultLoc.append(prefix + name)
 
             if resultLoc:
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -1094,7 +1065,9 @@ def homophones(domain, resultList, verbose, limit, givevariations=False,  keepor
         with open(pathEtc + "/homophones.txt", "r") as read_file:
             homophones = read_file.readlines()
         
-        domainList = domain.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
+
         resultLoc = list()
         loclist = list()
 
@@ -1104,16 +1077,16 @@ def homophones(domain, resultList, verbose, limit, givevariations=False,  keepor
                 for word in line:
                     if name == word.rstrip("\n"):
                         for otherword in line:
-                            if otherword.rstrip("\n") not in resultLoc and otherword.rstrip("\n") != name:
-                                resultLoc.append(otherword.rstrip("\n"))
+                            if prefix + otherword.rstrip("\n") not in resultLoc and otherword.rstrip("\n") != name:
+                                resultLoc.append(prefix + otherword.rstrip("\n"))
                     elif name not in resultLoc:
-                        resultLoc.append(name)
+                        resultLoc.append(prefix + name)
 
             if resultLoc:
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
@@ -1156,19 +1129,35 @@ def wrongTld(domain, resultList, verbose, limit, givevariations=False,  keeporig
             tlds = read_file.readlines()
         
         originalTld = domain.split(".")[-1]
+
+        prefix, domain_without_tld, possible_complete_tld = parse_domain(domain)
+
         domainLoc = ""
+        domainLoc_orig = ''
         cp = 0 
 
+        if possible_complete_tld != originalTld:
+            if prefix:
+                domainLoc = prefix
+
+            for element in domain_without_tld.split("."):
+                domainLoc += element + "."
         for element in domain.split(".")[:-1]:
-            domainLoc += element + "."
+            domainLoc_orig += element + "."
 
         for tld in tlds:
             if tld.lower().rstrip("\n") != originalTld:
                 cp += 1
                 if givevariations:
-                    resultList.append([domainLoc + tld.lower().rstrip("\n"), 'wrongTld'])
+                    if possible_complete_tld != originalTld:
+                        cp += 1
+                        resultList.append([domainLoc + tld.lower().rstrip("\n"), 'wrongTld'])
+                    resultList.append([domainLoc_orig + tld.lower().rstrip("\n"), 'wrongTld'])
                 else:
-                    resultList.append(domainLoc + tld.lower().rstrip("\n"))
+                    if possible_complete_tld != originalTld:
+                        cp += 1
+                        resultList.append(domainLoc + tld.lower().rstrip("\n"))
+                    resultList.append(domainLoc_orig + tld.lower().rstrip("\n"))
         
         if verbose:
             print(f"{cp}\n")
@@ -1248,13 +1237,20 @@ def subdomain(domain, resultList, verbose, limit, givevariations=False,  keepori
 
         cp = 0
 
-        for i in range(1, len(domain)-1):
-            if domain[i] not in ['-', '.'] and domain[i-1] not in ['-', '.']:
+        prefix, domain_without_tld, domain_tld = parse_domain(domain)
+        
+        if prefix:
+            domain_tmp = prefix + domain_without_tld
+        else:
+            domain_tmp = domain_without_tld
+
+        for i in range(1, len(domain_tmp)):
+            if domain_tmp[i] not in ['-', '.'] and domain_tmp[i-1] not in ['-', '.']:
                 cp += 1
                 if givevariations:
-                    resultList.append([domain[:i] + '.' + domain[i:], 'subdomain'])
+                    resultList.append([domain_tmp[:i] + '.' + domain_tmp[i:] + '.' + domain_tld, 'subdomain'])
                 else:
-                    resultList.append(domain[:i] + '.' + domain[i:])
+                    resultList.append(domain_tmp[:i] + '.' + domain_tmp[i:] + '.' + domain_tld)
 
         if verbose:
             print(f"{cp}\n")
@@ -1292,21 +1288,22 @@ def singularPluralize(domain, resultList, verbose, limit, givevariations=False, 
         loclist = list()
         inflector = inflect.engine()
 
-        domainList = domain.split(".")[:-1]
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
 
         for name in domainList:
             
             loc = inflector.plural(name)
-            resultLoc.append(name)
+            resultLoc.append(prefix + name)
 
             if loc and loc not in resultLoc:
-                resultLoc.append(loc)
+                resultLoc.append(prefix+ loc)
             
             if resultLoc:
                 loclist.append(resultLoc)
                 resultLoc = list()
 
-        loclist.append([domain.split(".")[-1]])
+        loclist.append([tld])
         rLoc = globalAppend(loclist)
 
         if verbose:
