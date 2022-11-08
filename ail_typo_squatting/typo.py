@@ -1339,26 +1339,59 @@ def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  kee
         if verbose:
             print("[+] Change dot to dash")
 
+        f = Faup()
+        f.decode(domain)
+        original_tld = f.get_tld()
+        original_dwt = f.get_domain_without_tld()
+
+        domain_list = [original_dwt]
+
         loc = domain
+        loc2 = domain
         while "." in loc:
             resultLoc = list()
             resultLoc2 = list()
-            loc2 = loc[::-1].replace(".", "-", 1)[::-1]
+            loc2 = loc2[::-1].replace(".", "-", 1)[::-1]
             loc = loc.replace(".", "-", 1)
 
-            if "." not in loc:
+            f.decode(loc)
+            loc_dwt = f.get_domain_without_tld()
+            loc_tld = f.get_tld()
+
+            f.decode(loc2)
+            loc2_dwt = f.get_domain_without_tld()
+            loc2_tld = f.get_tld()
+
+
+            if "." not in loc and loc_dwt not in domain_list:
                 resultLoc = addTld(loc, resultLoc, verbose, limit, givevariations)
                 resultList = checkResult(resultLoc, resultList, givevariations, "changeDotDash")
-            
-            elif loc not in resultList:
-                if givevariations:
-                    resultList.append([domain, 'changeDotDash'])
+                domain_list.append(loc_dwt)
+            elif loc_dwt not in domain_list:
+                if loc_tld != original_tld:
+                    resultLoc = addTld(loc, resultLoc, verbose, limit, givevariations)
+                    resultList = checkResult(resultLoc, resultList, givevariations, "changeDotDash")
                 else:
-                    resultList.append(loc)
+                    if givevariations:
+                        resultList.append([loc, 'changeDotDash'])
+                    else:
+                        resultList.append(loc)
+                domain_list.append(loc_dwt)
 
-            if loc != loc2:
+            if "." not in loc2 and loc2_dwt not in domain_list:
                 resultLoc2 = addTld(loc2, resultLoc2, verbose, limit, givevariations)
                 resultList = checkResult(resultLoc2, resultList, givevariations, "changeDotDash")
+                domain_list.append(loc2_dwt)
+            elif loc2_dwt not in domain_list:
+                if loc2_tld != original_tld:
+                    resultLoc2 = addTld(loc2, resultLoc2, verbose, limit, givevariations)
+                    resultList = checkResult(resultLoc2, resultList, givevariations, "changeDotDash")
+                else:
+                    if givevariations:
+                        resultList.append([loc2, 'changeDotDash'])
+                    else:
+                        resultList.append(loc2)
+                domain_list.append(loc2_dwt)
 
             if not keeporiginal:
                 try:
