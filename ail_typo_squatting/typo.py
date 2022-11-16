@@ -8,7 +8,7 @@ import string
 import inflect
 import argparse
 
-from pyfaup.faup import Faup
+import tldextract
 
 import pathlib
 pathProg = pathlib.Path(__file__).parent.absolute()
@@ -146,20 +146,19 @@ def checkResult(resultLoc, resultList, givevariations, algoName=''):
 
 
 def parse_domain(domain):
-    f = Faup()
-    f.decode(domain)
+    domain_extract = tldextract.extract(domain)
 
-    if not f.get_tld():
+    if not domain_extract.suffix:
         print("[-] Domain not valid")
         exit(-1)
 
-    if f.get_subdomain():
-        prefix = f.get_subdomain()
+    if domain_extract.subdomain:
+        prefix = domain_extract.subdomain
         prefix += '.'
     else:
         prefix = ''
 
-    return prefix, f.get_domain_without_tld(), f.get_tld()
+    return prefix, domain_extract.domain, domain_extract.suffix
 
 
 def omission(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
@@ -1339,10 +1338,13 @@ def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  kee
         if verbose:
             print("[+] Change dot to dash")
 
-        f = Faup()
-        f.decode(domain)
-        original_tld = f.get_tld()
-        original_dwt = f.get_domain_without_tld()
+        domain_extract = tldextract.extract(domain)
+        original_tld = domain_extract.suffix
+        original_dwt = domain_extract.domain
+
+        if not original_tld:
+            print("[-] Domain not valid")
+            exit(-1)
 
         domain_list = [original_dwt]
 
@@ -1354,13 +1356,13 @@ def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  kee
             loc2 = loc2[::-1].replace(".", "-", 1)[::-1]
             loc = loc.replace(".", "-", 1)
 
-            f.decode(loc)
-            loc_dwt = f.get_domain_without_tld()
-            loc_tld = f.get_tld()
+            loc_domain_extract = tldextract.extract(loc)
+            loc_dwt = loc_domain_extract.domain
+            loc_tld = loc_domain_extract.suffix
 
-            f.decode(loc2)
-            loc2_dwt = f.get_domain_without_tld()
-            loc2_tld = f.get_tld()
+            loc2_domain_extract = tldextract.extract(loc2)
+            loc2_dwt = loc2_domain_extract.domain
+            loc2_tld = loc2_domain_extract.suffix
 
 
             if "." not in loc and loc_dwt not in domain_list:
@@ -1382,8 +1384,8 @@ def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  kee
                 resultLoc2 = addTld(loc2, resultLoc2, verbose, limit, givevariations)
                 resultList = checkResult(resultLoc2, resultList, givevariations, "changeDotDash")
                 domain_list.append(loc2_dwt)
-            elif loc2_dwt not in domain_list:
-                if loc2_tld != original_tld:
+            elif loc2_tld != original_tld:
+                if loc2_dwt not in domain_list:
                     resultLoc2 = addTld(loc2, resultLoc2, verbose, limit, givevariations)
                     resultList = checkResult(resultLoc2, resultList, givevariations, "changeDotDash")
                 else:
