@@ -8,6 +8,8 @@ import string
 import inflect
 import argparse
 
+import requests
+
 import tldextract
 
 import pathlib
@@ -1417,6 +1419,60 @@ def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  kee
     return resultList
 
 
+def addDynamicDns(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
+    """Add dynamic dns"""
+
+    if not len(resultList) >= limit:
+        if verbose:
+            print("[+] Dynamic DNS")
+        
+        try:
+            r = requests.get("https://raw.githubusercontent.com/MISP/misp-warninglists/main/lists/dynamic-dns/list.json")
+            dynamicdns = r.json()['list']
+            with open(pathEtc + "/dynamic-dns.json", "w") as write_json:
+                json.dump(r.json(), write_json, indent=4)
+        except:
+            with open(pathEtc + "/dynamic-dns.json", "r") as read_json:
+                dynamicdns = json.load(read_json)["list"]
+
+
+        resultLoc = list()
+
+        domain_replace = [domain[::-1].replace(".", "-", 1)[::-1], domain.replace(".", "-"), domain.replace(".", "_")]
+
+        for ddns in dynamicdns:
+            for replace in domain_replace:
+                d_loc = replace + ddns
+                if d_loc not in resultLoc:
+                    resultLoc.append(d_loc)
+
+        if verbose:
+            print(f"{len(resultLoc)}\n")
+
+        resultList = checkResult(resultLoc, resultList, givevariations, "addDynamicDns")
+        
+        if not keeporiginal:
+            try:
+                if givevariations:
+                    resultList.remove([domain, 'addDynamicDns'])
+                else:
+                    resultList.remove(domain)
+            except:
+                pass
+        elif givevariations:
+            try:
+                resultList.remove([domain, 'addDynamicDns'])
+            except:
+                pass
+            if not [domain, 'original'] in resultList:
+                resultList.insert(0, [domain, 'original'])
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+
 def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False, keeporiginal=False, all_homoglyph=False):
     """Run all algo on each domain contain in domainList"""
 
@@ -1463,6 +1519,8 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
     resultList = singularPluralize(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
     resultList = changeDotDash(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = addDynamicDns(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
 
     if verbose:
@@ -1702,6 +1760,7 @@ if __name__ == "__main__":
     parser.add_argument("-sub", "--subdomain", help="Insert a dot at varying positions to create subdomain", action="store_true")
     parser.add_argument("-sp", "--singularpluralize", help="Create by making a singular domain plural and vice versa", action="store_true")
     parser.add_argument("-cdd", "--changedotdash", help="Change dot to dash", action="store_true")
+    parser.add_argument("-addns", "--adddynamicdns", help="Add dynamic dns at the end of the domain", action="store_true")
     
     args = parser.parse_args()
 
@@ -1831,6 +1890,9 @@ if __name__ == "__main__":
             
             if args.changedotdash:
                 resultList = changeDotDash(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+            if args.adddynamicdns:
+                resultList = addDynamicDns(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
 
             if verbose:
