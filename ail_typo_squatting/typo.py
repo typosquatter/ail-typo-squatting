@@ -153,6 +153,10 @@ def parse_domain(domain):
     if not domain_extract.suffix:
         print("[-] Domain not valid")
         exit(-1)
+    
+    if not domain_extract.domain:
+        print("[-] Only a TLD is identified. Try adding something like 'www.' before your domain")
+        exit(-1)
 
     if domain_extract.subdomain:
         prefix = domain_extract.subdomain
