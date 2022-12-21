@@ -311,27 +311,28 @@ each keys are variations and may have a field "ip" if the domain name have been 
 
 | Algo               | Description                                                  |
 | :----------------- | :----------------------------------------------------------- |
-| Omission           | These typos are created by leaving out a letter of the domain name, one letter at a time. |
-| Repetition         | These typos are created by repeating a letter of the domain name. |
-| ChangeOrder        | These typos are created by changing the order of letters in the each part of the domain. |
-| Transposition      | These typos are created by swapping the order of adjacent letters in the domain name. |
-| Replacement        | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK) |
-| Double Replacement | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard. |
+| AddDash            | These typos are created by adding a dash between the first and last character in a string. |
 | Addition           | These typos are created by add a characters in the domain name. |
+| AddDynamicDns      | These typos are created by adding a dynamic dns at the end of the original domain. |
+| AddTld             | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
+| Bitsquatting       | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
+| ChangeDotDash      | These typos are created by changing a dot to a dash.         |
+| ChangeOrder        | These typos are created by changing the order of letters in the each part of the domain. |
+| CommonMisspelling  | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com. |
+| Double Replacement | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard. |
+| Homoglyph          | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
+| Homophones         | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com. |
 | KeyboardInsertion  | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter. |
 | MissingDot         | These typos are created by deleting a dot from the domain name. |
+| Omission           | These typos are created by leaving out a letter of the domain name, one letter at a time. |
+| Repetition         | These typos are created by repeating a letter of the domain name. |
+| Replacement        | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK) |
 | StripDash          | These typos are created by deleting a dash from the domain name. |
-| VowelSwap          | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
-| AddDash            | These typos are created by adding a dash between the first and last character in a string. |
-| Bitsquatting       | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
-| Homoglyph          | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
-| CommonMisspelling  | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com. |
-| Homophones         | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com. |
-| WrongTld           | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
-| AddTld             | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
-| Subdomain          | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
 | SingularPluralize  | These typos are created by making a singular domain plural and vice versa. |
-| ChangeDotDash      | These typos are created by changing a dot to a dash          |
+| Subdomain          | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
+| Transposition      | These typos are created by swapping the order of adjacent letters in the domain name. |
+| VowelSwap          | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
+| WrongTld           | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
 
 
 
