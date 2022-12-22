@@ -78,6 +78,8 @@ algo_list = ["omission", "repetition", "changeOrder", "transposition", "replacem
 
 type_request = ['A', 'AAAA', 'NS', 'MX']
 
+exclude_tld = ["gov.pl"]
+
 
 def globalAppend(loclist):
     """
@@ -146,23 +148,32 @@ def checkResult(resultLoc, resultList, givevariations, algoName=''):
 
     return resultList
 
+def check_valid_domain(domain_extract):
+    if not domain_extract.suffix:
+        return("[-] Domain not valid")
+
+    if not domain_extract.suffix in exclude_tld:
+        if not domain_extract.domain:
+            return("[-] Only a TLD is identified. Try adding something like 'www.' before your domain.")
+    return ""
 
 def parse_domain(domain):
     domain_extract = tldextract.extract(domain)
 
-    if not domain_extract.suffix:
-        print("[-] Domain not valid")
-        exit(-1)
-    
-    if not domain_extract.domain:
-        print("[-] Only a TLD is identified. Try adding something like 'www.' before your domain")
+    res = check_valid_domain(domain_extract)
+    # If res is True then error
+    if res:
+        print(res)
         exit(-1)
 
-    if domain_extract.subdomain:
-        prefix = domain_extract.subdomain
-        prefix += '.'
+    if not domain_extract.suffix in exclude_tld:
+        if domain_extract.subdomain:
+            prefix = domain_extract.subdomain
+            prefix += '.'
+        else:
+            prefix = ''
     else:
-        prefix = ''
+        return '', domain_extract.suffix.split(".")[0], domain_extract.suffix.split(".")[1]
 
     return prefix, domain_extract.domain, domain_extract.suffix
 
