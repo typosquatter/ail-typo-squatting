@@ -26,3 +26,4 @@ from ail_typo_squatting.typo import singularPluralize
 from ail_typo_squatting.typo import changeDotDash
 from ail_typo_squatting.typo import addDynamicDns
 from ail_typo_squatting.typo import check_valid_domain
+from ail_typo_squatting.typo import numeralSwap

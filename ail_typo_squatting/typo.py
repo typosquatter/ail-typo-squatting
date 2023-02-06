@@ -74,6 +74,19 @@ glyphs = {
     'z': ['ʐ', 'ż', 'ź', 'ᴢ', 'ƶ', 'ẓ', 'ẕ', 'ⱬ']
     }
 
+numerals = [
+    ["0", "zero"],
+    ["1", "one", "first"],
+    ["2", "two", "second"],
+    ["3", "three", "third"],
+    ["4", "four", "fourth", "for"],
+    ["5", "five", "fifth"],
+    ["6", "six", "sixth"],
+    ["7", "seven", "seventh"],
+    ["8", "eight", "eighth"],
+    ["9", "nine", "ninth"]
+]
+
 algo_list = ["omission", "repetition", "changeOrder", "transposition", "replacement", "doubleReplacement", "addition", "keyboardInsertion", "missingDot", "stripDash", "vowelSwap", "addDash", "bitsquatting", "homoglyph", "commonMisspelling", "homophones", "wrongTld", "addTld", "subdomain", "singularePluralize", "changeDotDash"]
 
 type_request = ['A', 'AAAA', 'NS', 'MX']
@@ -1308,7 +1321,6 @@ def singularPluralize(domain, resultList, verbose, limit, givevariations=False, 
         domainList = [domain_without_tld]
 
         for name in domainList:
-            
             loc = inflector.plural(name)
             resultLoc.append(prefix + name)
 
@@ -1488,6 +1500,63 @@ def addDynamicDns(domain, resultList, verbose, limit, givevariations=False,  kee
     return resultList
 
 
+def numeralSwap(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
+    """Change a numbers to words and vice versa"""
+
+    if not len(resultList) >= limit:
+        if verbose:
+            print("[+] Numeral Swap")
+
+        resultLoc = list()
+        loclist = list()
+
+        prefix, domain_without_tld, tld = parse_domain(domain)
+        domainList = [domain_without_tld]
+
+        for name in domainList:
+            for numerals_list in numerals:
+                for nume in numerals_list:
+                    if nume in name:
+                        for nume2 in numerals_list:
+                            if not nume2 == nume:
+                                loc = prefix + name.replace(nume, nume2)
+                                if not loc in resultLoc:
+                                    resultLoc.append(loc)
+            if resultLoc:
+                loclist.append(resultLoc)
+                resultLoc = list()
+
+        if loclist:
+            loclist.append([tld])
+            rLoc = globalAppend(loclist)
+
+        if verbose:
+            print(f"{len(rLoc)}\n")
+
+        resultList = checkResult(rLoc, resultList, givevariations, "numeral_swap")
+
+        if not keeporiginal:
+            try:
+                if givevariations:
+                    resultList.remove([domain, 'numeral_swap'])
+                else:
+                    resultList.remove(domain)
+            except:
+                pass
+        elif givevariations:
+            try:
+                resultList.remove([domain, 'numeral_swap'])
+            except:
+                pass
+            if not [domain, 'original'] in resultList:
+                resultList.insert(0, [domain, 'original'])
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
+
 def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False, keeporiginal=False, all_homoglyph=False):
     """Run all algo on each domain contain in domainList"""
 
@@ -1536,6 +1605,8 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
     resultList = changeDotDash(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
     resultList = addDynamicDns(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = numeralSwap(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
 
     if verbose:
@@ -1776,6 +1847,7 @@ if __name__ == "__main__":
     parser.add_argument("-sp", "--singularpluralize", help="Create by making a singular domain plural and vice versa", action="store_true")
     parser.add_argument("-cdd", "--changedotdash", help="Change dot to dash", action="store_true")
     parser.add_argument("-addns", "--adddynamicdns", help="Add dynamic dns at the end of the domain", action="store_true")
+    parser.add_argument("-ns", "--numeralswap", help="Change a numbers to words and vice versa. Ex: circlone.lu, circl1.lu", action="store_true")
     
     args = parser.parse_args()
 
@@ -1908,6 +1980,9 @@ if __name__ == "__main__":
 
             if args.adddynamicdns:
                 resultList = addDynamicDns(domain, resultList, verbose, limit, givevariations, keeporiginal)
+            
+            if args.numeralswap:
+                resultList = numeralSwap(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
 
             if verbose:

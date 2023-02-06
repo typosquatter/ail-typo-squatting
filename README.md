@@ -20,18 +20,18 @@ The tool can be used as a stand-alone tool or to feed other systems.
 
 ail-typo-squatting can be install with poetry. If you don't have poetry installed, you can do the following `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`.
 
-~~~bash
+```bash
 $ poetry install
 $ poetry shell
 $ cd ail-typo-squatting
 $ python typo.py -h
-~~~
+```
 
 ## pip installation
 
-~~~bash
+```bash
 $ pip3 install ail-typo-squatting
-~~~
+```
 
 # Usage
 
@@ -90,8 +90,6 @@ options:
                         Change dot to dash
 ```
 
-
-
 # Usage example
 
 1. Creation of variations for `ail-project.org` and `circl.lu`, using all algorithm.
@@ -102,29 +100,27 @@ dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org ci
 
 2. Creation of variations for a file who contains domain name, using character omission - subdomain - hyphenation.
 
-````bash
+```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -fdn domain.txt -co -sub -hyp -o . -fo yara
-````
+```
 
 3. Creation of variations for `ail-project.org` and `circl.lu`, using all algorithm and using dns resolution.
 
-````bash
+```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org circl.lu -a -dnsr -o .
-````
+```
 
 4. Creation of variations for `ail-project.org`  and give the algorithm that generate the variation (**only for text format**).
 
-~~~bash
+```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py -dn ail-project.org -a -o - -var
-~~~
-
-
+```
 
 # Used as a library
 
 ## To run all algorithms
 
-~~~~python
+```python
 from ail_typo_squatting import runAll
 import math
 
@@ -142,16 +138,14 @@ for domain in domainList:
         givevariations=False,
         keeporiginal=False
     )
-    
+
     print(resultList)
     resultList = list()
-~~~~
-
-
+```
 
 ## To run specific algorithm
 
-````python
+```python
 from ail_typo_squatting import formatOutput, omission, subdomain, addDash
 import math
 
@@ -162,18 +156,16 @@ formatoutput = "yara"
 pathOutput = "."
 for domain in domainList:
     resultList = omission(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False,  keeporiginal=False)
-    
+
     resultList = subdomain(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False,  keeporiginal=False)
-    
+
     resultList = addDash(domain=domain, resultList=resultList, verbose=False, limit=limit, givevariations=False,  keeporiginal=False)
-    
+
     print(resultList)
     formatOutput(format=formatoutput, resultList=resultList, domain=domain, pathOutput=pathOutput, givevariations=False)
-    
+
     resultList = list()
-````
-
-
+```
 
 # Sample output
 
@@ -184,11 +176,9 @@ There's **4 format** possible for the output file:
 - regex
 - sigma
 
-
-
 For **Text** file, each line is a variation.
 
-````
+```
 ail-project.org
 il-project.org
 al-project.org
@@ -204,47 +194,41 @@ ail-projec.org
 aail-project.org
 aiil-project.org
 ...
-````
-
-
+```
 
 For **Yara** file, each rule is a variation.
 
-~~~~
+```
 rule ail-project_org {
-	meta:
-		domain = "ail-project.org"
-	strings: 
-		$s0 = "ail-project.org"
-		$s1 = "il-project.org"
-		$s2 = "al-project.org"
-		$s3 = "ai-project.org"
-		$s4 = "ailproject.org"
-		$s5 = "ail-roject.org"
-		$s6 = "ail-poject.org"
-		$s7 = "ail-prject.org"
-		$s8 = "ail-proect.org"
-		$s9 = "ail-projct.org"
-		$s10 = "ail-projet.org"
-		$s11 = "ail-projec.org"
-	condition:
-		 any of ($s*)
+    meta:
+        domain = "ail-project.org"
+    strings: 
+        $s0 = "ail-project.org"
+        $s1 = "il-project.org"
+        $s2 = "al-project.org"
+        $s3 = "ai-project.org"
+        $s4 = "ailproject.org"
+        $s5 = "ail-roject.org"
+        $s6 = "ail-poject.org"
+        $s7 = "ail-prject.org"
+        $s8 = "ail-proect.org"
+        $s9 = "ail-projct.org"
+        $s10 = "ail-projet.org"
+        $s11 = "ail-projec.org"
+    condition:
+         any of ($s*)
 }
-~~~~
-
-
+```
 
 For **Regex** file, each variations is transform into regex and concatenate with other to do only one big regex.
 
-~~~~
+```
 ail\-project\.org|il\-project\.org|al\-project\.org|ai\-project\.org|ailproject\.org|ail\-roject\.org|ail\-poject\.org|ail\-prject\.org|ail\-proect\.org|ail\-projct\.org|ail\-projet\.org|ail\-projec\.org
-~~~~
-
-
+```
 
 For **Sigma** file, each variations are list under `variations` key.
 
-~~~~
+```
 title: ail-project.org
 variations:
 - ail-project.org
@@ -259,11 +243,7 @@ variations:
 - ail-projct.org
 - ail-projet.org
 - ail-projec.org
-~~~~
-
-
-
-
+```
 
 ## DNS output
 
@@ -271,7 +251,7 @@ In case DNS resolve is selected, an additional file will be created in JSON form
 
 each keys are variations and may have a field "ip" if the domain name have been resolved. The filed "NotExist" will be there each time with a Boolean value to determine if the domain is existing or not.
 
-````json
+```json
 {
     "circl.lu": {
         "NotExist": false,
@@ -302,39 +282,35 @@ each keys are variations and may have a field "ip" if the domain name have been 
     },
     ...
 }
-````
-
-
+```
 
 # List of algorithms used
 
-
-| Algo               | Description                                                  |
-| :----------------- | :----------------------------------------------------------- |
-| AddDash            | These typos are created by adding a dash between the first and last character in a string. |
-| Addition           | These typos are created by add a characters in the domain name. |
-| AddDynamicDns      | These typos are created by adding a dynamic dns at the end of the original domain. |
-| AddTld             | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it |
+| Algo               | Description                                                                                                                                                                                                                               |
+|:------------------ |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AddDash            | These typos are created by adding a dash between the first and last character in a string.                                                                                                                                                |
+| Addition           | These typos are created by add a characters in the domain name.                                                                                                                                                                           |
+| AddDynamicDns      | These typos are created by adding a dynamic dns at the end of the original domain.                                                                                                                                                        |
+| AddTld             | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it                                                                                                                                   |
 | Bitsquatting       | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
-| ChangeDotDash      | These typos are created by changing a dot to a dash.         |
-| ChangeOrder        | These typos are created by changing the order of letters in the each part of the domain. |
-| CommonMisspelling  | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com. |
-| Double Replacement | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard. |
+| ChangeDotDash      | These typos are created by changing a dot to a dash.                                                                                                                                                                                      |
+| ChangeOrder        | These typos are created by changing the order of letters in the each part of the domain.                                                                                                                                                  |
+| CommonMisspelling  | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com.                                |
+| Double Replacement | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard.                                                                                      |
 | Homoglyph          | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
-| Homophones         | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com. |
-| KeyboardInsertion  | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter. |
-| MissingDot         | These typos are created by deleting a dot from the domain name. |
-| Omission           | These typos are created by leaving out a letter of the domain name, one letter at a time. |
-| Repetition         | These typos are created by repeating a letter of the domain name. |
-| Replacement        | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK) |
-| StripDash          | These typos are created by deleting a dash from the domain name. |
-| SingularPluralize  | These typos are created by making a singular domain plural and vice versa. |
-| Subdomain          | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com |
-| Transposition      | These typos are created by swapping the order of adjacent letters in the domain name. |
-| VowelSwap          | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com. |
-| WrongTld           | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains. |
-
-
+| Homophones         | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com.                                              |
+| KeyboardInsertion  | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter.                                                                                                                              |
+| MissingDot         | These typos are created by deleting a dot from the domain name.                                                                                                                                                                           |
+| NumeralSwap        | These typos are created by changing a number to words and vice versa. For example, circlone.lu becomes circl1.lu.                                                                                                                         |
+| Omission           | These typos are created by leaving out a letter of the domain name, one letter at a time.                                                                                                                                                 |
+| Repetition         | These typos are created by repeating a letter of the domain name.                                                                                                                                                                         |
+| Replacement        | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK)                                                                        |
+| StripDash          | These typos are created by deleting a dash from the domain name.                                                                                                                                                                          |
+| SingularPluralize  | These typos are created by making a singular domain plural and vice versa.                                                                                                                                                                |
+| Subdomain          | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com                                                                                                         |
+| Transposition      | These typos are created by swapping the order of adjacent letters in the domain name.                                                                                                                                                     |
+| VowelSwap          | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com.                                                                                        |
+| WrongTld           | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains.               |
 
 # Acknowledgment
 
