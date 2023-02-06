@@ -1530,10 +1530,12 @@ def numeralSwap(domain, resultList, verbose, limit, givevariations=False,  keepo
             loclist.append([tld])
             rLoc = globalAppend(loclist)
 
-        if verbose:
-            print(f"{len(rLoc)}\n")
+            if verbose:
+                print(f"{len(rLoc)}\n")
 
-        resultList = checkResult(rLoc, resultList, givevariations, "numeral_swap")
+            resultList = checkResult(rLoc, resultList, givevariations, "numeral_swap")
+        elif verbose:
+            print("0\n")
 
         if not keeporiginal:
             try:
