@@ -1533,21 +1533,21 @@ def numeralSwap(domain, resultList, verbose, limit, givevariations=False,  keepo
             if verbose:
                 print(f"{len(rLoc)}\n")
 
-            resultList = checkResult(rLoc, resultList, givevariations, "numeral_swap")
+            resultList = checkResult(rLoc, resultList, givevariations, "numeralSwap")
         elif verbose:
             print("0\n")
 
         if not keeporiginal:
             try:
                 if givevariations:
-                    resultList.remove([domain, 'numeral_swap'])
+                    resultList.remove([domain, 'numeralSwap'])
                 else:
                     resultList.remove(domain)
             except:
                 pass
         elif givevariations:
             try:
-                resultList.remove([domain, 'numeral_swap'])
+                resultList.remove([domain, 'numeralSwap'])
             except:
                 pass
             if not [domain, 'original'] in resultList:
