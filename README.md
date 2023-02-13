@@ -311,6 +311,7 @@ each keys are variations and may have a field "ip" if the domain name have been 
 | Transposition      | These typos are created by swapping the order of adjacent letters in the domain name.                                                                                                                                                     |
 | VowelSwap          | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com.                                                                                        |
 | WrongTld           | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains.               |
+| WrongSld           | These typos are created by changing the original second level domain to another. For example, www.trademe.co.uk becomes www.trademe.ac.uk and www.google.com will still be www.google.com .                                               |
 
 # Acknowledgment
 

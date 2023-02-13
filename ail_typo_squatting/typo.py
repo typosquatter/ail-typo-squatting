@@ -1244,6 +1244,80 @@ def wrongTld(domain, resultList, verbose, limit, givevariations=False, keeporigi
 
     return resultList
 
+def wrongSld(domain, resultList, verbose, limit, givevariations=False, keeporiginal=False):
+    """Change the original second level domain to another"""
+
+    if not len(resultList) >= limit:
+        if verbose:
+            print("[+] Wrong Sld")
+        
+        originalTld = domain.split(".")[-1]
+
+        prefix, domain_without_tld, possible_complete_tld = parse_domain(domain)
+
+        domainLoc = ""
+        cp = 0 
+
+        if possible_complete_tld != originalTld:
+            if prefix:
+                domainLoc = prefix
+
+            for element in domain_without_tld.split("."):
+                domainLoc += element + "."
+        
+        maybe_pkg_data = pkgutil.get_data("tldextract", ".tld_set_snapshot")
+        pkg_data = cast(bytes, maybe_pkg_data)
+        text = pkg_data.decode("utf-8")
+        public, private = tldextract.suffix_list.extract_tlds_from_suffix_list(text)
+
+        if possible_complete_tld != originalTld:
+            split_tld = possible_complete_tld.split(".")
+            for p in public:
+                if p.endswith("." + split_tld[-1]):
+                    loc = p.split(".")[-2] + "." + p.split(".")[-1]
+                    if givevariations:
+                        if not [domainLoc + loc, "wrongSld"] in resultList:
+                            resultList.append([domainLoc + loc, "wrongSld"])
+                    else:
+                        if not domainLoc + loc in resultList:
+                            resultList.append(domainLoc + loc)
+
+            for p in private:
+                if p.endswith("." + split_tld[-1]):
+                    loc = p.split(".")[-2] + "." + p.split(".")[-1]
+                    if givevariations:
+                        if not [domainLoc + loc, "wrongSld"] in resultList:
+                            cp += 1
+                            resultList.append([domainLoc + loc, "wrongSld"])
+                    else:
+                        if not domainLoc + loc in resultList:
+                            cp += 1
+                            resultList.append(domainLoc + loc)
+
+        if verbose:
+            print(f"{cp}\n")
+
+        if not keeporiginal:
+            try:
+                if givevariations:
+                    resultList.remove([domain, 'wrongSld'])
+                else:
+                    resultList.remove(domain)
+            except:
+                pass
+        elif givevariations:
+            try:
+                resultList.remove([domain, 'wrongSld'])
+            except:
+                pass
+            if not [domain, 'original'] in resultList:
+                resultList.insert(0, [domain, 'original'])
+
+        while len(resultList) > limit:
+            resultList.pop()
+
+    return resultList
+
 
 def addTld(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
     """Adding a tld before the original tld"""
@@ -1630,6 +1704,8 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
 
     resultList = wrongTld(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
+    resultList = wrongSld(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
     resultList = addTld(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
     resultList = subdomain(domain, resultList, verbose, limit, givevariations, keeporiginal)
@@ -1876,6 +1952,7 @@ if __name__ == "__main__":
     parser.add_argument("-cm", "--commonmisspelling", help="Change a word by is misspellings", action="store_true")
     parser.add_argument("-hp", "--homophones", help="Change word by an other who sound the same when spoken", action="store_true")
     parser.add_argument("-wt", "--wrongtld", help="Change the original top level domain to another", action="store_true")
+    parser.add_argument("-wsld", "--wrongsld", help="Change the original second level domain to another", action="store_true")
     parser.add_argument("-at", "--addtld", help="Adding a tld before the original tld", action="store_true")
     parser.add_argument("-sub", "--subdomain", help="Insert a dot at varying positions to create subdomain", action="store_true")
     parser.add_argument("-sp", "--singularpluralize", help="Create by making a singular domain plural and vice versa", action="store_true")
@@ -1999,6 +2076,9 @@ if __name__ == "__main__":
 
             if args.wrongtld:
                 resultList = wrongTld(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+            if args.wrongsld:
+                resultList = wrongSld(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
             if args.addtld:
                 resultList = addTld(domain, resultList, verbose, limit, givevariations, keeporiginal)

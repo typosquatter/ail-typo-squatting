@@ -20,6 +20,7 @@ from ail_typo_squatting.typo import homoglyph
 from ail_typo_squatting.typo import commonMisspelling
 from ail_typo_squatting.typo import homophones
 from ail_typo_squatting.typo import wrongTld
+from ail_typo_squatting.typo import wrongSld
 from ail_typo_squatting.typo import addTld
 from ail_typo_squatting.typo import subdomain
 from ail_typo_squatting.typo import singularPluralize
