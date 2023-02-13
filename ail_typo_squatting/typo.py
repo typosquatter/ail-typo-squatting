@@ -20,6 +20,9 @@ for i in re.split(r"/|\\", str(pathProg))[:-1]:
 pathEtc = pathWork + "etc"
 sys.path.append(pathEtc)
 
+import pkgutil
+from typing import cast
+
 
 qwerty = {
     '1': '2q', '2': '3wq1', '3': '4ew2', '4': '5re3', '5': '6tr4', '6': '7yt5', '7': '8uy6', '8': '9iu7', '9': '0oi8', '0': 'po9',
@@ -1145,7 +1148,7 @@ def homophones(domain, resultList, verbose, limit, givevariations=False,  keepor
     return resultList
     
 
-def wrongTld(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False):
+def wrongTld(domain, resultList, verbose, limit, givevariations=False, keeporiginal=False):
     """Change the original top level domain to another"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
     # Version 2022102502
@@ -1188,6 +1191,35 @@ def wrongTld(domain, resultList, verbose, limit, givevariations=False,  keeporig
                         resultList.append(domainLoc + tld.lower().rstrip("\n"))
                     resultList.append(domainLoc_orig + tld.lower().rstrip("\n"))
         
+        maybe_pkg_data = pkgutil.get_data("tldextract", ".tld_set_snapshot")
+        pkg_data = cast(bytes, maybe_pkg_data)
+        text = pkg_data.decode("utf-8")
+        public, private = tldextract.suffix_list.extract_tlds_from_suffix_list(text)
+
+        if possible_complete_tld == originalTld:
+            split_tld = possible_complete_tld.split(".")
+            for p in public:
+                if p.endswith("." + split_tld[-1]):
+                    loc = p.split(".")[-2] + "." + p.split(".")[-1]
+                    if givevariations:
+                        if not [domainLoc_orig + loc, "wrongTld"] in resultList:
+                            resultList.append([domainLoc_orig + loc, "wrongTld"])
+                    else:
+                        if not domainLoc_orig + loc in resultList:
+                            resultList.append(domainLoc_orig + loc)
+
+            for p in private:
+                if p.endswith("." + split_tld[-1]):
+                    loc = p.split(".")[-2] + "." + p.split(".")[-1]
+                    if givevariations:
+                        if not [domainLoc_orig + loc, "wrongTld"] in resultList:
+                            cp += 1
+                            resultList.append([domainLoc_orig + loc, "wrongTld"])
+                    else:
+                        if not domainLoc_orig + loc in resultList:
+                            cp += 1
+                            resultList.append(domainLoc_orig + loc)
+
         if verbose:
             print(f"{cp}\n")
 
