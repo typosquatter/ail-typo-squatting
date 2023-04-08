@@ -23,6 +23,7 @@ sys.path.append(pathEtc)
 import pkgutil
 from typing import cast
 
+from trieregex import TrieRegEx as TRE
 
 qwerty = {
     '1': '2q', '2': '3wq1', '3': '4ew2', '4': '5re3', '5': '6tr4', '6': '7yt5', '7': '8uy6', '8': '9iu7', '9': '0oi8', '0': 'po9',
@@ -1833,20 +1834,9 @@ def formatYara(resultList, domain, givevariations=False):
 
 def formatRegex(resultList, givevariations=False):
     """Output in regex format"""
-    regex = ""
-    for result in resultList:
-        if givevariations:
-            result = result[0]
-        reg = ""
-        for car in result:
-            if car in string.ascii_letters or car in string.digits:
-                reg += car
-            elif car in string.punctuation:
-                reg += "\\" + car
-        regex += f"{reg}|"
-    regex = regex[:-1]
-
-    return regex
+    tre = TRE()
+    tre.add(*resultList)
+    return tre.regex()
 
 def formatYaml(resultList, domain, givevariations=False):
     """Output in yaml format"""
