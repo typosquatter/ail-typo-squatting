@@ -1333,6 +1333,60 @@ def formatOutput(format, resultList, domain, pathOutput, givevariations=False):
         formatOutput("text", resultList, domain, pathOutput, givevariations)
 
 
+def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False, keeporiginal=False, all_homoglyph=False):
+    """Run all algo on each domain contain in domainList"""
+
+    resultList = list()
+
+    resultList = omission(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = repetition(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = replacement(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = doubleReplacement(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = changeOrder(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = addition(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = missingDot(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = stripDash(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = vowelSwap(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = addDash(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = homoglyph(domain, resultList, verbose, limit, givevariations, keeporiginal, all_homoglyph)
+
+    resultList = commonMisspelling(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = homophones(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = wrongTld(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = wrongSld(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = addTld(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = subdomain(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = singularPluralize(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = changeDotDash(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = addDynamicDns(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    resultList = numeralSwap(domain, resultList, verbose, limit, givevariations, keeporiginal)
+
+    if verbose:
+        print(f"Total: {len(resultList)}")
+
+    formatOutput(formatoutput, resultList, domain, pathOutput, givevariations)
+
+    return resultList
+
 
 
 if __name__ == "__main__":
