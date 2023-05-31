@@ -37,10 +37,10 @@ $ pip3 install ail-typo-squatting
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
-usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT] [-fo FORMATOUTPUT] [-dnsr] [-l LIMIT] [-var] [-ko] [-a] [-om] [-repe] [-tra] [-repl] [-drepl] [-cho] [-ki] [-add] [-md] [-sd]
-               [-vs] [-ada] [-bs] [-hg] [-ahg] [-cm] [-hp] [-wt] [-at] [-sub] [-sp] [-cdd]
+usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT] [-fo FORMATOUTPUT] [-dnsr] [-dnsl] [-l LIMIT] [-var] [-ko] [-a] [-om] [-repe] [-repl] [-drepl] [-cho] [-add]
+               [-md] [-sd] [-vs] [-ada] [-hg] [-ahg] [-cm] [-hp] [-wt] [-wsld] [-at] [-sub] [-sp] [-cdd] [-addns] [-ns]
 
-options:
+optional arguments:
   -h, --help            show this help message and exit
   -v                    verbose, more display
   -dn DOMAINNAME [DOMAINNAME ...], --domainName DOMAINNAME [DOMAINNAME ...]
@@ -53,6 +53,7 @@ options:
                         format for the output file, yara - regex - yaml - text. Default: text
   -dnsr, --dnsresolving
                         resolve all variation of domain name to see if it's up or not
+  -dnsl, --dnslimited   resolve all variation of domain name but keep only up domain in final result json
   -l LIMIT, --limit LIMIT
                         limit of variations for a domain name
   -var, --givevariations
@@ -61,20 +62,15 @@ options:
   -a, --all             Use all algo
   -om, --omission       Leave out a letter of the domain name
   -repe, --repetition   Character Repeat
-  -tra, --transposition
-                        Swappe the order of adjacent letters in the domain name
-  -repl, --replacement  Adjacent character replacement to the immediate left and right on the keyboard
+  -repl, --replacement  Character replacement
   -drepl, --doublereplacement
                         Double Character Replacement
   -cho, --changeorder   Change the order of letters in word
-  -ki, --keyboardinsertion
-                        Adjacent character insertion of letters to the immediate left and right on the keyboard of each letter
   -add, --addition      Add a character in the domain name
   -md, --missingdot     Delete a dot from the domain name
   -sd, --stripdash      Delete of a dash from the domain name
   -vs, --vowelswap      Swap vowels within the domain name
   -ada, --adddash       Add a dash between the first and last character in a string
-  -bs, --bitsquatting   The character is substituted with the set of valid characters that can be made after a single bit flip
   -hg, --homoglyph      One or more characters that look similar to another character but are different are called homogylphs
   -ahg, --all_homoglyph
                         generate all possible homoglyph permutations. Ex: circl.lu, e1rc1.lu
@@ -82,12 +78,16 @@ options:
                         Change a word by is misspellings
   -hp, --homophones     Change word by an other who sound the same when spoken
   -wt, --wrongtld       Change the original top level domain to another
+  -wsld, --wrongsld     Change the original second level domain to another
   -at, --addtld         Adding a tld before the original tld
   -sub, --subdomain     Insert a dot at varying positions to create subdomain
   -sp, --singularpluralize
                         Create by making a singular domain plural and vice versa
   -cdd, --changedotdash
                         Change dot to dash
+  -addns, --adddynamicdns
+                        Add dynamic dns at the end of the domain
+  -ns, --numeralswap    Change a numbers to words and vice versa. Ex: circlone.lu, circl1.lu
 ```
 
 # Usage example
@@ -292,23 +292,20 @@ each keys are variations and may have a field "ip" if the domain name have been 
 | Addition           | These typos are created by add a characters in the domain name.                                                                                                                                                                           |
 | AddDynamicDns      | These typos are created by adding a dynamic dns at the end of the original domain.                                                                                                                                                        |
 | AddTld             | These typos are created by adding a tld before the right tld. Example: google.com becomes google.com.it                                                                                                                                   |
-| Bitsquatting       | These typos are created by substituting a character with the set of valid characters that can be made after a single bit flip. For example, facebook.com becomes bacebook.com, dacebook.com, faaebook.com,fabebook.com,facabook.com, etc. |
 | ChangeDotDash      | These typos are created by changing a dot to a dash.                                                                                                                                                                                      |
 | ChangeOrder        | These typos are created by changing the order of letters in the each part of the domain.                                                                                                                                                  |
 | CommonMisspelling  | These typos are created by changing a word by is misspelling. Over 8000 common misspellings from Wikipedia. For example, www.youtube.com becomes www.youtub.com and www.abseil.com becomes www.absail.com.                                |
-| Double Replacement | These typos are created by replacing identical, consecutive letters of the domain name with letters to the immediate left and right on the keyboard.                                                                                      |
+| Double Replacement | These typos are created by replacing identical, consecutive letters of the domain name.                                                                                                                                                   |
 | Homoglyph          | These typos are created by replacing characters to another character that look similar but are different.  An example is that the lower case l looks similar to the numeral one, e.g. l vs 1. For example, google.com becomes goog1e.com. |
 | Homophones         | These typos are created by changing word by an other who sound the same when spoken. Over 450 sets of words that sound the same when spoken. For example, www.base.com becomes www.bass.com.                                              |
-| KeyboardInsertion  | These typos are created by inserting letters to the immediate left and right on the keyboard of each letter.                                                                                                                              |
 | MissingDot         | These typos are created by deleting a dot from the domain name.                                                                                                                                                                           |
 | NumeralSwap        | These typos are created by changing a number to words and vice versa. For example, circlone.lu becomes circl1.lu.                                                                                                                         |
 | Omission           | These typos are created by leaving out a letter of the domain name, one letter at a time.                                                                                                                                                 |
 | Repetition         | These typos are created by repeating a letter of the domain name.                                                                                                                                                                         |
-| Replacement        | These typos are created by replacing each letter of the domain name with letters to the immediate left and right on the keyboard. (QWERTY, AZERTY, QWERTZ, DVORAK)                                                                        |
+| Replacement        | These typos are created by replacing each letter of the domain name.                                                                                                                                                                      |
 | StripDash          | These typos are created by deleting a dash from the domain name.                                                                                                                                                                          |
 | SingularPluralize  | These typos are created by making a singular domain plural and vice versa.                                                                                                                                                                |
 | Subdomain          | These typos are created by placing a dot in the domain name in order to create subdomain. Example: google.com becomes goo.gle.com                                                                                                         |
-| Transposition      | These typos are created by swapping the order of adjacent letters in the domain name.                                                                                                                                                     |
 | VowelSwap          | These typos are created by swapping vowels within the domain name except for the first letter. For example, www.google.com becomes www.gaagle.com.                                                                                        |
 | WrongTld           | These typos are created by changing the original top level domain to another. For example, www.trademe.co.nz becomes www.trademe.co.mz and www.google.com becomes www.google.org Uses the 19 most common top level domains.               |
 | WrongSld           | These typos are created by changing the original second level domain to another. For example, www.trademe.co.uk becomes www.trademe.ac.uk and www.google.com will still be www.google.com .                                               |
