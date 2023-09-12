@@ -1221,7 +1221,29 @@ def numeralSwap(domain, resultList, verbose, limit, givevariations=False,  keepo
     return resultList
 
 
-def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=False, dns_limited=False):
+def catchAll(current_domain):
+    import dns.resolver
+
+    is_catch_all = False
+
+    chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+    ca_str = ''
+    for _ in range(10):
+        ca_str += random.choice(chars)
+
+    domain_catch_all = f"{ca_str}.{current_domain}"
+    try:
+        answer = dns.resolver.resolve(domain_catch_all, 'A')
+        if len(answer):
+            is_catch_all = True
+    except:
+        pass
+    if is_catch_all:
+        return domain_catch_all
+    return False
+        
+
+def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=False, dns_limited=False, catch_all=False):
     """Do a dns resolving on each variations and then create a json"""
 
     import dns.name
@@ -1270,6 +1292,8 @@ def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=F
                     loc_dict[result]['NotExist'] = True
             else:
                 loc_dict[result]['NotExist'] = False
+                if catch_all:
+                    loc_dict[result]['CatchAll'] = catchAll(n)
 
             if loc_dict:
                 domain_resolve[variation].append(loc_dict)
@@ -1296,6 +1320,8 @@ def dnsResolving(resultList, domain, pathOutput, verbose=False, givevariations=F
                     domain_resolve[result]['NotExist'] = True
             else:
                 domain_resolve[result]['NotExist'] = False
+                if catch_all:
+                    domain_resolve[result]['CatchAll'] = catchAll(n)
 
         if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}_resolve.json", "w", encoding='utf-8') as write_json:
@@ -1468,6 +1494,7 @@ if __name__ == "__main__":
     parser.add_argument("-addns", "--adddynamicdns", help="Add dynamic dns at the end of the domain", action="store_true")
     parser.add_argument("-ns", "--numeralswap", help="Change a numbers to words and vice versa. Ex: circlone.lu, circl1.lu", action="store_true")
     parser.add_argument("-combo", help="Combine multiple algo on a domain name", action="store_true")
+    parser.add_argument("-ca", "--catchall", help="Combine with -dnsr. Generate a random string in front of the domain.", action="store_true")
     
     args = parser.parse_args()
 
@@ -1582,6 +1609,6 @@ if __name__ == "__main__":
 
 
         if args.dnsresolving:
-            dnsResolving(resultList, domain, pathOutput, verbose, givevariations, dns_limited)
+            dnsResolving(resultList, domain, pathOutput, verbose, givevariations, dns_limited, args.catchall)
 
         resultList = list()
