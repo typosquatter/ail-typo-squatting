@@ -19,8 +19,14 @@ Error = False
 
 for file in os.listdir(pathTest):
     if file.split(".")[-1] == "txt":
-        domain = file.replace(".txt","")
-        print(f"\n\t[*****] {domain} [*****]")
+        if ".var.txt" in file:
+            domain = file.replace(".var.txt","")
+            givevariations = True
+            print(f"\n\t[*****] givevariations {domain} [*****]")
+        else:
+            domain = file.replace(".txt","")
+            givevariations = False
+            print(f"\n\t[*****] {domain} [*****]")
 
         pathTrash = pathWork + "trash"
         if not os.path.isdir(pathTrash):
@@ -28,9 +34,9 @@ for file in os.listdir(pathTest):
 
         resultList = list()
         resultFile = list()
-        resultList = runAll(domain=domain, limit=math.inf, formatoutput="text", pathOutput=pathTrash, verbose=False)
+        resultList = runAll(domain=domain, limit=math.inf, formatoutput="text", pathOutput=pathTrash, verbose=False, givevariations=givevariations, keeporiginal=False, all_homoglyph=False)
 
-        shutil.rmtree(pathTrash)
+        # shutil.rmtree(pathTrash)
 
         with open(os.path.join(pathTest, file), "r", encoding="utf-8") as read_file:
             for line in read_file.readlines():
