@@ -1453,10 +1453,9 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
 
     resultList = list()
 
-    if args.all:
-        for algo in algo_list:
-            func = globals()[algo]
-            resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal)
+    for algo in algo_list:
+        func = globals()[algo]
+        resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
     if verbose:
         print(f"Total: {len(resultList)}")
