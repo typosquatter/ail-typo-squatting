@@ -24,6 +24,8 @@ sys.path.append(pathEtc)
 import pkgutil
 from typing import cast
 
+from retrie.trie import Trie
+
 
 glyphs = {
     '0': ['o'],
@@ -1368,6 +1370,18 @@ def formatRegex(resultList, givevariations=False):
 
     return regex
 
+def formatRegexRetrie(resultList, givevariations=False):
+    """Output in regex format"""
+
+    trie = Trie()
+    if not givevariations:
+        trie.add(*resultList)
+    else:
+        loc_list = [element[0] for element in resultList]
+        trie.add(*loc_list)
+
+    return trie.pattern()
+
 def formatYaml(resultList, domain, givevariations=False):
     """Output in yaml format"""
     yaml_file = {"title": domain}
@@ -1383,7 +1397,7 @@ def formatYaml(resultList, domain, givevariations=False):
 
     return yaml_file
 
-def formatOutput(format, resultList, domain, pathOutput, givevariations=False):
+def formatOutput(format, resultList, domain, pathOutput, givevariations=False, betterRegex=False):
     """
     Call different function to create the right format file
     """
@@ -1412,7 +1426,10 @@ def formatOutput(format, resultList, domain, pathOutput, givevariations=False):
             print(yara)
 
     elif format == "regex":
-        regex = formatRegex(resultList, givevariations)
+        if betterRegex:
+            regex = formatRegexRetrie(resultList, givevariations)
+        else:
+            regex = formatRegex(resultList, givevariations)
         if pathOutput and not pathOutput == "-":
             with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
                 write_file.write(regex)
@@ -1460,6 +1477,7 @@ if __name__ == "__main__":
 
     parser.add_argument("-o", "--output", help="path to ouput location")
     parser.add_argument("-fo", "--formatoutput", help="format for the output file, yara - regex - yaml - text. Default: text")
+    parser.add_argument("-br", "--betterregex", help="Use retrie for faster regex", action="store_true")
 
     parser.add_argument("-dnsr", "--dnsresolving", help="resolve all variation of domain name to see if it's up or not", action="store_true")
     parser.add_argument("-dnsl", "--dnslimited", help="resolve all variation of domain name but keep only up domain in final result json", action="store_true")
@@ -1605,7 +1623,7 @@ if __name__ == "__main__":
         if verbose:
             print(f"Total: {len(resultList)}")
 
-        formatOutput(formatoutput, resultList, domain, pathOutput, givevariations)
+        formatOutput(formatoutput, resultList, domain, pathOutput, givevariations, args.betterregex)
 
 
         if args.dnsresolving:
