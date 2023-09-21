@@ -36,7 +36,7 @@ for file in os.listdir(pathTest):
         resultFile = list()
         resultList = runAll(domain=domain, limit=math.inf, formatoutput="text", pathOutput=pathTrash, verbose=False, givevariations=givevariations, keeporiginal=False, all_homoglyph=False)
 
-        # shutil.rmtree(pathTrash)
+        shutil.rmtree(pathTrash)
 
         with open(os.path.join(pathTest, file), "r", encoding="utf-8") as read_file:
             for line in read_file.readlines():
