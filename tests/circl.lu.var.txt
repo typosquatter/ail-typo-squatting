@@ -629,6 +629,7 @@ ciʀcl.lu, homoglyph
 cırcl.lu, homoglyph
 cirᴄl.lu, homoglyph
 circı.lu, homoglyph
+circl.nym.lun wrongTld
 circl.aaa, wrongTld
 circl.aarp, wrongTld
 circl.abarth, wrongTld
