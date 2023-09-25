@@ -22,12 +22,12 @@ keywords = [
 include = ["etc/*"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.8"
 inflect = "^5.3.0"
-dnspython = "^2.2.0"
-pyyaml = "^6.0"
-tldextract = "^3.1.2"
-requests = "^2.27.1"
+dnspython = "^2.2.1"
+pyyaml = "^6.0.1"
+tldextract = "^3.6.0"
+requests = "^2.31.0"
 retrie = "^0.2.3"
 
 [tool.poetry.dev-dependencies]
