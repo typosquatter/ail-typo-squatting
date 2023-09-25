@@ -5,8 +5,8 @@ name: Python application
 
 on:
   push:
-   paths:
-      - 'tests/*.txt'
+   branches:
+   	- main
 
 jobs:
   build:
