@@ -2,6 +2,16 @@
 from .utils.generator_functions import *
 
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +----------------------+
+  |    circl.lu    |     |  c.ircl.lu           |
+  +----------------+     +----------------------+
+
+"""
+
+# Subdomain
 def subdomain(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Insert a dot at varying positions to create subdomain"""
 

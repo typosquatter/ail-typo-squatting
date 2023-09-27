@@ -2,6 +2,15 @@
 from .utils.generator_functions import *
 
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +-------------------+
+  |    circl.lu    |     |     cicrl.com     |
+  +----------------+     +-------------------+
+
+"""
+
 # Change Order
 def changeOrder(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Change the order of letters in word"""

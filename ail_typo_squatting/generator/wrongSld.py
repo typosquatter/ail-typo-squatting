@@ -4,6 +4,7 @@ from .utils.generator_functions import *
 import pkgutil
 from typing import cast
 
+# Wrong Sld
 def wrongSld(domain, resultList, verbose, limit, givevariations=False, keeporiginal=False, combo=False):
     """Change the original second level domain to another"""
 

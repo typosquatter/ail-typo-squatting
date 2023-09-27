@@ -6,6 +6,7 @@ import requests, json
 
 pathEtc = get_path_etc()
 
+# Add Dynamic DNS
 def addDynamicDns(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Add dynamic dns"""
 

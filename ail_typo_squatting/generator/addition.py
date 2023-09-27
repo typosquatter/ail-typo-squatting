@@ -1,6 +1,16 @@
 # Import all the utils
 from .utils.generator_functions import *
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +----------------------+
+  |    circl.lu    |     |     circli.lu        |
+  +----------------+     +----------------------+
+
+"""
+
+
 # Addition
 def addition(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Add a character in the domain name"""

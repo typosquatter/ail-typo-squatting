@@ -4,6 +4,16 @@ from .utils.get_pathetc import get_path_etc
 
 pathEtc = get_path_etc()
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +-----------------+
+  |    circl.lu    |     |     sircl.lu    |
+  +----------------+     +-----------------+
+
+"""
+
+# Homophones
 def homophones(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Change word by an other who sound the same when spoken"""
     # From http://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones

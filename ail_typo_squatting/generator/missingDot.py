@@ -1,6 +1,14 @@
 # Import all the utils
 from .utils.generator_functions import *
 
+"""
+   Original Domain           Typosquatted Domain
+  +---------------------+     +-----------------------+
+  |   example.circl.lu  |     |    examplecircl.lu    |
+  +---------------------+     +-----------------------+
+
+"""
+
 # Missing Dot
 def utilMissingDot(resultLoc, loc):
     """Function for missingDot algorithm"""

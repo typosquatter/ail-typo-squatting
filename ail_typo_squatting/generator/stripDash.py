@@ -1,6 +1,15 @@
 # Import all the utils
 from .utils.generator_functions import *
 
+"""
+
+   Original Domain            Typosquatted Domain
+  +--------------------+     +----------------------+
+  |  i-love-potato.lu  |     |   ilove-potato.lu    |
+  +--------------------+     +----------------------+
+
+"""
+
 def stripDash(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Delete a dash from the domain name"""
 

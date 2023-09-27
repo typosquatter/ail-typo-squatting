@@ -1,10 +1,19 @@
 # Import all the utils
 from .utils.generator_functions import *
-
 from .conts.main import *
 
 numerals = const_get_numeral()
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +--------------------+
+  |    circl.lu    |     |      c1rcl.lu      |
+  +----------------+     +--------------------+
+
+"""
+
+# Numeral Swap
 def numeralSwap(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Change a numbers to words and vice versa"""
 

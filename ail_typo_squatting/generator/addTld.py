@@ -4,6 +4,15 @@ from .utils.get_pathetc import get_path_etc
 
 pathEtc = get_path_etc()
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +------------------------+
+  |    circl.lu    |     |     circl.lu.com       |
+  +----------------+     +------------------------+
+
+"""
+
 # Add Tld
 def addTld(domain, resultList, verbose, limit, givevariations=False, keeporiginal=False, combo=False):
     """Adding a tld before the original tld"""

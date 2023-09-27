@@ -2,6 +2,12 @@
 from .utils.generator_functions import *
 from .addTld import addTld
 
+"""
+    Original Domain            Typosquatted Domain
+   +--------------------+     +------------------------+
+   |    sub.circl.lu    |     |    sub-circl-lu.com    |
+   +--------------------+     +------------------------+
+"""
 
 def changeDotDash(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Change dot to dash"""

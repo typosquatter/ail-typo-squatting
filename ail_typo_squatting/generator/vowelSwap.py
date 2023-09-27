@@ -1,6 +1,15 @@
 # Import all the utils
 from .utils.generator_functions import *
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +----------------------+
+  |    circl.lu    |     |    corcl.li          |
+  +----------------+     +----------------------+
+
+"""
+
 # Vowel Swap
 def vowelSwap(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Swap vowels within the domain name"""

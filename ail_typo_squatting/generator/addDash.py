@@ -1,6 +1,15 @@
 # Import all the utils
 from .utils.generator_functions import *
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +-------------------+
+  |    circl.lu    |     |     ci-rcl.lu     |
+  +----------------+     +-------------------+
+
+"""
+
 # Add Dash
 def addDash(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Add a dash between the first and last character in a string"""

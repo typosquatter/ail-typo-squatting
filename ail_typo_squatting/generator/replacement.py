@@ -1,6 +1,16 @@
 # Import all the utils
 from .utils.generator_functions import *
 
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +----------------------+
+  |    circl.lu    |     |      corcl.lu        |
+  +----------------+     +----------------------+
+
+"""
+
+# Replacement
 def replacement(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
     """Adjacent character replacement to the immediate left and right on the keyboard"""
 

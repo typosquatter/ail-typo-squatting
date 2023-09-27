@@ -7,6 +7,17 @@ pathEtc = get_path_etc()
 import pkgutil
 from typing import cast
 
+
+"""
+
+   Original Domain        Typosquatted Domain
+  +----------------+     +----------------------+
+  |    circl.lu    |     |    circl.org         |
+  +----------------+     +----------------------+
+
+"""
+
+# Wrong Tld
 def wrongTld(domain, resultList, verbose, limit, givevariations=False, keeporiginal=False, combo=False):
     """Change the original top level domain to another"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt

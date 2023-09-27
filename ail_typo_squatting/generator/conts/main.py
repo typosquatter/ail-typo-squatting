@@ -55,8 +55,6 @@ ALGO_NAME_LIST = [
     "singularPluralize", "changeDotDash", "wrongSld", "numeralSwap", "addDynamicDns"
 ]
 
-DNS_REQUEST_TYPE = ['A', 'AAAA', 'NS', 'MX']
-
 EXCLUDED_TLD = ["gov.pl"] # why not ?
 
 
@@ -78,12 +76,6 @@ def const_get_algo_name_list():
     Return the list of algorithm names
     """
     return ALGO_NAME_LIST
-
-def const_get_dns_request_type():
-    """
-    Return the list of DNS request type
-    """
-    return DNS_REQUEST_TYPE
 
 def const_get_excluded_tld():
     """
