@@ -1,8 +1,6 @@
 # Import all the utils
 from .utils.generator_functions import *
-
-
-from .conts.main import *
+from .const.main import *
 
 glyphs = const_get_similar_chars()
 

@@ -37,12 +37,6 @@ def addTld(domain, resultList, verbose, limit, givevariations=False, keeporigina
         if verbose:
             print(f"{cp}\n")
 
-        # if combo:
-        #     return final_treatment(domain, loc_result_list, limit, givevariations, keeporiginal, "addTld")
-
-        # resultList = resultList + loc_result_list
-        # resultList = final_treatment(domain, resultList, limit, givevariations, keeporiginal, "addTld")
-
         return final_treatment(domain, loc_result_list, limit, givevariations, keeporiginal, "addTld")
 
     return resultList

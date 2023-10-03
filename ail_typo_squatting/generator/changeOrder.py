@@ -1,7 +1,6 @@
 # Import all the utils
 from .utils.generator_functions import *
 
-
 """
 
    Original Domain        Typosquatted Domain

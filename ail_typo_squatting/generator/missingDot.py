@@ -68,9 +68,6 @@ def missingDot(domain, resultList, verbose, limit, givevariations=False,  keepor
         if verbose:
             print(f"{cp}\n")
 
-        # if combo:
-        #     return final_treatment(domain, loc_result_list, limit, givevariations, keeporiginal, "missingDot")
         return final_treatment(domain, loc_result_list, limit, givevariations, keeporiginal, "missingDot")
-
 
     return resultList

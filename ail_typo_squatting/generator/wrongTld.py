@@ -2,10 +2,10 @@
 from .utils.generator_functions import *
 from .utils.get_pathetc import get_path_etc
 
-pathEtc = get_path_etc()
-
 import pkgutil
 from typing import cast
+
+pathEtc = get_path_etc()
 
 
 """

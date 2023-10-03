@@ -1,6 +1,6 @@
 # Import all the utils
 from .utils.generator_functions import *
-from .conts.main import *
+from .const.main import *
 
 numerals = const_get_numeral()
 

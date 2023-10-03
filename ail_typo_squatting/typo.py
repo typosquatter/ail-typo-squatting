@@ -1,11 +1,10 @@
 # Import all the modules
 
 ## The public libraries
-import os, sys, math, yaml
+import os, sys, math
 
 ## The local libraries
-from generator.conts.main import *
-from generator.utils.generator_functions import check_valid_domain
+from generator.const.main import *
 
 ## The typo generator
 from generator.addDash import addDash
@@ -31,9 +30,7 @@ from generator.wrongTld import wrongTld
 from generator.wrongSld import wrongSld
 
 ## The format function
-from format.yara import formatYara
-from format.regex import formatRegex, formatRegexRetrie
-from format.yaml import formatYaml
+from format.output import formatOutput
 
 ## The dns resolving function
 from dns_local.resolving import dnsResolving # named "dns_local" to avoid conflict with the dns library
@@ -44,63 +41,13 @@ from generator.utils.get_pathetc import get_path_etc
 sys.path.append(get_path_etc())
 
 
-# Import all the constants of data from the file conts/main.py
+# Import all the constants of data from the file const/main.py
 # If you wanna add a new algorithm, you have to add it in the list algo_list
 numerals = const_get_numeral()
 algo_list = const_get_algo_name_list()
 
 
 ## [START] Final treatment
-
-def formatOutput(format, resultList, domain, pathOutput, givevariations=False, betterRegex=False):
-    """
-    Call different function to create the right format file
-    """
-
-    if format == "text":
-        if pathOutput and not pathOutput == "-":
-            with open(f"{pathOutput}/{domain}.txt", "w", encoding='utf-8') as write_file:
-                for element in resultList:
-                    if givevariations:
-                        write_file.write(f"{element[0]}, {element[1]}\n")
-                    else:
-                        write_file.write(element + "\n")
-        elif pathOutput == "-":
-            for element in resultList:
-                if givevariations:
-                    print(f"{element[0]}, {element[1]}")
-                else:
-                    print(element)
-
-    elif format == "yara":
-        yara = formatYara(resultList, domain, givevariations)
-        if pathOutput and not pathOutput == "-":
-            with open(f"{pathOutput}/{domain}.yar", "w", encoding='utf-8') as write_file:
-                write_file.write(yara)
-        elif pathOutput == "-":
-            print(yara)
-
-    elif format == "regex":
-        if betterRegex:
-            regex = formatRegexRetrie(resultList, givevariations)
-        else:
-            regex = formatRegex(resultList, givevariations)
-        if pathOutput and not pathOutput == "-":
-            with open(f"{pathOutput}/{domain}.regex", "w", encoding='utf-8') as write_file:
-                write_file.write(regex)
-        elif pathOutput == "-":
-            print(regex)
-
-    elif format == "yaml":
-        yaml_file = formatYaml(resultList, domain, givevariations)
-        if pathOutput and not pathOutput == "-":
-            with open(f"{pathOutput}/{domain}.yml", "w", encoding='utf-8') as write_file:
-                yaml.dump(yaml_file, write_file)
-        elif pathOutput == "-":
-            print(yaml_file)
-    else:
-        print(f"Unknown format: {format}. Will use text format instead")
-        formatOutput("text", resultList, domain, pathOutput, givevariations)
 
 def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False, keeporiginal=False, all_homoglyph=False):
     """Run all algo on each domain contain in domainList"""

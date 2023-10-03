@@ -2,7 +2,7 @@
 import tldextract
 
 # Import the constants stored in "../const/main.py"
-from ..conts.main import *
+from ..const.main import *
 
 # The constants
 algo_list = const_get_algo_name_list()
@@ -41,6 +41,7 @@ def globalAppend(loclist):
 
     return r[-1]
     
+    
 def checkResult(resultLoc, resultList, givevariations, algoName=''):
     """
     Verify if element in resultLoc not exist in resultList before adding them in resultList
@@ -75,6 +76,7 @@ def checkResult(resultLoc, resultList, givevariations, algoName=''):
 
     return loc_result_list
 
+
 def check_valid_domain(domain_extract):
     if not domain_extract.suffix:
         return("[-] Domain not valid")
@@ -83,6 +85,7 @@ def check_valid_domain(domain_extract):
         if not domain_extract.domain:
             return("[-] Only a TLD is identified. Try adding something like 'www.' before your domain.")
     return ""
+
 
 def parse_domain(domain):
     domain_extract = tldextract.extract(domain)
@@ -103,6 +106,7 @@ def parse_domain(domain):
         return '', domain_extract.suffix.split(".")[0], domain_extract.suffix.split(".")[1]
 
     return prefix, domain_extract.domain, domain_extract.suffix
+
 
 def final_treatment(domain, resultList, limit, givevariations, keeporiginal, algo_name):
     """ Final treatment of a variation's function, keep original and name of variations' algorithm """

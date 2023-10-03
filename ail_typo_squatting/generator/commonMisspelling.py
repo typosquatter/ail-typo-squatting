@@ -1,12 +1,11 @@
 # Import all the utils
 from .utils.generator_functions import *
-import json
-
 from .utils.get_pathetc import get_path_etc
 
-pathEtc = get_path_etc()
+import json
 
-print(pathEtc)
+
+pathEtc = get_path_etc()
 
 
 def commonMisspelling(domain, resultList, verbose, limit, givevariations=False,  keeporiginal=False, combo=False):
