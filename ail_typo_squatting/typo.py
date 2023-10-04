@@ -3,6 +3,9 @@
 ## The public libraries
 import os, sys, math
 
+import pathlib, sys
+sys.path.append(str(os.path.join(pathlib.Path(__file__).parent)))
+
 ## The local libraries
 from generator.const.main import *
 
