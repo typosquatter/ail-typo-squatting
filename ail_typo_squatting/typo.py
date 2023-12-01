@@ -1,7 +1,7 @@
 # Import all the modules
 
 ## The public libraries
-import os, sys, math
+import os, sys, math, json, requests
 
 import pathlib, sys
 sys.path.append(str(os.path.join(pathlib.Path(__file__).parent)))
@@ -50,6 +50,18 @@ numerals = const_get_numeral()
 algo_list = const_get_algo_name_list()
 
 
+def update_ddns_list():
+    try:
+        r = requests.get("https://raw.githubusercontent.com/MISP/misp-warninglists/main/lists/dynamic-dns/list.json")
+        with open(os.path.join(get_path_etc(), "dynamic-dns.json"), "w") as write_json:
+            json.dump(r.json(), write_json, indent=4)
+
+        print("[+] Dynamic Dns warning list updated")
+    except:
+        print("Error during update...")
+        exit(1)
+
+
 ## [START] Final treatment
 
 def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariations=False, keeporiginal=False, all_homoglyph=False):
@@ -58,8 +70,9 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
     resultList = list()
 
     for algo in algo_list:
-        func = globals()[algo]
-        resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal)
+        if not algo == "addDynamicDns":
+            func = globals()[algo]
+            resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal)
 
     if verbose:
         print(f"Total: {len(resultList)}")
@@ -76,6 +89,9 @@ if __name__ == "__main__":
     # Step 1: Get the arguments
     parser = getArguments()
     args = parser.parse_args()
+
+    if args.updatedynamicdns:
+        update_ddns_list()
 
     resultList = list()
 
@@ -163,11 +179,12 @@ if __name__ == "__main__":
                                     print(f"{len(loc_result)}\n")                                 
         elif args.all:
             for algo in algo_list:
-                func = globals()[algo]
-                if algo == "homoglyph":
-                    resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal, all=args.all_homoglyph)
-                else:
-                    resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal)
+                if not algo == "addDynamicDns":
+                    func = globals()[algo]
+                    if algo == "homoglyph":
+                        resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal, all=args.all_homoglyph)
+                    else:
+                        resultList = func(domain, resultList, verbose, limit, givevariations, keeporiginal)
         else:
             for arg in vars(args):
                 for algo in algo_list:

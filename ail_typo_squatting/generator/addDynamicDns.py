@@ -2,7 +2,7 @@
 from .utils.generator_functions import *
 from .utils.get_pathetc import get_path_etc
 
-import requests, json
+import json
 
 pathEtc = get_path_etc()
 
@@ -14,15 +14,8 @@ def addDynamicDns(domain, resultList, verbose, limit, givevariations=False,  kee
         if verbose:
             print("[+] Dynamic DNS")
         
-        try:
-            r = requests.get("https://raw.githubusercontent.com/MISP/misp-warninglists/main/lists/dynamic-dns/list.json")
-            dynamicdns = r.json()['list']
-            with open(pathEtc + "/dynamic-dns.json", "w") as write_json:
-                json.dump(r.json(), write_json, indent=4)
-        except:
-            with open(pathEtc + "/dynamic-dns.json", "r") as read_json:
-                dynamicdns = json.load(read_json)["list"]
-
+        with open(pathEtc + "/dynamic-dns.json", "r") as read_json:
+            dynamicdns = json.load(read_json)["list"]
 
         resultLoc = list()
 

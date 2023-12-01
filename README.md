@@ -9,8 +9,7 @@ The tool can be used as a stand-alone tool or to feed other systems.
 - Python 3.6+
 - [inflect](https://github.com/jaraco/inflect) library
 - [pyyaml](https://pyyaml.org/wiki/PyYAMLDocumentation)
-
-## Optional
+- [tldextract](https://github.com/john-kurkowski/tldextract)
 
 - [dnspython](https://github.com/rthalley/dnspython)
 
@@ -37,10 +36,8 @@ $ pip3 install ail-typo-squatting
 
 ```bash
 dacru@dacru:~/git/ail-typo-squatting/bin$ python3 typo.py --help  
-usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT]
-               [-fo FORMATOUTPUT] [-br] [-dnsr] [-dnsl] [-l LIMIT] [-var] [-ko] [-a] [-om] [-repe] [-repl]
-               [-drepl] [-cho] [-add] [-md] [-sd] [-vs] [-ada] [-hg] [-ahg] [-cm] [-hp] [-wt] [-wsld] [-at]
-               [-sub] [-sp] [-cdd] [-addns] [-ns] [-combo] [-ca]
+usage: typo.py [-h] [-v] [-dn DOMAINNAME [DOMAINNAME ...]] [-fdn FILEDOMAINNAME] [-o OUTPUT] [-fo FORMATOUTPUT] [-br] [-dnsr] [-dnsl] [-l LIMIT] [-var] [-ko] [-a] [-om] [-repe] [-repl] [-drepl] [-cho]
+               [-add] [-md] [-sd] [-vs] [-ada] [-hg] [-ahg] [-cm] [-hp] [-wt] [-wsld] [-at] [-sub] [-sp] [-cdd] [-addns] [-uddns] [-ns] [-combo] [-ca]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -74,8 +71,7 @@ optional arguments:
   -sd, --stripdash      Delete of a dash from the domain name
   -vs, --vowelswap      Swap vowels within the domain name
   -ada, --adddash       Add a dash between the first and last character in a string
-  -hg, --homoglyph      One or more characters that look similar to another character but are different are
-                        called homogylphs
+  -hg, --homoglyph      One or more characters that look similar to another character but are different are called homogylphs
   -ahg, --all_homoglyph
                         generate all possible homoglyph permutations. Ex: circl.lu, e1rc1.lu
   -cm, --commonmisspelling
@@ -91,9 +87,12 @@ optional arguments:
                         Change dot to dash
   -addns, --adddynamicdns
                         Add dynamic dns at the end of the domain
+  -uddns, --updatedynamicdns
+                        Update dynamic dns warning list
   -ns, --numeralswap    Change a numbers to words and vice versa. Ex: circlone.lu, circl1.lu
   -combo                Combine multiple algo on a domain name
   -ca, --catchall       Combine with -dnsr. Generate a random string in front of the domain.
+
 ```
 
 # Usage example

@@ -42,6 +42,7 @@ def getArguments():
     parser.add_argument("-sp", "--singularpluralize", help="Create by making a singular domain plural and vice versa", action="store_true")
     parser.add_argument("-cdd", "--changedotdash", help="Change dot to dash", action="store_true")
     parser.add_argument("-addns", "--adddynamicdns", help="Add dynamic dns at the end of the domain", action="store_true")
+    parser.add_argument("-uddns", "--updatedynamicdns", help="Update dynamic dns warning list", action="store_true")
     parser.add_argument("-ns", "--numeralswap", help="Change a numbers to words and vice versa. Ex: circlone.lu, circl1.lu", action="store_true")
     parser.add_argument("-combo", help="Combine multiple algo on a domain name", action="store_true")
     parser.add_argument("-ca", "--catchall", help="Combine with -dnsr. Generate a random string in front of the domain.", action="store_true")
