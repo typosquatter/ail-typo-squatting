@@ -17,7 +17,7 @@ The tool can be used as a stand-alone tool or to feed other systems.
 
 ## Source install
 
-ail-typo-squatting can be install with poetry. If you don't have poetry installed, you can do the following `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`.
+ail-typo-squatting can be install with poetry. If you don't have poetry installed, you can do the following `curl -sSL https://install.python-poetry.org | python3 -`.
 
 ```bash
 $ poetry install
