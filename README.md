@@ -2,7 +2,9 @@
 
 ail-typo-squatting is a Python library to generate list of potential typo squatting domains with domain name permutation engine to feed AIL and other systems. 
 
-The tool can be used as a stand-alone tool or to feed other systems.
+The tool can be used as a stand-alone tool or to feed other systems. 
+
+If you don't want to use the Python library, [https://typosquatting-finder.circl.lu/](https://typosquatting-finder.circl.lu/) is an online service which uses this library.
 
 # Requirements
 
