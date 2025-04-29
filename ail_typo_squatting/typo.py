@@ -83,9 +83,8 @@ def runAll(domain, limit, formatoutput, pathOutput, verbose=False, givevariation
 
 ## [END] Final treatment
 
-# Main file function
-if __name__ == "__main__":
 
+def main():
     # Step 1: Get the arguments
     parser = getArguments()
     args = parser.parse_args()
@@ -131,6 +130,7 @@ if __name__ == "__main__":
             domainList = read_file.readlines()
     else:
         print("[-] No Entry")
+        parser.print_help()
         exit(-1)
 
     # Step 4: Check the domain name
@@ -207,3 +207,8 @@ if __name__ == "__main__":
             dnsResolving(resultList, domain, pathOutput, verbose, givevariations, dns_limited, args.catchall)
 
         resultList = list()
+
+
+# Main file function
+if __name__ == "__main__":
+    main()

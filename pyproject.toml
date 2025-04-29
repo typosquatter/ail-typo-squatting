@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "ail-typo-squatting"
-version = "2.7.4"
+version = "2.7.5"
 description = "Generate list of domain name using Domain name permutation engine to feed AIL"
 authors = [
-	"David Cruciani <david.cruciani@securitymadein.lu>"
+	"David Cruciani <david.cruciani@circl.lu>"
 ]
 maintainers = [
 	"Alexandre Dulaunoy <a@foo.be>",
@@ -32,6 +32,10 @@ retrie = "^0.2.4"
 
 [tool.poetry.dev-dependencies]
 
+[tool.poetry.scripts]
+ail-typo-squatting = "ail_typo_squatting.typo:main"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
