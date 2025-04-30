@@ -577,61 +577,60 @@ c-ircl.lu
 ci-rcl.lu
 cir-cl.lu
 circ-l.lu
-ᴄirᴄl.lu
-cirčl.lu
-circı.lu
-ċirċl.lu
-ᴄircl.lu
-ĉircl.lu
-ciɍcl.lu
-ciṛcl.lu
-ciȑcl.lu
-çirçl.lu
-čircl.lu
-çircl.lu
-cirƈl.lu
-cĭrcl.lu
-círcl.lu
-ciɽcl.lu
-cɪrcl.lu
-ƈircl.lu
-ciṟcl.lu
-circł.lu
-cırcl.lu
-cɩrcl.lu
-eirel.lu
-ciɾcl.lu
-ciȓcl.lu
-ċircl.lu
-ciɼcl.lu
-ciŗcl.lu
-ciŕcl.lu
-čirčl.lu
-ćirćl.lu
-cirćl.lu
-ciʀcl.lu
-cǐrcl.lu
 cỉrcl.lu
+ciȓcl.lu
+circł.lu
+cirƈl.lu
 cirċl.lu
-cɨrcl.lu
-cȋrcl.lu
-cïrcl.lu
 cīrcl.lu
-ciṙcl.lu
-ĉirĉl.lu
-ciřcl.lu
-cirᴄl.lu
-ćircl.lu
-cirçl.lu
-cirĉl.lu
-circɩ.lu
+ciɽcl.lu
+ċircl.lu
 cìrcl.lu
-ƈirƈl.lu
-circɫ.lu
+cirčl.lu
+eirel.lu
+ćirćl.lu
+cirçl.lu
+ᴄirᴄl.lu
+cȋrcl.lu
+ċirċl.lu
+ciŕcl.lu
+ciṟcl.lu
+ćircl.lu
+cɨrcl.lu
+čirčl.lu
+çirçl.lu
+cɩrcl.lu
+ƈircl.lu
+ciɼcl.lu
+cirćl.lu
+ciṛcl.lu
 cịrcl.lu
+ĉirĉl.lu
+ciṙcl.lu
+cɪrcl.lu
+çircl.lu
+cïrcl.lu
+ciȑcl.lu
+circı.lu
+ciɾcl.lu
+cǐrcl.lu
+ciɍcl.lu
+ciʀcl.lu
+čircl.lu
+ƈirƈl.lu
+ĉircl.lu
+cirĉl.lu
+ᴄircl.lu
+cirᴄl.lu
+círcl.lu
+circɩ.lu
+ciřcl.lu
+ciŗcl.lu
+circɫ.lu
+cĭrcl.lu
+cırcl.lu
 circl.aaa
 circl.aarp
-circl.abarth
 circl.abb
 circl.abbott
 circl.abbvie
@@ -647,7 +646,6 @@ circl.accountants
 circl.aco
 circl.actor
 circl.ad
-circl.adac
 circl.ads
 circl.adult
 circl.ae
@@ -667,7 +665,6 @@ circl.airforce
 circl.airtel
 circl.akdn
 circl.al
-circl.alfaromeo
 circl.alibaba
 circl.alipay
 circl.allfinanz
@@ -718,7 +715,6 @@ circl.auspost
 circl.author
 circl.auto
 circl.autos
-circl.avianca
 circl.aw
 circl.aws
 circl.ax
@@ -729,7 +725,6 @@ circl.ba
 circl.baby
 circl.baidu
 circl.banamex
-circl.bananarepublic
 circl.band
 circl.bank
 circl.bar
@@ -753,7 +748,6 @@ circl.be
 circl.beats
 circl.beauty
 circl.beer
-circl.bentley
 circl.berlin
 circl.best
 circl.bestbuy
@@ -846,7 +840,6 @@ circl.catholic
 circl.cba
 circl.cbn
 circl.cbre
-circl.cbs
 circl.cc
 circl.cd
 circl.center
@@ -875,7 +868,6 @@ circl.citadel
 circl.citi
 circl.citic
 circl.city
-circl.cityeats
 circl.ck
 circl.cl
 circl.claims
@@ -896,7 +888,6 @@ circl.coffee
 circl.college
 circl.cologne
 circl.com
-circl.comcast
 circl.commbank
 circl.community
 circl.company
@@ -909,7 +900,6 @@ circl.consulting
 circl.contact
 circl.contractors
 circl.cooking
-circl.cookingchannel
 circl.cool
 circl.coop
 circl.corsica
@@ -936,7 +926,6 @@ circl.cy
 circl.cymru
 circl.cyou
 circl.cz
-circl.dabur
 circl.dad
 circl.dance
 circl.data
@@ -1015,7 +1004,6 @@ circl.es
 circl.esq
 circl.estate
 circl.et
-circl.etisalat
 circl.eu
 circl.eurovision
 circl.eus
@@ -1041,7 +1029,6 @@ circl.feedback
 circl.ferrari
 circl.ferrero
 circl.fi
-circl.fiat
 circl.fidelity
 circl.fido
 circl.film
@@ -1067,7 +1054,6 @@ circl.fm
 circl.fo
 circl.foo
 circl.food
-circl.foodnetwork
 circl.football
 circl.ford
 circl.forex
@@ -1080,7 +1066,6 @@ circl.free
 circl.fresenius
 circl.frl
 circl.frogans
-circl.frontdoor
 circl.frontier
 circl.ftr
 circl.fujitsu
@@ -1152,7 +1137,6 @@ circl.group
 circl.gs
 circl.gt
 circl.gu
-circl.guardian
 circl.gucci
 circl.guge
 circl.guide
@@ -1173,7 +1157,6 @@ circl.help
 circl.helsinki
 circl.here
 circl.hermes
-circl.hgtv
 circl.hiphop
 circl.hisamitsu
 circl.hitachi
@@ -1195,7 +1178,6 @@ circl.hospital
 circl.host
 circl.hosting
 circl.hot
-circl.hoteles
 circl.hotels
 circl.hotmail
 circl.house
@@ -1274,7 +1256,6 @@ circl.kaufen
 circl.kddi
 circl.ke
 circl.kerryhotels
-circl.kerrylogistics
 circl.kerryproperties
 circl.kfh
 circl.kg
@@ -1283,7 +1264,6 @@ circl.ki
 circl.kia
 circl.kids
 circl.kim
-circl.kinder
 circl.kindle
 circl.kitchen
 circl.kiwi
@@ -1307,8 +1287,6 @@ circl.la
 circl.lacaixa
 circl.lamborghini
 circl.lamer
-circl.lancaster
-circl.lancia
 circl.land
 circl.landrover
 circl.lanxess
@@ -1339,9 +1317,7 @@ circl.lilly
 circl.limited
 circl.limo
 circl.lincoln
-circl.linde
 circl.link
-circl.lipsy
 circl.live
 circl.living
 circl.lk
@@ -1351,7 +1327,6 @@ circl.loan
 circl.loans
 circl.locker
 circl.locus
-circl.loft
 circl.lol
 circl.london
 circl.lotte
@@ -1370,7 +1345,6 @@ circl.luxury
 circl.lv
 circl.ly
 circl.ma
-circl.macys
 circl.madrid
 circl.maif
 circl.maison
@@ -1384,7 +1358,6 @@ circl.marketing
 circl.markets
 circl.marriott
 circl.marshalls
-circl.maserati
 circl.mattel
 circl.mba
 circl.mc
@@ -1444,7 +1417,6 @@ circl.mtr
 circl.mu
 circl.museum
 circl.music
-circl.mutual
 circl.mv
 circl.mw
 circl.mx
@@ -1454,7 +1426,6 @@ circl.na
 circl.nab
 circl.nagoya
 circl.name
-circl.natura
 circl.navy
 circl.nba
 circl.nc
@@ -1485,7 +1456,6 @@ circl.nissay
 circl.nl
 circl.no
 circl.nokia
-circl.northwesternmutual
 circl.norton
 circl.now
 circl.nowruz
@@ -1504,7 +1474,6 @@ circl.office
 circl.okinawa
 circl.olayan
 circl.olayangroup
-circl.oldnavy
 circl.ollo
 circl.om
 circl.omega
@@ -1531,7 +1500,6 @@ circl.pars
 circl.partners
 circl.parts
 circl.party
-circl.passagens
 circl.pay
 circl.pccw
 circl.pe
@@ -1632,7 +1600,6 @@ circl.ril
 circl.rio
 circl.rip
 circl.ro
-circl.rocher
 circl.rocks
 circl.rodeo
 circl.rogers
@@ -1667,7 +1634,6 @@ circl.sb
 circl.sbi
 circl.sbs
 circl.sc
-circl.sca
 circl.scb
 circl.schaeffler
 circl.schmidt
@@ -1687,7 +1653,6 @@ circl.seek
 circl.select
 circl.sener
 circl.services
-circl.ses
 circl.seven
 circl.sew
 circl.sex
@@ -1697,7 +1662,6 @@ circl.sg
 circl.sh
 circl.shangrila
 circl.sharp
-circl.shaw
 circl.shell
 circl.shia
 circl.shiksha
@@ -1706,7 +1670,6 @@ circl.shop
 circl.shopping
 circl.shouji
 circl.show
-circl.showtime
 circl.si
 circl.silk
 circl.sina
@@ -1804,7 +1767,6 @@ circl.theatre
 circl.tiaa
 circl.tickets
 circl.tienda
-circl.tiffany
 circl.tips
 circl.tires
 circl.tirol
@@ -1834,7 +1796,6 @@ circl.trade
 circl.trading
 circl.training
 circl.travel
-circl.travelchannel
 circl.travelers
 circl.travelersinsurance
 circl.trust
@@ -1889,14 +1850,12 @@ circl.vivo
 circl.vlaanderen
 circl.vn
 circl.vodka
-circl.volkswagen
 circl.volvo
 circl.vote
 circl.voting
 circl.voto
 circl.voyage
 circl.vu
-circl.vuelos
 circl.wales
 circl.walmart
 circl.walter
@@ -1934,7 +1893,6 @@ circl.wtc
 circl.wtf
 circl.xbox
 circl.xerox
-circl.xfinity
 circl.xihuan
 circl.xin
 circl.xn--11b4c3d
@@ -2014,7 +1972,6 @@ circl.xn--j1aef
 circl.xn--j1amh
 circl.xn--j6w193g
 circl.xn--jlq480n2rg
-circl.xn--jlq61u9w7b
 circl.xn--jvr189m
 circl.xn--kcrx77d1x4a
 circl.xn--kprw13d
@@ -2026,7 +1983,6 @@ circl.xn--mgb9awbf
 circl.xn--mgba3a3ejt
 circl.xn--mgba3a4f16a
 circl.xn--mgba7c0bbn0a
-circl.xn--mgbaakc7dvf
 circl.xn--mgbaam7a8h
 circl.xn--mgbab2bd
 circl.xn--mgbah1a3hjkrd
@@ -2113,11 +2069,9 @@ circl.zm
 circl.zone
 circl.zuerich
 circl.zw
-circl.blogspot.lu
 circl.123website.lu
 circl.lu.aaa
 circl.lu.aarp
-circl.lu.abarth
 circl.lu.abb
 circl.lu.abbott
 circl.lu.abbvie
@@ -2133,7 +2087,6 @@ circl.lu.accountants
 circl.lu.aco
 circl.lu.actor
 circl.lu.ad
-circl.lu.adac
 circl.lu.ads
 circl.lu.adult
 circl.lu.ae
@@ -2153,7 +2106,6 @@ circl.lu.airforce
 circl.lu.airtel
 circl.lu.akdn
 circl.lu.al
-circl.lu.alfaromeo
 circl.lu.alibaba
 circl.lu.alipay
 circl.lu.allfinanz
@@ -2204,7 +2156,6 @@ circl.lu.auspost
 circl.lu.author
 circl.lu.auto
 circl.lu.autos
-circl.lu.avianca
 circl.lu.aw
 circl.lu.aws
 circl.lu.ax
@@ -2215,7 +2166,6 @@ circl.lu.ba
 circl.lu.baby
 circl.lu.baidu
 circl.lu.banamex
-circl.lu.bananarepublic
 circl.lu.band
 circl.lu.bank
 circl.lu.bar
@@ -2239,7 +2189,6 @@ circl.lu.be
 circl.lu.beats
 circl.lu.beauty
 circl.lu.beer
-circl.lu.bentley
 circl.lu.berlin
 circl.lu.best
 circl.lu.bestbuy
@@ -2332,7 +2281,6 @@ circl.lu.catholic
 circl.lu.cba
 circl.lu.cbn
 circl.lu.cbre
-circl.lu.cbs
 circl.lu.cc
 circl.lu.cd
 circl.lu.center
@@ -2361,7 +2309,6 @@ circl.lu.citadel
 circl.lu.citi
 circl.lu.citic
 circl.lu.city
-circl.lu.cityeats
 circl.lu.ck
 circl.lu.cl
 circl.lu.claims
@@ -2382,7 +2329,6 @@ circl.lu.coffee
 circl.lu.college
 circl.lu.cologne
 circl.lu.com
-circl.lu.comcast
 circl.lu.commbank
 circl.lu.community
 circl.lu.company
@@ -2395,7 +2341,6 @@ circl.lu.consulting
 circl.lu.contact
 circl.lu.contractors
 circl.lu.cooking
-circl.lu.cookingchannel
 circl.lu.cool
 circl.lu.coop
 circl.lu.corsica
@@ -2422,7 +2367,6 @@ circl.lu.cy
 circl.lu.cymru
 circl.lu.cyou
 circl.lu.cz
-circl.lu.dabur
 circl.lu.dad
 circl.lu.dance
 circl.lu.data
@@ -2501,7 +2445,6 @@ circl.lu.es
 circl.lu.esq
 circl.lu.estate
 circl.lu.et
-circl.lu.etisalat
 circl.lu.eu
 circl.lu.eurovision
 circl.lu.eus
@@ -2527,7 +2470,6 @@ circl.lu.feedback
 circl.lu.ferrari
 circl.lu.ferrero
 circl.lu.fi
-circl.lu.fiat
 circl.lu.fidelity
 circl.lu.fido
 circl.lu.film
@@ -2553,7 +2495,6 @@ circl.lu.fm
 circl.lu.fo
 circl.lu.foo
 circl.lu.food
-circl.lu.foodnetwork
 circl.lu.football
 circl.lu.ford
 circl.lu.forex
@@ -2566,7 +2507,6 @@ circl.lu.free
 circl.lu.fresenius
 circl.lu.frl
 circl.lu.frogans
-circl.lu.frontdoor
 circl.lu.frontier
 circl.lu.ftr
 circl.lu.fujitsu
@@ -2638,7 +2578,6 @@ circl.lu.group
 circl.lu.gs
 circl.lu.gt
 circl.lu.gu
-circl.lu.guardian
 circl.lu.gucci
 circl.lu.guge
 circl.lu.guide
@@ -2659,7 +2598,6 @@ circl.lu.help
 circl.lu.helsinki
 circl.lu.here
 circl.lu.hermes
-circl.lu.hgtv
 circl.lu.hiphop
 circl.lu.hisamitsu
 circl.lu.hitachi
@@ -2681,7 +2619,6 @@ circl.lu.hospital
 circl.lu.host
 circl.lu.hosting
 circl.lu.hot
-circl.lu.hoteles
 circl.lu.hotels
 circl.lu.hotmail
 circl.lu.house
@@ -2760,7 +2697,6 @@ circl.lu.kaufen
 circl.lu.kddi
 circl.lu.ke
 circl.lu.kerryhotels
-circl.lu.kerrylogistics
 circl.lu.kerryproperties
 circl.lu.kfh
 circl.lu.kg
@@ -2769,7 +2705,6 @@ circl.lu.ki
 circl.lu.kia
 circl.lu.kids
 circl.lu.kim
-circl.lu.kinder
 circl.lu.kindle
 circl.lu.kitchen
 circl.lu.kiwi
@@ -2793,8 +2728,6 @@ circl.lu.la
 circl.lu.lacaixa
 circl.lu.lamborghini
 circl.lu.lamer
-circl.lu.lancaster
-circl.lu.lancia
 circl.lu.land
 circl.lu.landrover
 circl.lu.lanxess
@@ -2825,9 +2758,7 @@ circl.lu.lilly
 circl.lu.limited
 circl.lu.limo
 circl.lu.lincoln
-circl.lu.linde
 circl.lu.link
-circl.lu.lipsy
 circl.lu.live
 circl.lu.living
 circl.lu.lk
@@ -2837,7 +2768,6 @@ circl.lu.loan
 circl.lu.loans
 circl.lu.locker
 circl.lu.locus
-circl.lu.loft
 circl.lu.lol
 circl.lu.london
 circl.lu.lotte
@@ -2857,7 +2787,6 @@ circl.lu.luxury
 circl.lu.lv
 circl.lu.ly
 circl.lu.ma
-circl.lu.macys
 circl.lu.madrid
 circl.lu.maif
 circl.lu.maison
@@ -2871,7 +2800,6 @@ circl.lu.marketing
 circl.lu.markets
 circl.lu.marriott
 circl.lu.marshalls
-circl.lu.maserati
 circl.lu.mattel
 circl.lu.mba
 circl.lu.mc
@@ -2931,7 +2859,6 @@ circl.lu.mtr
 circl.lu.mu
 circl.lu.museum
 circl.lu.music
-circl.lu.mutual
 circl.lu.mv
 circl.lu.mw
 circl.lu.mx
@@ -2941,7 +2868,6 @@ circl.lu.na
 circl.lu.nab
 circl.lu.nagoya
 circl.lu.name
-circl.lu.natura
 circl.lu.navy
 circl.lu.nba
 circl.lu.nc
@@ -2972,7 +2898,6 @@ circl.lu.nissay
 circl.lu.nl
 circl.lu.no
 circl.lu.nokia
-circl.lu.northwesternmutual
 circl.lu.norton
 circl.lu.now
 circl.lu.nowruz
@@ -2991,7 +2916,6 @@ circl.lu.office
 circl.lu.okinawa
 circl.lu.olayan
 circl.lu.olayangroup
-circl.lu.oldnavy
 circl.lu.ollo
 circl.lu.om
 circl.lu.omega
@@ -3018,7 +2942,6 @@ circl.lu.pars
 circl.lu.partners
 circl.lu.parts
 circl.lu.party
-circl.lu.passagens
 circl.lu.pay
 circl.lu.pccw
 circl.lu.pe
@@ -3119,7 +3042,6 @@ circl.lu.ril
 circl.lu.rio
 circl.lu.rip
 circl.lu.ro
-circl.lu.rocher
 circl.lu.rocks
 circl.lu.rodeo
 circl.lu.rogers
@@ -3154,7 +3076,6 @@ circl.lu.sb
 circl.lu.sbi
 circl.lu.sbs
 circl.lu.sc
-circl.lu.sca
 circl.lu.scb
 circl.lu.schaeffler
 circl.lu.schmidt
@@ -3174,7 +3095,6 @@ circl.lu.seek
 circl.lu.select
 circl.lu.sener
 circl.lu.services
-circl.lu.ses
 circl.lu.seven
 circl.lu.sew
 circl.lu.sex
@@ -3184,7 +3104,6 @@ circl.lu.sg
 circl.lu.sh
 circl.lu.shangrila
 circl.lu.sharp
-circl.lu.shaw
 circl.lu.shell
 circl.lu.shia
 circl.lu.shiksha
@@ -3193,7 +3112,6 @@ circl.lu.shop
 circl.lu.shopping
 circl.lu.shouji
 circl.lu.show
-circl.lu.showtime
 circl.lu.si
 circl.lu.silk
 circl.lu.sina
@@ -3291,7 +3209,6 @@ circl.lu.theatre
 circl.lu.tiaa
 circl.lu.tickets
 circl.lu.tienda
-circl.lu.tiffany
 circl.lu.tips
 circl.lu.tires
 circl.lu.tirol
@@ -3321,7 +3238,6 @@ circl.lu.trade
 circl.lu.trading
 circl.lu.training
 circl.lu.travel
-circl.lu.travelchannel
 circl.lu.travelers
 circl.lu.travelersinsurance
 circl.lu.trust
@@ -3376,14 +3292,12 @@ circl.lu.vivo
 circl.lu.vlaanderen
 circl.lu.vn
 circl.lu.vodka
-circl.lu.volkswagen
 circl.lu.volvo
 circl.lu.vote
 circl.lu.voting
 circl.lu.voto
 circl.lu.voyage
 circl.lu.vu
-circl.lu.vuelos
 circl.lu.wales
 circl.lu.walmart
 circl.lu.walter
@@ -3421,7 +3335,6 @@ circl.lu.wtc
 circl.lu.wtf
 circl.lu.xbox
 circl.lu.xerox
-circl.lu.xfinity
 circl.lu.xihuan
 circl.lu.xin
 circl.lu.xn--11b4c3d
@@ -3501,7 +3414,6 @@ circl.lu.xn--j1aef
 circl.lu.xn--j1amh
 circl.lu.xn--j6w193g
 circl.lu.xn--jlq480n2rg
-circl.lu.xn--jlq61u9w7b
 circl.lu.xn--jvr189m
 circl.lu.xn--kcrx77d1x4a
 circl.lu.xn--kprw13d
@@ -3513,7 +3425,6 @@ circl.lu.xn--mgb9awbf
 circl.lu.xn--mgba3a3ejt
 circl.lu.xn--mgba3a4f16a
 circl.lu.xn--mgba7c0bbn0a
-circl.lu.xn--mgbaakc7dvf
 circl.lu.xn--mgbaam7a8h
 circl.lu.xn--mgbab2bd
 circl.lu.xn--mgbah1a3hjkrd
@@ -3606,7 +3517,6 @@ cir.cl.lu
 circ.l.lu
 circl-lu.aaa
 circl-lu.aarp
-circl-lu.abarth
 circl-lu.abb
 circl-lu.abbott
 circl-lu.abbvie
@@ -3622,7 +3532,6 @@ circl-lu.accountants
 circl-lu.aco
 circl-lu.actor
 circl-lu.ad
-circl-lu.adac
 circl-lu.ads
 circl-lu.adult
 circl-lu.ae
@@ -3642,7 +3551,6 @@ circl-lu.airforce
 circl-lu.airtel
 circl-lu.akdn
 circl-lu.al
-circl-lu.alfaromeo
 circl-lu.alibaba
 circl-lu.alipay
 circl-lu.allfinanz
@@ -3693,7 +3601,6 @@ circl-lu.auspost
 circl-lu.author
 circl-lu.auto
 circl-lu.autos
-circl-lu.avianca
 circl-lu.aw
 circl-lu.aws
 circl-lu.ax
@@ -3704,7 +3611,6 @@ circl-lu.ba
 circl-lu.baby
 circl-lu.baidu
 circl-lu.banamex
-circl-lu.bananarepublic
 circl-lu.band
 circl-lu.bank
 circl-lu.bar
@@ -3728,7 +3634,6 @@ circl-lu.be
 circl-lu.beats
 circl-lu.beauty
 circl-lu.beer
-circl-lu.bentley
 circl-lu.berlin
 circl-lu.best
 circl-lu.bestbuy
@@ -3821,7 +3726,6 @@ circl-lu.catholic
 circl-lu.cba
 circl-lu.cbn
 circl-lu.cbre
-circl-lu.cbs
 circl-lu.cc
 circl-lu.cd
 circl-lu.center
@@ -3850,7 +3754,6 @@ circl-lu.citadel
 circl-lu.citi
 circl-lu.citic
 circl-lu.city
-circl-lu.cityeats
 circl-lu.ck
 circl-lu.cl
 circl-lu.claims
@@ -3871,7 +3774,6 @@ circl-lu.coffee
 circl-lu.college
 circl-lu.cologne
 circl-lu.com
-circl-lu.comcast
 circl-lu.commbank
 circl-lu.community
 circl-lu.company
@@ -3884,7 +3786,6 @@ circl-lu.consulting
 circl-lu.contact
 circl-lu.contractors
 circl-lu.cooking
-circl-lu.cookingchannel
 circl-lu.cool
 circl-lu.coop
 circl-lu.corsica
@@ -3911,7 +3812,6 @@ circl-lu.cy
 circl-lu.cymru
 circl-lu.cyou
 circl-lu.cz
-circl-lu.dabur
 circl-lu.dad
 circl-lu.dance
 circl-lu.data
@@ -3990,7 +3890,6 @@ circl-lu.es
 circl-lu.esq
 circl-lu.estate
 circl-lu.et
-circl-lu.etisalat
 circl-lu.eu
 circl-lu.eurovision
 circl-lu.eus
@@ -4016,7 +3915,6 @@ circl-lu.feedback
 circl-lu.ferrari
 circl-lu.ferrero
 circl-lu.fi
-circl-lu.fiat
 circl-lu.fidelity
 circl-lu.fido
 circl-lu.film
@@ -4042,7 +3940,6 @@ circl-lu.fm
 circl-lu.fo
 circl-lu.foo
 circl-lu.food
-circl-lu.foodnetwork
 circl-lu.football
 circl-lu.ford
 circl-lu.forex
@@ -4055,7 +3952,6 @@ circl-lu.free
 circl-lu.fresenius
 circl-lu.frl
 circl-lu.frogans
-circl-lu.frontdoor
 circl-lu.frontier
 circl-lu.ftr
 circl-lu.fujitsu
@@ -4127,7 +4023,6 @@ circl-lu.group
 circl-lu.gs
 circl-lu.gt
 circl-lu.gu
-circl-lu.guardian
 circl-lu.gucci
 circl-lu.guge
 circl-lu.guide
@@ -4148,7 +4043,6 @@ circl-lu.help
 circl-lu.helsinki
 circl-lu.here
 circl-lu.hermes
-circl-lu.hgtv
 circl-lu.hiphop
 circl-lu.hisamitsu
 circl-lu.hitachi
@@ -4170,7 +4064,6 @@ circl-lu.hospital
 circl-lu.host
 circl-lu.hosting
 circl-lu.hot
-circl-lu.hoteles
 circl-lu.hotels
 circl-lu.hotmail
 circl-lu.house
@@ -4249,7 +4142,6 @@ circl-lu.kaufen
 circl-lu.kddi
 circl-lu.ke
 circl-lu.kerryhotels
-circl-lu.kerrylogistics
 circl-lu.kerryproperties
 circl-lu.kfh
 circl-lu.kg
@@ -4258,7 +4150,6 @@ circl-lu.ki
 circl-lu.kia
 circl-lu.kids
 circl-lu.kim
-circl-lu.kinder
 circl-lu.kindle
 circl-lu.kitchen
 circl-lu.kiwi
@@ -4282,8 +4173,6 @@ circl-lu.la
 circl-lu.lacaixa
 circl-lu.lamborghini
 circl-lu.lamer
-circl-lu.lancaster
-circl-lu.lancia
 circl-lu.land
 circl-lu.landrover
 circl-lu.lanxess
@@ -4314,9 +4203,7 @@ circl-lu.lilly
 circl-lu.limited
 circl-lu.limo
 circl-lu.lincoln
-circl-lu.linde
 circl-lu.link
-circl-lu.lipsy
 circl-lu.live
 circl-lu.living
 circl-lu.lk
@@ -4326,7 +4213,6 @@ circl-lu.loan
 circl-lu.loans
 circl-lu.locker
 circl-lu.locus
-circl-lu.loft
 circl-lu.lol
 circl-lu.london
 circl-lu.lotte
@@ -4346,7 +4232,6 @@ circl-lu.luxury
 circl-lu.lv
 circl-lu.ly
 circl-lu.ma
-circl-lu.macys
 circl-lu.madrid
 circl-lu.maif
 circl-lu.maison
@@ -4360,7 +4245,6 @@ circl-lu.marketing
 circl-lu.markets
 circl-lu.marriott
 circl-lu.marshalls
-circl-lu.maserati
 circl-lu.mattel
 circl-lu.mba
 circl-lu.mc
@@ -4420,7 +4304,6 @@ circl-lu.mtr
 circl-lu.mu
 circl-lu.museum
 circl-lu.music
-circl-lu.mutual
 circl-lu.mv
 circl-lu.mw
 circl-lu.mx
@@ -4430,7 +4313,6 @@ circl-lu.na
 circl-lu.nab
 circl-lu.nagoya
 circl-lu.name
-circl-lu.natura
 circl-lu.navy
 circl-lu.nba
 circl-lu.nc
@@ -4461,7 +4343,6 @@ circl-lu.nissay
 circl-lu.nl
 circl-lu.no
 circl-lu.nokia
-circl-lu.northwesternmutual
 circl-lu.norton
 circl-lu.now
 circl-lu.nowruz
@@ -4480,7 +4361,6 @@ circl-lu.office
 circl-lu.okinawa
 circl-lu.olayan
 circl-lu.olayangroup
-circl-lu.oldnavy
 circl-lu.ollo
 circl-lu.om
 circl-lu.omega
@@ -4507,7 +4387,6 @@ circl-lu.pars
 circl-lu.partners
 circl-lu.parts
 circl-lu.party
-circl-lu.passagens
 circl-lu.pay
 circl-lu.pccw
 circl-lu.pe
@@ -4608,7 +4487,6 @@ circl-lu.ril
 circl-lu.rio
 circl-lu.rip
 circl-lu.ro
-circl-lu.rocher
 circl-lu.rocks
 circl-lu.rodeo
 circl-lu.rogers
@@ -4643,7 +4521,6 @@ circl-lu.sb
 circl-lu.sbi
 circl-lu.sbs
 circl-lu.sc
-circl-lu.sca
 circl-lu.scb
 circl-lu.schaeffler
 circl-lu.schmidt
@@ -4663,7 +4540,6 @@ circl-lu.seek
 circl-lu.select
 circl-lu.sener
 circl-lu.services
-circl-lu.ses
 circl-lu.seven
 circl-lu.sew
 circl-lu.sex
@@ -4673,7 +4549,6 @@ circl-lu.sg
 circl-lu.sh
 circl-lu.shangrila
 circl-lu.sharp
-circl-lu.shaw
 circl-lu.shell
 circl-lu.shia
 circl-lu.shiksha
@@ -4682,7 +4557,6 @@ circl-lu.shop
 circl-lu.shopping
 circl-lu.shouji
 circl-lu.show
-circl-lu.showtime
 circl-lu.si
 circl-lu.silk
 circl-lu.sina
@@ -4780,7 +4654,6 @@ circl-lu.theatre
 circl-lu.tiaa
 circl-lu.tickets
 circl-lu.tienda
-circl-lu.tiffany
 circl-lu.tips
 circl-lu.tires
 circl-lu.tirol
@@ -4810,7 +4683,6 @@ circl-lu.trade
 circl-lu.trading
 circl-lu.training
 circl-lu.travel
-circl-lu.travelchannel
 circl-lu.travelers
 circl-lu.travelersinsurance
 circl-lu.trust
@@ -4865,14 +4737,12 @@ circl-lu.vivo
 circl-lu.vlaanderen
 circl-lu.vn
 circl-lu.vodka
-circl-lu.volkswagen
 circl-lu.volvo
 circl-lu.vote
 circl-lu.voting
 circl-lu.voto
 circl-lu.voyage
 circl-lu.vu
-circl-lu.vuelos
 circl-lu.wales
 circl-lu.walmart
 circl-lu.walter
@@ -4910,7 +4780,6 @@ circl-lu.wtc
 circl-lu.wtf
 circl-lu.xbox
 circl-lu.xerox
-circl-lu.xfinity
 circl-lu.xihuan
 circl-lu.xin
 circl-lu.xn--11b4c3d
@@ -4990,7 +4859,6 @@ circl-lu.xn--j1aef
 circl-lu.xn--j1amh
 circl-lu.xn--j6w193g
 circl-lu.xn--jlq480n2rg
-circl-lu.xn--jlq61u9w7b
 circl-lu.xn--jvr189m
 circl-lu.xn--kcrx77d1x4a
 circl-lu.xn--kprw13d
@@ -5002,7 +4870,6 @@ circl-lu.xn--mgb9awbf
 circl-lu.xn--mgba3a3ejt
 circl-lu.xn--mgba3a4f16a
 circl-lu.xn--mgba7c0bbn0a
-circl-lu.xn--mgbaakc7dvf
 circl-lu.xn--mgbaam7a8h
 circl-lu.xn--mgbab2bd
 circl-lu.xn--mgbah1a3hjkrd

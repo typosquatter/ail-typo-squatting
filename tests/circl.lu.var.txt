@@ -577,61 +577,60 @@ c-ircl.lu, addDash
 ci-rcl.lu, addDash
 cir-cl.lu, addDash
 circ-l.lu, addDash
-circł.lu, homoglyph
-cịrcl.lu, homoglyph
-çircl.lu, homoglyph
-cɪrcl.lu, homoglyph
-cɨrcl.lu, homoglyph
-ciɾcl.lu, homoglyph
-cirčl.lu, homoglyph
-cīrcl.lu, homoglyph
-eirel.lu, homoglyph
-çirçl.lu, homoglyph
-ciṟcl.lu, homoglyph
-ciŕcl.lu, homoglyph
-ciɍcl.lu, homoglyph
-ċirċl.lu, homoglyph
-cirᴄl.lu, homoglyph
-circɫ.lu, homoglyph
-cirçl.lu, homoglyph
-circɩ.lu, homoglyph
-cirĉl.lu, homoglyph
-cırcl.lu, homoglyph
-cȋrcl.lu, homoglyph
-círcl.lu, homoglyph
-cỉrcl.lu, homoglyph
-ᴄircl.lu, homoglyph
-ciȓcl.lu, homoglyph
-cĭrcl.lu, homoglyph
-ciɽcl.lu, homoglyph
-ᴄirᴄl.lu, homoglyph
-ciřcl.lu, homoglyph
-ĉircl.lu, homoglyph
-cirćl.lu, homoglyph
-cìrcl.lu, homoglyph
-ćirćl.lu, homoglyph
-ciŗcl.lu, homoglyph
-cirċl.lu, homoglyph
-ciṛcl.lu, homoglyph
-čircl.lu, homoglyph
-cǐrcl.lu, homoglyph
-cirƈl.lu, homoglyph
-ƈircl.lu, homoglyph
-ciȑcl.lu, homoglyph
-ƈirƈl.lu, homoglyph
-čirčl.lu, homoglyph
-ćircl.lu, homoglyph
-ċircl.lu, homoglyph
-cɩrcl.lu, homoglyph
 ciṙcl.lu, homoglyph
-ciɼcl.lu, homoglyph
-cïrcl.lu, homoglyph
-circı.lu, homoglyph
+cȋrcl.lu, homoglyph
+cirćl.lu, homoglyph
+ciɽcl.lu, homoglyph
+circɫ.lu, homoglyph
+ciřcl.lu, homoglyph
+çirçl.lu, homoglyph
+circł.lu, homoglyph
+eirel.lu, homoglyph
 ĉirĉl.lu, homoglyph
+čircl.lu, homoglyph
+cīrcl.lu, homoglyph
+circɩ.lu, homoglyph
+cirċl.lu, homoglyph
+cirᴄl.lu, homoglyph
+ᴄircl.lu, homoglyph
+cĭrcl.lu, homoglyph
+ciŗcl.lu, homoglyph
+cirƈl.lu, homoglyph
+cirçl.lu, homoglyph
+çircl.lu, homoglyph
+ĉircl.lu, homoglyph
+cìrcl.lu, homoglyph
+ciȑcl.lu, homoglyph
+ċirċl.lu, homoglyph
+cırcl.lu, homoglyph
+ƈirƈl.lu, homoglyph
+cïrcl.lu, homoglyph
+cỉrcl.lu, homoglyph
+ċircl.lu, homoglyph
+cɨrcl.lu, homoglyph
+cǐrcl.lu, homoglyph
+ćirćl.lu, homoglyph
+ciɼcl.lu, homoglyph
+cɪrcl.lu, homoglyph
+cirĉl.lu, homoglyph
+cɩrcl.lu, homoglyph
+círcl.lu, homoglyph
+ᴄirᴄl.lu, homoglyph
+cịrcl.lu, homoglyph
+ciṛcl.lu, homoglyph
+circı.lu, homoglyph
+ciɍcl.lu, homoglyph
 ciʀcl.lu, homoglyph
+ciɾcl.lu, homoglyph
+ciŕcl.lu, homoglyph
+ćircl.lu, homoglyph
+cirčl.lu, homoglyph
+ciȓcl.lu, homoglyph
+čirčl.lu, homoglyph
+ciṟcl.lu, homoglyph
+ƈircl.lu, homoglyph
 circl.aaa, wrongTld
 circl.aarp, wrongTld
-circl.abarth, wrongTld
 circl.abb, wrongTld
 circl.abbott, wrongTld
 circl.abbvie, wrongTld
@@ -647,7 +646,6 @@ circl.accountants, wrongTld
 circl.aco, wrongTld
 circl.actor, wrongTld
 circl.ad, wrongTld
-circl.adac, wrongTld
 circl.ads, wrongTld
 circl.adult, wrongTld
 circl.ae, wrongTld
@@ -667,7 +665,6 @@ circl.airforce, wrongTld
 circl.airtel, wrongTld
 circl.akdn, wrongTld
 circl.al, wrongTld
-circl.alfaromeo, wrongTld
 circl.alibaba, wrongTld
 circl.alipay, wrongTld
 circl.allfinanz, wrongTld
@@ -718,7 +715,6 @@ circl.auspost, wrongTld
 circl.author, wrongTld
 circl.auto, wrongTld
 circl.autos, wrongTld
-circl.avianca, wrongTld
 circl.aw, wrongTld
 circl.aws, wrongTld
 circl.ax, wrongTld
@@ -729,7 +725,6 @@ circl.ba, wrongTld
 circl.baby, wrongTld
 circl.baidu, wrongTld
 circl.banamex, wrongTld
-circl.bananarepublic, wrongTld
 circl.band, wrongTld
 circl.bank, wrongTld
 circl.bar, wrongTld
@@ -753,7 +748,6 @@ circl.be, wrongTld
 circl.beats, wrongTld
 circl.beauty, wrongTld
 circl.beer, wrongTld
-circl.bentley, wrongTld
 circl.berlin, wrongTld
 circl.best, wrongTld
 circl.bestbuy, wrongTld
@@ -846,7 +840,6 @@ circl.catholic, wrongTld
 circl.cba, wrongTld
 circl.cbn, wrongTld
 circl.cbre, wrongTld
-circl.cbs, wrongTld
 circl.cc, wrongTld
 circl.cd, wrongTld
 circl.center, wrongTld
@@ -875,7 +868,6 @@ circl.citadel, wrongTld
 circl.citi, wrongTld
 circl.citic, wrongTld
 circl.city, wrongTld
-circl.cityeats, wrongTld
 circl.ck, wrongTld
 circl.cl, wrongTld
 circl.claims, wrongTld
@@ -896,7 +888,6 @@ circl.coffee, wrongTld
 circl.college, wrongTld
 circl.cologne, wrongTld
 circl.com, wrongTld
-circl.comcast, wrongTld
 circl.commbank, wrongTld
 circl.community, wrongTld
 circl.company, wrongTld
@@ -909,7 +900,6 @@ circl.consulting, wrongTld
 circl.contact, wrongTld
 circl.contractors, wrongTld
 circl.cooking, wrongTld
-circl.cookingchannel, wrongTld
 circl.cool, wrongTld
 circl.coop, wrongTld
 circl.corsica, wrongTld
@@ -936,7 +926,6 @@ circl.cy, wrongTld
 circl.cymru, wrongTld
 circl.cyou, wrongTld
 circl.cz, wrongTld
-circl.dabur, wrongTld
 circl.dad, wrongTld
 circl.dance, wrongTld
 circl.data, wrongTld
@@ -1015,7 +1004,6 @@ circl.es, wrongTld
 circl.esq, wrongTld
 circl.estate, wrongTld
 circl.et, wrongTld
-circl.etisalat, wrongTld
 circl.eu, wrongTld
 circl.eurovision, wrongTld
 circl.eus, wrongTld
@@ -1041,7 +1029,6 @@ circl.feedback, wrongTld
 circl.ferrari, wrongTld
 circl.ferrero, wrongTld
 circl.fi, wrongTld
-circl.fiat, wrongTld
 circl.fidelity, wrongTld
 circl.fido, wrongTld
 circl.film, wrongTld
@@ -1067,7 +1054,6 @@ circl.fm, wrongTld
 circl.fo, wrongTld
 circl.foo, wrongTld
 circl.food, wrongTld
-circl.foodnetwork, wrongTld
 circl.football, wrongTld
 circl.ford, wrongTld
 circl.forex, wrongTld
@@ -1080,7 +1066,6 @@ circl.free, wrongTld
 circl.fresenius, wrongTld
 circl.frl, wrongTld
 circl.frogans, wrongTld
-circl.frontdoor, wrongTld
 circl.frontier, wrongTld
 circl.ftr, wrongTld
 circl.fujitsu, wrongTld
@@ -1152,7 +1137,6 @@ circl.group, wrongTld
 circl.gs, wrongTld
 circl.gt, wrongTld
 circl.gu, wrongTld
-circl.guardian, wrongTld
 circl.gucci, wrongTld
 circl.guge, wrongTld
 circl.guide, wrongTld
@@ -1173,7 +1157,6 @@ circl.help, wrongTld
 circl.helsinki, wrongTld
 circl.here, wrongTld
 circl.hermes, wrongTld
-circl.hgtv, wrongTld
 circl.hiphop, wrongTld
 circl.hisamitsu, wrongTld
 circl.hitachi, wrongTld
@@ -1195,7 +1178,6 @@ circl.hospital, wrongTld
 circl.host, wrongTld
 circl.hosting, wrongTld
 circl.hot, wrongTld
-circl.hoteles, wrongTld
 circl.hotels, wrongTld
 circl.hotmail, wrongTld
 circl.house, wrongTld
@@ -1274,7 +1256,6 @@ circl.kaufen, wrongTld
 circl.kddi, wrongTld
 circl.ke, wrongTld
 circl.kerryhotels, wrongTld
-circl.kerrylogistics, wrongTld
 circl.kerryproperties, wrongTld
 circl.kfh, wrongTld
 circl.kg, wrongTld
@@ -1283,7 +1264,6 @@ circl.ki, wrongTld
 circl.kia, wrongTld
 circl.kids, wrongTld
 circl.kim, wrongTld
-circl.kinder, wrongTld
 circl.kindle, wrongTld
 circl.kitchen, wrongTld
 circl.kiwi, wrongTld
@@ -1307,8 +1287,6 @@ circl.la, wrongTld
 circl.lacaixa, wrongTld
 circl.lamborghini, wrongTld
 circl.lamer, wrongTld
-circl.lancaster, wrongTld
-circl.lancia, wrongTld
 circl.land, wrongTld
 circl.landrover, wrongTld
 circl.lanxess, wrongTld
@@ -1339,9 +1317,7 @@ circl.lilly, wrongTld
 circl.limited, wrongTld
 circl.limo, wrongTld
 circl.lincoln, wrongTld
-circl.linde, wrongTld
 circl.link, wrongTld
-circl.lipsy, wrongTld
 circl.live, wrongTld
 circl.living, wrongTld
 circl.lk, wrongTld
@@ -1351,7 +1327,6 @@ circl.loan, wrongTld
 circl.loans, wrongTld
 circl.locker, wrongTld
 circl.locus, wrongTld
-circl.loft, wrongTld
 circl.lol, wrongTld
 circl.london, wrongTld
 circl.lotte, wrongTld
@@ -1370,7 +1345,6 @@ circl.luxury, wrongTld
 circl.lv, wrongTld
 circl.ly, wrongTld
 circl.ma, wrongTld
-circl.macys, wrongTld
 circl.madrid, wrongTld
 circl.maif, wrongTld
 circl.maison, wrongTld
@@ -1384,7 +1358,6 @@ circl.marketing, wrongTld
 circl.markets, wrongTld
 circl.marriott, wrongTld
 circl.marshalls, wrongTld
-circl.maserati, wrongTld
 circl.mattel, wrongTld
 circl.mba, wrongTld
 circl.mc, wrongTld
@@ -1444,7 +1417,6 @@ circl.mtr, wrongTld
 circl.mu, wrongTld
 circl.museum, wrongTld
 circl.music, wrongTld
-circl.mutual, wrongTld
 circl.mv, wrongTld
 circl.mw, wrongTld
 circl.mx, wrongTld
@@ -1454,7 +1426,6 @@ circl.na, wrongTld
 circl.nab, wrongTld
 circl.nagoya, wrongTld
 circl.name, wrongTld
-circl.natura, wrongTld
 circl.navy, wrongTld
 circl.nba, wrongTld
 circl.nc, wrongTld
@@ -1485,7 +1456,6 @@ circl.nissay, wrongTld
 circl.nl, wrongTld
 circl.no, wrongTld
 circl.nokia, wrongTld
-circl.northwesternmutual, wrongTld
 circl.norton, wrongTld
 circl.now, wrongTld
 circl.nowruz, wrongTld
@@ -1504,7 +1474,6 @@ circl.office, wrongTld
 circl.okinawa, wrongTld
 circl.olayan, wrongTld
 circl.olayangroup, wrongTld
-circl.oldnavy, wrongTld
 circl.ollo, wrongTld
 circl.om, wrongTld
 circl.omega, wrongTld
@@ -1531,7 +1500,6 @@ circl.pars, wrongTld
 circl.partners, wrongTld
 circl.parts, wrongTld
 circl.party, wrongTld
-circl.passagens, wrongTld
 circl.pay, wrongTld
 circl.pccw, wrongTld
 circl.pe, wrongTld
@@ -1632,7 +1600,6 @@ circl.ril, wrongTld
 circl.rio, wrongTld
 circl.rip, wrongTld
 circl.ro, wrongTld
-circl.rocher, wrongTld
 circl.rocks, wrongTld
 circl.rodeo, wrongTld
 circl.rogers, wrongTld
@@ -1667,7 +1634,6 @@ circl.sb, wrongTld
 circl.sbi, wrongTld
 circl.sbs, wrongTld
 circl.sc, wrongTld
-circl.sca, wrongTld
 circl.scb, wrongTld
 circl.schaeffler, wrongTld
 circl.schmidt, wrongTld
@@ -1687,7 +1653,6 @@ circl.seek, wrongTld
 circl.select, wrongTld
 circl.sener, wrongTld
 circl.services, wrongTld
-circl.ses, wrongTld
 circl.seven, wrongTld
 circl.sew, wrongTld
 circl.sex, wrongTld
@@ -1697,7 +1662,6 @@ circl.sg, wrongTld
 circl.sh, wrongTld
 circl.shangrila, wrongTld
 circl.sharp, wrongTld
-circl.shaw, wrongTld
 circl.shell, wrongTld
 circl.shia, wrongTld
 circl.shiksha, wrongTld
@@ -1706,7 +1670,6 @@ circl.shop, wrongTld
 circl.shopping, wrongTld
 circl.shouji, wrongTld
 circl.show, wrongTld
-circl.showtime, wrongTld
 circl.si, wrongTld
 circl.silk, wrongTld
 circl.sina, wrongTld
@@ -1804,7 +1767,6 @@ circl.theatre, wrongTld
 circl.tiaa, wrongTld
 circl.tickets, wrongTld
 circl.tienda, wrongTld
-circl.tiffany, wrongTld
 circl.tips, wrongTld
 circl.tires, wrongTld
 circl.tirol, wrongTld
@@ -1834,7 +1796,6 @@ circl.trade, wrongTld
 circl.trading, wrongTld
 circl.training, wrongTld
 circl.travel, wrongTld
-circl.travelchannel, wrongTld
 circl.travelers, wrongTld
 circl.travelersinsurance, wrongTld
 circl.trust, wrongTld
@@ -1889,14 +1850,12 @@ circl.vivo, wrongTld
 circl.vlaanderen, wrongTld
 circl.vn, wrongTld
 circl.vodka, wrongTld
-circl.volkswagen, wrongTld
 circl.volvo, wrongTld
 circl.vote, wrongTld
 circl.voting, wrongTld
 circl.voto, wrongTld
 circl.voyage, wrongTld
 circl.vu, wrongTld
-circl.vuelos, wrongTld
 circl.wales, wrongTld
 circl.walmart, wrongTld
 circl.walter, wrongTld
@@ -1934,7 +1893,6 @@ circl.wtc, wrongTld
 circl.wtf, wrongTld
 circl.xbox, wrongTld
 circl.xerox, wrongTld
-circl.xfinity, wrongTld
 circl.xihuan, wrongTld
 circl.xin, wrongTld
 circl.xn--11b4c3d, wrongTld
@@ -2014,7 +1972,6 @@ circl.xn--j1aef, wrongTld
 circl.xn--j1amh, wrongTld
 circl.xn--j6w193g, wrongTld
 circl.xn--jlq480n2rg, wrongTld
-circl.xn--jlq61u9w7b, wrongTld
 circl.xn--jvr189m, wrongTld
 circl.xn--kcrx77d1x4a, wrongTld
 circl.xn--kprw13d, wrongTld
@@ -2026,7 +1983,6 @@ circl.xn--mgb9awbf, wrongTld
 circl.xn--mgba3a3ejt, wrongTld
 circl.xn--mgba3a4f16a, wrongTld
 circl.xn--mgba7c0bbn0a, wrongTld
-circl.xn--mgbaakc7dvf, wrongTld
 circl.xn--mgbaam7a8h, wrongTld
 circl.xn--mgbab2bd, wrongTld
 circl.xn--mgbah1a3hjkrd, wrongTld
@@ -2113,11 +2069,9 @@ circl.zm, wrongTld
 circl.zone, wrongTld
 circl.zuerich, wrongTld
 circl.zw, wrongTld
-circl.blogspot.lu, wrongTld
 circl.123website.lu, wrongTld
 circl.lu.aaa, addTld
 circl.lu.aarp, addTld
-circl.lu.abarth, addTld
 circl.lu.abb, addTld
 circl.lu.abbott, addTld
 circl.lu.abbvie, addTld
@@ -2133,7 +2087,6 @@ circl.lu.accountants, addTld
 circl.lu.aco, addTld
 circl.lu.actor, addTld
 circl.lu.ad, addTld
-circl.lu.adac, addTld
 circl.lu.ads, addTld
 circl.lu.adult, addTld
 circl.lu.ae, addTld
@@ -2153,7 +2106,6 @@ circl.lu.airforce, addTld
 circl.lu.airtel, addTld
 circl.lu.akdn, addTld
 circl.lu.al, addTld
-circl.lu.alfaromeo, addTld
 circl.lu.alibaba, addTld
 circl.lu.alipay, addTld
 circl.lu.allfinanz, addTld
@@ -2204,7 +2156,6 @@ circl.lu.auspost, addTld
 circl.lu.author, addTld
 circl.lu.auto, addTld
 circl.lu.autos, addTld
-circl.lu.avianca, addTld
 circl.lu.aw, addTld
 circl.lu.aws, addTld
 circl.lu.ax, addTld
@@ -2215,7 +2166,6 @@ circl.lu.ba, addTld
 circl.lu.baby, addTld
 circl.lu.baidu, addTld
 circl.lu.banamex, addTld
-circl.lu.bananarepublic, addTld
 circl.lu.band, addTld
 circl.lu.bank, addTld
 circl.lu.bar, addTld
@@ -2239,7 +2189,6 @@ circl.lu.be, addTld
 circl.lu.beats, addTld
 circl.lu.beauty, addTld
 circl.lu.beer, addTld
-circl.lu.bentley, addTld
 circl.lu.berlin, addTld
 circl.lu.best, addTld
 circl.lu.bestbuy, addTld
@@ -2332,7 +2281,6 @@ circl.lu.catholic, addTld
 circl.lu.cba, addTld
 circl.lu.cbn, addTld
 circl.lu.cbre, addTld
-circl.lu.cbs, addTld
 circl.lu.cc, addTld
 circl.lu.cd, addTld
 circl.lu.center, addTld
@@ -2361,7 +2309,6 @@ circl.lu.citadel, addTld
 circl.lu.citi, addTld
 circl.lu.citic, addTld
 circl.lu.city, addTld
-circl.lu.cityeats, addTld
 circl.lu.ck, addTld
 circl.lu.cl, addTld
 circl.lu.claims, addTld
@@ -2382,7 +2329,6 @@ circl.lu.coffee, addTld
 circl.lu.college, addTld
 circl.lu.cologne, addTld
 circl.lu.com, addTld
-circl.lu.comcast, addTld
 circl.lu.commbank, addTld
 circl.lu.community, addTld
 circl.lu.company, addTld
@@ -2395,7 +2341,6 @@ circl.lu.consulting, addTld
 circl.lu.contact, addTld
 circl.lu.contractors, addTld
 circl.lu.cooking, addTld
-circl.lu.cookingchannel, addTld
 circl.lu.cool, addTld
 circl.lu.coop, addTld
 circl.lu.corsica, addTld
@@ -2422,7 +2367,6 @@ circl.lu.cy, addTld
 circl.lu.cymru, addTld
 circl.lu.cyou, addTld
 circl.lu.cz, addTld
-circl.lu.dabur, addTld
 circl.lu.dad, addTld
 circl.lu.dance, addTld
 circl.lu.data, addTld
@@ -2501,7 +2445,6 @@ circl.lu.es, addTld
 circl.lu.esq, addTld
 circl.lu.estate, addTld
 circl.lu.et, addTld
-circl.lu.etisalat, addTld
 circl.lu.eu, addTld
 circl.lu.eurovision, addTld
 circl.lu.eus, addTld
@@ -2527,7 +2470,6 @@ circl.lu.feedback, addTld
 circl.lu.ferrari, addTld
 circl.lu.ferrero, addTld
 circl.lu.fi, addTld
-circl.lu.fiat, addTld
 circl.lu.fidelity, addTld
 circl.lu.fido, addTld
 circl.lu.film, addTld
@@ -2553,7 +2495,6 @@ circl.lu.fm, addTld
 circl.lu.fo, addTld
 circl.lu.foo, addTld
 circl.lu.food, addTld
-circl.lu.foodnetwork, addTld
 circl.lu.football, addTld
 circl.lu.ford, addTld
 circl.lu.forex, addTld
@@ -2566,7 +2507,6 @@ circl.lu.free, addTld
 circl.lu.fresenius, addTld
 circl.lu.frl, addTld
 circl.lu.frogans, addTld
-circl.lu.frontdoor, addTld
 circl.lu.frontier, addTld
 circl.lu.ftr, addTld
 circl.lu.fujitsu, addTld
@@ -2638,7 +2578,6 @@ circl.lu.group, addTld
 circl.lu.gs, addTld
 circl.lu.gt, addTld
 circl.lu.gu, addTld
-circl.lu.guardian, addTld
 circl.lu.gucci, addTld
 circl.lu.guge, addTld
 circl.lu.guide, addTld
@@ -2659,7 +2598,6 @@ circl.lu.help, addTld
 circl.lu.helsinki, addTld
 circl.lu.here, addTld
 circl.lu.hermes, addTld
-circl.lu.hgtv, addTld
 circl.lu.hiphop, addTld
 circl.lu.hisamitsu, addTld
 circl.lu.hitachi, addTld
@@ -2681,7 +2619,6 @@ circl.lu.hospital, addTld
 circl.lu.host, addTld
 circl.lu.hosting, addTld
 circl.lu.hot, addTld
-circl.lu.hoteles, addTld
 circl.lu.hotels, addTld
 circl.lu.hotmail, addTld
 circl.lu.house, addTld
@@ -2760,7 +2697,6 @@ circl.lu.kaufen, addTld
 circl.lu.kddi, addTld
 circl.lu.ke, addTld
 circl.lu.kerryhotels, addTld
-circl.lu.kerrylogistics, addTld
 circl.lu.kerryproperties, addTld
 circl.lu.kfh, addTld
 circl.lu.kg, addTld
@@ -2769,7 +2705,6 @@ circl.lu.ki, addTld
 circl.lu.kia, addTld
 circl.lu.kids, addTld
 circl.lu.kim, addTld
-circl.lu.kinder, addTld
 circl.lu.kindle, addTld
 circl.lu.kitchen, addTld
 circl.lu.kiwi, addTld
@@ -2793,8 +2728,6 @@ circl.lu.la, addTld
 circl.lu.lacaixa, addTld
 circl.lu.lamborghini, addTld
 circl.lu.lamer, addTld
-circl.lu.lancaster, addTld
-circl.lu.lancia, addTld
 circl.lu.land, addTld
 circl.lu.landrover, addTld
 circl.lu.lanxess, addTld
@@ -2825,9 +2758,7 @@ circl.lu.lilly, addTld
 circl.lu.limited, addTld
 circl.lu.limo, addTld
 circl.lu.lincoln, addTld
-circl.lu.linde, addTld
 circl.lu.link, addTld
-circl.lu.lipsy, addTld
 circl.lu.live, addTld
 circl.lu.living, addTld
 circl.lu.lk, addTld
@@ -2837,7 +2768,6 @@ circl.lu.loan, addTld
 circl.lu.loans, addTld
 circl.lu.locker, addTld
 circl.lu.locus, addTld
-circl.lu.loft, addTld
 circl.lu.lol, addTld
 circl.lu.london, addTld
 circl.lu.lotte, addTld
@@ -2857,7 +2787,6 @@ circl.lu.luxury, addTld
 circl.lu.lv, addTld
 circl.lu.ly, addTld
 circl.lu.ma, addTld
-circl.lu.macys, addTld
 circl.lu.madrid, addTld
 circl.lu.maif, addTld
 circl.lu.maison, addTld
@@ -2871,7 +2800,6 @@ circl.lu.marketing, addTld
 circl.lu.markets, addTld
 circl.lu.marriott, addTld
 circl.lu.marshalls, addTld
-circl.lu.maserati, addTld
 circl.lu.mattel, addTld
 circl.lu.mba, addTld
 circl.lu.mc, addTld
@@ -2931,7 +2859,6 @@ circl.lu.mtr, addTld
 circl.lu.mu, addTld
 circl.lu.museum, addTld
 circl.lu.music, addTld
-circl.lu.mutual, addTld
 circl.lu.mv, addTld
 circl.lu.mw, addTld
 circl.lu.mx, addTld
@@ -2941,7 +2868,6 @@ circl.lu.na, addTld
 circl.lu.nab, addTld
 circl.lu.nagoya, addTld
 circl.lu.name, addTld
-circl.lu.natura, addTld
 circl.lu.navy, addTld
 circl.lu.nba, addTld
 circl.lu.nc, addTld
@@ -2972,7 +2898,6 @@ circl.lu.nissay, addTld
 circl.lu.nl, addTld
 circl.lu.no, addTld
 circl.lu.nokia, addTld
-circl.lu.northwesternmutual, addTld
 circl.lu.norton, addTld
 circl.lu.now, addTld
 circl.lu.nowruz, addTld
@@ -2991,7 +2916,6 @@ circl.lu.office, addTld
 circl.lu.okinawa, addTld
 circl.lu.olayan, addTld
 circl.lu.olayangroup, addTld
-circl.lu.oldnavy, addTld
 circl.lu.ollo, addTld
 circl.lu.om, addTld
 circl.lu.omega, addTld
@@ -3018,7 +2942,6 @@ circl.lu.pars, addTld
 circl.lu.partners, addTld
 circl.lu.parts, addTld
 circl.lu.party, addTld
-circl.lu.passagens, addTld
 circl.lu.pay, addTld
 circl.lu.pccw, addTld
 circl.lu.pe, addTld
@@ -3119,7 +3042,6 @@ circl.lu.ril, addTld
 circl.lu.rio, addTld
 circl.lu.rip, addTld
 circl.lu.ro, addTld
-circl.lu.rocher, addTld
 circl.lu.rocks, addTld
 circl.lu.rodeo, addTld
 circl.lu.rogers, addTld
@@ -3154,7 +3076,6 @@ circl.lu.sb, addTld
 circl.lu.sbi, addTld
 circl.lu.sbs, addTld
 circl.lu.sc, addTld
-circl.lu.sca, addTld
 circl.lu.scb, addTld
 circl.lu.schaeffler, addTld
 circl.lu.schmidt, addTld
@@ -3174,7 +3095,6 @@ circl.lu.seek, addTld
 circl.lu.select, addTld
 circl.lu.sener, addTld
 circl.lu.services, addTld
-circl.lu.ses, addTld
 circl.lu.seven, addTld
 circl.lu.sew, addTld
 circl.lu.sex, addTld
@@ -3184,7 +3104,6 @@ circl.lu.sg, addTld
 circl.lu.sh, addTld
 circl.lu.shangrila, addTld
 circl.lu.sharp, addTld
-circl.lu.shaw, addTld
 circl.lu.shell, addTld
 circl.lu.shia, addTld
 circl.lu.shiksha, addTld
@@ -3193,7 +3112,6 @@ circl.lu.shop, addTld
 circl.lu.shopping, addTld
 circl.lu.shouji, addTld
 circl.lu.show, addTld
-circl.lu.showtime, addTld
 circl.lu.si, addTld
 circl.lu.silk, addTld
 circl.lu.sina, addTld
@@ -3291,7 +3209,6 @@ circl.lu.theatre, addTld
 circl.lu.tiaa, addTld
 circl.lu.tickets, addTld
 circl.lu.tienda, addTld
-circl.lu.tiffany, addTld
 circl.lu.tips, addTld
 circl.lu.tires, addTld
 circl.lu.tirol, addTld
@@ -3321,7 +3238,6 @@ circl.lu.trade, addTld
 circl.lu.trading, addTld
 circl.lu.training, addTld
 circl.lu.travel, addTld
-circl.lu.travelchannel, addTld
 circl.lu.travelers, addTld
 circl.lu.travelersinsurance, addTld
 circl.lu.trust, addTld
@@ -3376,14 +3292,12 @@ circl.lu.vivo, addTld
 circl.lu.vlaanderen, addTld
 circl.lu.vn, addTld
 circl.lu.vodka, addTld
-circl.lu.volkswagen, addTld
 circl.lu.volvo, addTld
 circl.lu.vote, addTld
 circl.lu.voting, addTld
 circl.lu.voto, addTld
 circl.lu.voyage, addTld
 circl.lu.vu, addTld
-circl.lu.vuelos, addTld
 circl.lu.wales, addTld
 circl.lu.walmart, addTld
 circl.lu.walter, addTld
@@ -3421,7 +3335,6 @@ circl.lu.wtc, addTld
 circl.lu.wtf, addTld
 circl.lu.xbox, addTld
 circl.lu.xerox, addTld
-circl.lu.xfinity, addTld
 circl.lu.xihuan, addTld
 circl.lu.xin, addTld
 circl.lu.xn--11b4c3d, addTld
@@ -3501,7 +3414,6 @@ circl.lu.xn--j1aef, addTld
 circl.lu.xn--j1amh, addTld
 circl.lu.xn--j6w193g, addTld
 circl.lu.xn--jlq480n2rg, addTld
-circl.lu.xn--jlq61u9w7b, addTld
 circl.lu.xn--jvr189m, addTld
 circl.lu.xn--kcrx77d1x4a, addTld
 circl.lu.xn--kprw13d, addTld
@@ -3513,7 +3425,6 @@ circl.lu.xn--mgb9awbf, addTld
 circl.lu.xn--mgba3a3ejt, addTld
 circl.lu.xn--mgba3a4f16a, addTld
 circl.lu.xn--mgba7c0bbn0a, addTld
-circl.lu.xn--mgbaakc7dvf, addTld
 circl.lu.xn--mgbaam7a8h, addTld
 circl.lu.xn--mgbab2bd, addTld
 circl.lu.xn--mgbah1a3hjkrd, addTld
@@ -3606,7 +3517,6 @@ cir.cl.lu, subdomain
 circ.l.lu, subdomain
 circl-lu.aaa, changeDotDash
 circl-lu.aarp, changeDotDash
-circl-lu.abarth, changeDotDash
 circl-lu.abb, changeDotDash
 circl-lu.abbott, changeDotDash
 circl-lu.abbvie, changeDotDash
@@ -3622,7 +3532,6 @@ circl-lu.accountants, changeDotDash
 circl-lu.aco, changeDotDash
 circl-lu.actor, changeDotDash
 circl-lu.ad, changeDotDash
-circl-lu.adac, changeDotDash
 circl-lu.ads, changeDotDash
 circl-lu.adult, changeDotDash
 circl-lu.ae, changeDotDash
@@ -3642,7 +3551,6 @@ circl-lu.airforce, changeDotDash
 circl-lu.airtel, changeDotDash
 circl-lu.akdn, changeDotDash
 circl-lu.al, changeDotDash
-circl-lu.alfaromeo, changeDotDash
 circl-lu.alibaba, changeDotDash
 circl-lu.alipay, changeDotDash
 circl-lu.allfinanz, changeDotDash
@@ -3693,7 +3601,6 @@ circl-lu.auspost, changeDotDash
 circl-lu.author, changeDotDash
 circl-lu.auto, changeDotDash
 circl-lu.autos, changeDotDash
-circl-lu.avianca, changeDotDash
 circl-lu.aw, changeDotDash
 circl-lu.aws, changeDotDash
 circl-lu.ax, changeDotDash
@@ -3704,7 +3611,6 @@ circl-lu.ba, changeDotDash
 circl-lu.baby, changeDotDash
 circl-lu.baidu, changeDotDash
 circl-lu.banamex, changeDotDash
-circl-lu.bananarepublic, changeDotDash
 circl-lu.band, changeDotDash
 circl-lu.bank, changeDotDash
 circl-lu.bar, changeDotDash
@@ -3728,7 +3634,6 @@ circl-lu.be, changeDotDash
 circl-lu.beats, changeDotDash
 circl-lu.beauty, changeDotDash
 circl-lu.beer, changeDotDash
-circl-lu.bentley, changeDotDash
 circl-lu.berlin, changeDotDash
 circl-lu.best, changeDotDash
 circl-lu.bestbuy, changeDotDash
@@ -3821,7 +3726,6 @@ circl-lu.catholic, changeDotDash
 circl-lu.cba, changeDotDash
 circl-lu.cbn, changeDotDash
 circl-lu.cbre, changeDotDash
-circl-lu.cbs, changeDotDash
 circl-lu.cc, changeDotDash
 circl-lu.cd, changeDotDash
 circl-lu.center, changeDotDash
@@ -3850,7 +3754,6 @@ circl-lu.citadel, changeDotDash
 circl-lu.citi, changeDotDash
 circl-lu.citic, changeDotDash
 circl-lu.city, changeDotDash
-circl-lu.cityeats, changeDotDash
 circl-lu.ck, changeDotDash
 circl-lu.cl, changeDotDash
 circl-lu.claims, changeDotDash
@@ -3871,7 +3774,6 @@ circl-lu.coffee, changeDotDash
 circl-lu.college, changeDotDash
 circl-lu.cologne, changeDotDash
 circl-lu.com, changeDotDash
-circl-lu.comcast, changeDotDash
 circl-lu.commbank, changeDotDash
 circl-lu.community, changeDotDash
 circl-lu.company, changeDotDash
@@ -3884,7 +3786,6 @@ circl-lu.consulting, changeDotDash
 circl-lu.contact, changeDotDash
 circl-lu.contractors, changeDotDash
 circl-lu.cooking, changeDotDash
-circl-lu.cookingchannel, changeDotDash
 circl-lu.cool, changeDotDash
 circl-lu.coop, changeDotDash
 circl-lu.corsica, changeDotDash
@@ -3911,7 +3812,6 @@ circl-lu.cy, changeDotDash
 circl-lu.cymru, changeDotDash
 circl-lu.cyou, changeDotDash
 circl-lu.cz, changeDotDash
-circl-lu.dabur, changeDotDash
 circl-lu.dad, changeDotDash
 circl-lu.dance, changeDotDash
 circl-lu.data, changeDotDash
@@ -3990,7 +3890,6 @@ circl-lu.es, changeDotDash
 circl-lu.esq, changeDotDash
 circl-lu.estate, changeDotDash
 circl-lu.et, changeDotDash
-circl-lu.etisalat, changeDotDash
 circl-lu.eu, changeDotDash
 circl-lu.eurovision, changeDotDash
 circl-lu.eus, changeDotDash
@@ -4016,7 +3915,6 @@ circl-lu.feedback, changeDotDash
 circl-lu.ferrari, changeDotDash
 circl-lu.ferrero, changeDotDash
 circl-lu.fi, changeDotDash
-circl-lu.fiat, changeDotDash
 circl-lu.fidelity, changeDotDash
 circl-lu.fido, changeDotDash
 circl-lu.film, changeDotDash
@@ -4042,7 +3940,6 @@ circl-lu.fm, changeDotDash
 circl-lu.fo, changeDotDash
 circl-lu.foo, changeDotDash
 circl-lu.food, changeDotDash
-circl-lu.foodnetwork, changeDotDash
 circl-lu.football, changeDotDash
 circl-lu.ford, changeDotDash
 circl-lu.forex, changeDotDash
@@ -4055,7 +3952,6 @@ circl-lu.free, changeDotDash
 circl-lu.fresenius, changeDotDash
 circl-lu.frl, changeDotDash
 circl-lu.frogans, changeDotDash
-circl-lu.frontdoor, changeDotDash
 circl-lu.frontier, changeDotDash
 circl-lu.ftr, changeDotDash
 circl-lu.fujitsu, changeDotDash
@@ -4127,7 +4023,6 @@ circl-lu.group, changeDotDash
 circl-lu.gs, changeDotDash
 circl-lu.gt, changeDotDash
 circl-lu.gu, changeDotDash
-circl-lu.guardian, changeDotDash
 circl-lu.gucci, changeDotDash
 circl-lu.guge, changeDotDash
 circl-lu.guide, changeDotDash
@@ -4148,7 +4043,6 @@ circl-lu.help, changeDotDash
 circl-lu.helsinki, changeDotDash
 circl-lu.here, changeDotDash
 circl-lu.hermes, changeDotDash
-circl-lu.hgtv, changeDotDash
 circl-lu.hiphop, changeDotDash
 circl-lu.hisamitsu, changeDotDash
 circl-lu.hitachi, changeDotDash
@@ -4170,7 +4064,6 @@ circl-lu.hospital, changeDotDash
 circl-lu.host, changeDotDash
 circl-lu.hosting, changeDotDash
 circl-lu.hot, changeDotDash
-circl-lu.hoteles, changeDotDash
 circl-lu.hotels, changeDotDash
 circl-lu.hotmail, changeDotDash
 circl-lu.house, changeDotDash
@@ -4249,7 +4142,6 @@ circl-lu.kaufen, changeDotDash
 circl-lu.kddi, changeDotDash
 circl-lu.ke, changeDotDash
 circl-lu.kerryhotels, changeDotDash
-circl-lu.kerrylogistics, changeDotDash
 circl-lu.kerryproperties, changeDotDash
 circl-lu.kfh, changeDotDash
 circl-lu.kg, changeDotDash
@@ -4258,7 +4150,6 @@ circl-lu.ki, changeDotDash
 circl-lu.kia, changeDotDash
 circl-lu.kids, changeDotDash
 circl-lu.kim, changeDotDash
-circl-lu.kinder, changeDotDash
 circl-lu.kindle, changeDotDash
 circl-lu.kitchen, changeDotDash
 circl-lu.kiwi, changeDotDash
@@ -4282,8 +4173,6 @@ circl-lu.la, changeDotDash
 circl-lu.lacaixa, changeDotDash
 circl-lu.lamborghini, changeDotDash
 circl-lu.lamer, changeDotDash
-circl-lu.lancaster, changeDotDash
-circl-lu.lancia, changeDotDash
 circl-lu.land, changeDotDash
 circl-lu.landrover, changeDotDash
 circl-lu.lanxess, changeDotDash
@@ -4314,9 +4203,7 @@ circl-lu.lilly, changeDotDash
 circl-lu.limited, changeDotDash
 circl-lu.limo, changeDotDash
 circl-lu.lincoln, changeDotDash
-circl-lu.linde, changeDotDash
 circl-lu.link, changeDotDash
-circl-lu.lipsy, changeDotDash
 circl-lu.live, changeDotDash
 circl-lu.living, changeDotDash
 circl-lu.lk, changeDotDash
@@ -4326,7 +4213,6 @@ circl-lu.loan, changeDotDash
 circl-lu.loans, changeDotDash
 circl-lu.locker, changeDotDash
 circl-lu.locus, changeDotDash
-circl-lu.loft, changeDotDash
 circl-lu.lol, changeDotDash
 circl-lu.london, changeDotDash
 circl-lu.lotte, changeDotDash
@@ -4346,7 +4232,6 @@ circl-lu.luxury, changeDotDash
 circl-lu.lv, changeDotDash
 circl-lu.ly, changeDotDash
 circl-lu.ma, changeDotDash
-circl-lu.macys, changeDotDash
 circl-lu.madrid, changeDotDash
 circl-lu.maif, changeDotDash
 circl-lu.maison, changeDotDash
@@ -4360,7 +4245,6 @@ circl-lu.marketing, changeDotDash
 circl-lu.markets, changeDotDash
 circl-lu.marriott, changeDotDash
 circl-lu.marshalls, changeDotDash
-circl-lu.maserati, changeDotDash
 circl-lu.mattel, changeDotDash
 circl-lu.mba, changeDotDash
 circl-lu.mc, changeDotDash
@@ -4420,7 +4304,6 @@ circl-lu.mtr, changeDotDash
 circl-lu.mu, changeDotDash
 circl-lu.museum, changeDotDash
 circl-lu.music, changeDotDash
-circl-lu.mutual, changeDotDash
 circl-lu.mv, changeDotDash
 circl-lu.mw, changeDotDash
 circl-lu.mx, changeDotDash
@@ -4430,7 +4313,6 @@ circl-lu.na, changeDotDash
 circl-lu.nab, changeDotDash
 circl-lu.nagoya, changeDotDash
 circl-lu.name, changeDotDash
-circl-lu.natura, changeDotDash
 circl-lu.navy, changeDotDash
 circl-lu.nba, changeDotDash
 circl-lu.nc, changeDotDash
@@ -4461,7 +4343,6 @@ circl-lu.nissay, changeDotDash
 circl-lu.nl, changeDotDash
 circl-lu.no, changeDotDash
 circl-lu.nokia, changeDotDash
-circl-lu.northwesternmutual, changeDotDash
 circl-lu.norton, changeDotDash
 circl-lu.now, changeDotDash
 circl-lu.nowruz, changeDotDash
@@ -4480,7 +4361,6 @@ circl-lu.office, changeDotDash
 circl-lu.okinawa, changeDotDash
 circl-lu.olayan, changeDotDash
 circl-lu.olayangroup, changeDotDash
-circl-lu.oldnavy, changeDotDash
 circl-lu.ollo, changeDotDash
 circl-lu.om, changeDotDash
 circl-lu.omega, changeDotDash
@@ -4507,7 +4387,6 @@ circl-lu.pars, changeDotDash
 circl-lu.partners, changeDotDash
 circl-lu.parts, changeDotDash
 circl-lu.party, changeDotDash
-circl-lu.passagens, changeDotDash
 circl-lu.pay, changeDotDash
 circl-lu.pccw, changeDotDash
 circl-lu.pe, changeDotDash
@@ -4608,7 +4487,6 @@ circl-lu.ril, changeDotDash
 circl-lu.rio, changeDotDash
 circl-lu.rip, changeDotDash
 circl-lu.ro, changeDotDash
-circl-lu.rocher, changeDotDash
 circl-lu.rocks, changeDotDash
 circl-lu.rodeo, changeDotDash
 circl-lu.rogers, changeDotDash
@@ -4643,7 +4521,6 @@ circl-lu.sb, changeDotDash
 circl-lu.sbi, changeDotDash
 circl-lu.sbs, changeDotDash
 circl-lu.sc, changeDotDash
-circl-lu.sca, changeDotDash
 circl-lu.scb, changeDotDash
 circl-lu.schaeffler, changeDotDash
 circl-lu.schmidt, changeDotDash
@@ -4663,7 +4540,6 @@ circl-lu.seek, changeDotDash
 circl-lu.select, changeDotDash
 circl-lu.sener, changeDotDash
 circl-lu.services, changeDotDash
-circl-lu.ses, changeDotDash
 circl-lu.seven, changeDotDash
 circl-lu.sew, changeDotDash
 circl-lu.sex, changeDotDash
@@ -4673,7 +4549,6 @@ circl-lu.sg, changeDotDash
 circl-lu.sh, changeDotDash
 circl-lu.shangrila, changeDotDash
 circl-lu.sharp, changeDotDash
-circl-lu.shaw, changeDotDash
 circl-lu.shell, changeDotDash
 circl-lu.shia, changeDotDash
 circl-lu.shiksha, changeDotDash
@@ -4682,7 +4557,6 @@ circl-lu.shop, changeDotDash
 circl-lu.shopping, changeDotDash
 circl-lu.shouji, changeDotDash
 circl-lu.show, changeDotDash
-circl-lu.showtime, changeDotDash
 circl-lu.si, changeDotDash
 circl-lu.silk, changeDotDash
 circl-lu.sina, changeDotDash
@@ -4780,7 +4654,6 @@ circl-lu.theatre, changeDotDash
 circl-lu.tiaa, changeDotDash
 circl-lu.tickets, changeDotDash
 circl-lu.tienda, changeDotDash
-circl-lu.tiffany, changeDotDash
 circl-lu.tips, changeDotDash
 circl-lu.tires, changeDotDash
 circl-lu.tirol, changeDotDash
@@ -4810,7 +4683,6 @@ circl-lu.trade, changeDotDash
 circl-lu.trading, changeDotDash
 circl-lu.training, changeDotDash
 circl-lu.travel, changeDotDash
-circl-lu.travelchannel, changeDotDash
 circl-lu.travelers, changeDotDash
 circl-lu.travelersinsurance, changeDotDash
 circl-lu.trust, changeDotDash
@@ -4865,14 +4737,12 @@ circl-lu.vivo, changeDotDash
 circl-lu.vlaanderen, changeDotDash
 circl-lu.vn, changeDotDash
 circl-lu.vodka, changeDotDash
-circl-lu.volkswagen, changeDotDash
 circl-lu.volvo, changeDotDash
 circl-lu.vote, changeDotDash
 circl-lu.voting, changeDotDash
 circl-lu.voto, changeDotDash
 circl-lu.voyage, changeDotDash
 circl-lu.vu, changeDotDash
-circl-lu.vuelos, changeDotDash
 circl-lu.wales, changeDotDash
 circl-lu.walmart, changeDotDash
 circl-lu.walter, changeDotDash
@@ -4910,7 +4780,6 @@ circl-lu.wtc, changeDotDash
 circl-lu.wtf, changeDotDash
 circl-lu.xbox, changeDotDash
 circl-lu.xerox, changeDotDash
-circl-lu.xfinity, changeDotDash
 circl-lu.xihuan, changeDotDash
 circl-lu.xin, changeDotDash
 circl-lu.xn--11b4c3d, changeDotDash
@@ -4990,7 +4859,6 @@ circl-lu.xn--j1aef, changeDotDash
 circl-lu.xn--j1amh, changeDotDash
 circl-lu.xn--j6w193g, changeDotDash
 circl-lu.xn--jlq480n2rg, changeDotDash
-circl-lu.xn--jlq61u9w7b, changeDotDash
 circl-lu.xn--jvr189m, changeDotDash
 circl-lu.xn--kcrx77d1x4a, changeDotDash
 circl-lu.xn--kprw13d, changeDotDash
@@ -5002,7 +4870,6 @@ circl-lu.xn--mgb9awbf, changeDotDash
 circl-lu.xn--mgba3a3ejt, changeDotDash
 circl-lu.xn--mgba3a4f16a, changeDotDash
 circl-lu.xn--mgba7c0bbn0a, changeDotDash
-circl-lu.xn--mgbaakc7dvf, changeDotDash
 circl-lu.xn--mgbaam7a8h, changeDotDash
 circl-lu.xn--mgbab2bd, changeDotDash
 circl-lu.xn--mgbah1a3hjkrd, changeDotDash
