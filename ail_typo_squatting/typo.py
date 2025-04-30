@@ -41,7 +41,7 @@ from dns_local.resolving import dnsResolving # named "dns_local" to avoid confli
 ## The utils
 from utils.parser import getArguments
 from generator.utils.get_pathetc import get_path_etc
-sys.path.append(get_path_etc())
+# sys.path.append(get_path_etc())
 
 
 # Import all the constants of data from the file const/main.py

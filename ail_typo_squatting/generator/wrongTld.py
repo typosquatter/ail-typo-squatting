@@ -1,4 +1,5 @@
 # Import all the utils
+import os
 from .utils.generator_functions import *
 from .utils.get_pathetc import get_path_etc
 
@@ -21,13 +22,13 @@ pathEtc = get_path_etc()
 def wrongTld(domain, resultList, verbose, limit, givevariations=False, keeporiginal=False, combo=False):
     """Change the original top level domain to another"""
     # https://data.iana.org/TLD/tlds-alpha-by-domain.txt
-    # Version 2022102502
+    # Version 2025043000
 
     if not len(resultList) >= limit:
         if verbose:
             print("[+] Wrong Tld")
 
-        with open(pathEtc + "/tlds-alpha-by-domain.txt", "r") as read_file:
+        with open(os.path.join(pathEtc, "tlds-alpha-by-domain.txt"), "r") as read_file:
             tlds = read_file.readlines()
         
         originalTld = domain.split(".")[-1]

@@ -1,4 +1,5 @@
 # Import all the utils
+import os
 from .utils.generator_functions import *
 from .utils.get_pathetc import get_path_etc
 
@@ -14,7 +15,7 @@ def addDynamicDns(domain, resultList, verbose, limit, givevariations=False,  kee
         if verbose:
             print("[+] Dynamic DNS")
         
-        with open(pathEtc + "/dynamic-dns.json", "r") as read_json:
+        with open(os.path.join(pathEtc, "dynamic-dns.json"), "r") as read_json:
             dynamicdns = json.load(read_json)["list"]
 
         resultLoc = list()

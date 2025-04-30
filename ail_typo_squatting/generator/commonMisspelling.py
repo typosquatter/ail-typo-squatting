@@ -1,4 +1,5 @@
 # Import all the utils
+import os
 from .utils.generator_functions import *
 from .utils.get_pathetc import get_path_etc
 
@@ -16,7 +17,7 @@ def commonMisspelling(domain, resultList, verbose, limit, givevariations=False, 
         if verbose:
             print("[+] Common Misspelling")
 
-        with open(pathEtc + "/common-misspellings.json", "r") as read_json:
+        with open(os.path.join(pathEtc, "common-misspellings.json"), "r") as read_json:
             misspelling = json.load(read_json)
             keys = misspelling.keys()
 

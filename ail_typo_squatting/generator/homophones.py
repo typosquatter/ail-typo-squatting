@@ -1,4 +1,5 @@
 # Import all the utils
+import os
 from .utils.generator_functions import *
 from .utils.get_pathetc import get_path_etc
 
@@ -24,7 +25,7 @@ def homophones(domain, resultList, verbose, limit, givevariations=False,  keepor
         if verbose:
             print("[+] Homophones")
 
-        with open(pathEtc + "/homophones.txt", "r") as read_file:
+        with open(os.path.join(pathEtc, "homophones.txt"), "r") as read_file:
             homophones = read_file.readlines()
         
         prefix, domain_without_tld, tld = parse_domain(domain)
